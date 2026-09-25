@@ -1,0 +1,62 @@
+# LA WEB DE VENTA DE KONTROL — `kontrol.delamotech.es` (de momento, para enseñarla: NO sale en Google)
+#
+# La primera vez, en el VPS:
+#   cd /root && git clone https://github.com/pdelamo/kontrol-web.git && cd kontrol-web && docker compose -p kontrolweb -f docker-compose.kontrolweb.yml up -d
+# Para cada versión nueva basta con:
+#   cd /root/kontrol-web && git pull
+# (nginx sirve la carpeta tal cual: no hay nada que construir ni que reiniciar).
+#
+# Copiado de la web de OLIMPO (`olimpo-web` en docker-compose.olimpo.yml), que es la que funciona en
+# este VPS: un nginx pelado sirviendo ficheros quietos, en su propio proyecto (-p kontrolweb) para que
+# no toque ni al panel ni a la app de Kontrol. Si algún día alguien encontrara un agujero en el
+# servidor de estáticos, se encontraría un HTML y nada más: ni base de datos, ni claves, ni sesiones.
+services:
+  kontrol-web:
+    image: nginx:1.27-alpine
+    container_name: kontrol-web
+    restart: unless-stopped
+    volumes:
+      # Solo lectura: el contenedor no tiene por qué poder escribir en la carpeta del repo.
+      - ./web:/usr/share/nginx/html:ro
+      - ./nginx-web.conf:/etc/nginx/conf.d/default.conf:ro
+    # Ficheros quietos: con 48 MB le sobra y no le quita sitio a lo que da de comer.
+    deploy:
+      resources:
+        limits:
+          memory: 48M
+    networks: [n8n_default]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kweb-http.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kweb-http.entrypoints=web
+      - traefik.http.routers.kweb-http.middlewares=kweb-https
+      - traefik.http.middlewares.kweb-https.redirectscheme.scheme=https
+      - traefik.http.routers.kweb.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kweb.entrypoints=websecure
+      - traefik.http.routers.kweb.middlewares=kweb-freno,kweb-cabeceras
+      # El mismo freno que OLIMPO: no protege datos (aquí no hay), protege la máquina.
+      - traefik.http.middlewares.kweb-freno.ratelimit.average=60
+      - traefik.http.middlewares.kweb-freno.ratelimit.burst=120
+      - traefik.http.middlewares.kweb-freno.ratelimit.period=1s
+      - traefik.http.middlewares.kweb-freno.ratelimit.sourcecriterion.ipstrategy.depth=1
+      # Las cabeceras de seguridad de siempre, desde el primer despliegue.
+      - traefik.http.middlewares.kweb-cabeceras.headers.stsSeconds=31536000
+      - traefik.http.middlewares.kweb-cabeceras.headers.frameDeny=true
+      - traefik.http.middlewares.kweb-cabeceras.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.kweb-cabeceras.headers.referrerPolicy=strict-origin-when-cross-origin
+      - "traefik.http.middlewares.kweb-cabeceras.headers.customResponseHeaders.Permissions-Policy=camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+      # ⚠️ `connect-src` deja hablar con n8n.delamotech.es: ahí irá el flujo que manda solo el formulario
+      # de contacto. Sin esa línea, el día que se active, el navegador bloquearía el envío en silencio.
+      - "traefik.http.middlewares.kweb-cabeceras.headers.customResponseHeaders.Content-Security-Policy=default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https://n8n.delamotech.es"
+      # ⚠️ MIENTRAS ES UN BORRADOR, FUERA DE GOOGLE. El día que sea la web de verdad (con su dominio y su
+      # nombre definitivo), se quita esta línea y el `robots.txt` de web/.
+      - "traefik.http.middlewares.kweb-cabeceras.headers.customResponseHeaders.X-Robots-Tag=noindex, nofollow"
+      - traefik.http.routers.kweb.tls=true
+      # El emisor de certificados de este VPS se llama así (el mismo que el panel, el camarero y OLIMPO).
+      - traefik.http.routers.kweb.tls.certresolver=mytlschallenge
+      - traefik.http.services.kweb.loadbalancer.server.port=80
+
+networks:
+  # La red donde vive Traefik en este VPS (se llama así por herencia de n8n).
+  n8n_default:
+    external: true
