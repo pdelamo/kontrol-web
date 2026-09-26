@@ -22,6 +22,9 @@ window.MARCA = {
   correo: "ldelamo@gmail.com",                       /* adonde llegan los mensajes del formulario */
   formulario: "",                                    /* la dirección del flujo que envía el correo solo
                                                         (n8n); vacía = se abre el correo del visitante */
+  horas: "https://n8n.delamotech.es/webhook/kontrol-huecos",     /* las horas libres para la llamada (n8n);
+                                                        vacía = horas de ejemplo y no se apunta nada */
+  agendar: "https://n8n.delamotech.es/webhook/kontrol-llamada",  /* donde se apunta la llamada (n8n) */
   entrar: "https://costes.delamotech.es/app/entrar",
   mensaje: "Hola, quiero saber más de {producto}."
 };
@@ -522,6 +525,104 @@ p{margin:0;text-wrap:pretty}
 .telefono{display:block;margin-top:14px;font-size:15px;color:var(--texto-2)}
 .telefono b{font-weight:400;color:var(--texto);user-select:all}
 
+/* ── AGENDAR UNA LLAMADA: el segundo tique y el calendario que abre ──
+   Las horas las da n8n mirando el calendario «Llamadas Kontrol»; la web solo las enseña y las
+   vuelve a pedir cada poco mientras está abierta (lo tachado ya lo ha cogido alguien). */
+.tiques{display:grid;gap:34px}
+.contacto .tique-llamada .tique{transform:rotate(-.9deg)}
+.tique-llamada .telefono{display:inline-flex;align-items:center;gap:8px}
+.punto-vivo{flex:none;width:8px;height:8px;border-radius:50%;background:var(--positivo)}
+@media (prefers-reduced-motion:no-preference){
+  .punto-vivo{animation:late 2.4s ease-out infinite}
+  @keyframes late{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--positivo) 50%,transparent)}70%,100%{box-shadow:0 0 0 7px color-mix(in srgb,var(--positivo) 0%,transparent)}}
+}
+html.agenda-abierta{overflow:hidden}
+.agenda{padding:0;border:0;margin:0;width:100%;max-width:100%;height:100%;max-height:100%;height:100dvh;max-height:100dvh;background:transparent;color:var(--texto);overflow:visible}
+.agenda::backdrop{background:color-mix(in srgb,var(--pino-profundo) 58%,transparent);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.agenda-caja{position:relative;height:100%;overflow-y:auto;overscroll-behavior:contain;background:var(--superficie);background-image:linear-gradient(to bottom,color-mix(in srgb,var(--luz) 50%,transparent),transparent 180px);
+  padding:calc(env(safe-area-inset-top,0px) + 14px) var(--lado) calc(env(safe-area-inset-bottom,0px) + 32px)}
+:root[data-tema="oscuro"] .agenda-caja{background-image:none}
+.agenda-cabeza{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding-bottom:18px;margin-bottom:20px;border-bottom:1.5px dashed var(--borde-fuerte)}
+.agenda-icono{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--acento-suave);color:var(--acento-texto);box-shadow:var(--filo)}
+.agenda-cabeza h2{font-size:clamp(22px,6vw,28px);line-height:1.1;letter-spacing:-.02em}
+.agenda-cabeza p{color:var(--texto-2);font-size:15.5px;margin-top:4px}
+.agenda-cerrar{display:grid;place-items:center;width:46px;height:46px;border:0;border-radius:50%;background:var(--superficie-alt);color:var(--texto);cursor:pointer;box-shadow:0 0 0 1px var(--borde);transition:background-color .2s ease,transform .25s var(--curva)}
+.agenda-cerrar:hover{background:var(--acento-sutil)}
+.agenda-cerrar:active{transform:scale(.94)}
+.agenda-aviso{display:flex;gap:10px;align-items:flex-start;margin:0 0 18px;padding:12px 14px;border-radius:14px;background:var(--negativo-fondo);color:var(--negativo-tinta);font-size:15.5px}
+.agenda-rejilla{display:grid;gap:26px}
+/* El mes */
+.mes-cabeza{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.mes-nombre{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.mes-nombre::first-letter{text-transform:uppercase}
+.mes-flecha{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--texto);cursor:pointer;transition:background-color .2s ease}
+.mes-flecha:hover:not(:disabled){background:var(--acento-sutil)}
+.mes-flecha:disabled{opacity:.28;cursor:default}
+.mes-semana,.mes-dias{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.mes-semana span{text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--texto-3);padding-bottom:6px}
+.dia{position:relative;display:grid;place-items:center;aspect-ratio:1;min-height:40px;border:0;border-radius:12px;background:transparent;color:var(--texto-3);font:inherit;font-size:16px;font-variant-numeric:tabular-nums;padding:0}
+button.dia{cursor:pointer;background:var(--superficie);color:var(--texto);font-weight:700;box-shadow:0 0 0 1px var(--borde),var(--sombra-1);transition:box-shadow .2s ease,background-color .2s ease,color .2s ease,transform .25s var(--curva)}
+button.dia::after{content:"";position:absolute;bottom:18%;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--positivo)}
+button.dia:hover{box-shadow:0 0 0 1.5px var(--acento),var(--sombra-1)}
+button.dia:active{transform:scale(.95)}
+button.dia[aria-pressed="true"]{background:var(--boton);color:var(--boton-texto);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--luz) 30%,transparent),0 8px 18px -8px color-mix(in srgb,var(--boton) 80%,transparent)}
+button.dia[aria-pressed="true"]::after{background:var(--boton-texto)}
+button.dia.lleno{cursor:default;background:transparent;color:var(--texto-3);font-weight:400;text-decoration:line-through;box-shadow:0 0 0 1px var(--borde)}
+button.dia.lleno::after{display:none}
+.dia.hoy:not([aria-pressed="true"]){box-shadow:inset 0 0 0 1.5px var(--borde-fuerte)}
+/* Las horas */
+.horas-dia{font-size:18px;font-weight:700;letter-spacing:-.01em;min-height:1.5em}
+.horas-dia::first-letter{text-transform:uppercase}
+.horas-grupo{margin:14px 0 8px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-2)}
+.horas-lista .fila{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hora{display:grid;place-items:center;min-height:48px;border:0;border-radius:999px;background:var(--superficie);color:var(--texto);font:inherit;font-size:16.5px;font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:0 0 0 1px var(--borde-fuerte),var(--sombra-1);transition:box-shadow .2s ease,background-color .2s ease,color .2s ease,transform .25s var(--curva)}
+.hora:hover:not(:disabled){box-shadow:0 0 0 1.5px var(--acento),var(--sombra-2);color:var(--acento-texto)}
+.hora:active:not(:disabled){transform:scale(.96)}
+.hora[aria-pressed="true"]{background:var(--boton);color:var(--boton-texto);box-shadow:0 8px 18px -8px color-mix(in srgb,var(--boton) 80%,transparent)}
+.hora.cogida{cursor:not-allowed;background:transparent;color:var(--texto-3);text-decoration:line-through;box-shadow:none;outline:1px dashed var(--borde-fuerte);outline-offset:-1px}
+.horas-pie{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:14px;color:var(--texto-2)}
+.horas-fallo{margin-top:6px;color:var(--texto-2)}
+.horas-fallo .acciones{margin-top:14px}
+/* Mientras llegan las horas: huecos grises con brillo, del mismo tamaño que lo de verdad */
+.agenda.cargando .mes-dias span.dia,.agenda.cargando .hora{color:transparent;background:linear-gradient(100deg,var(--superficie-alt) 30%,color-mix(in srgb,var(--luz) 60%,var(--superficie-alt)) 50%,var(--superficie-alt) 70%) 0 0 / 300% 100%;box-shadow:none;outline:0;text-decoration:none}
+@media (prefers-reduced-motion:no-preference){.agenda.cargando .mes-dias span.dia,.agenda.cargando .hora{animation:brillo 1.3s linear infinite} @keyframes brillo{to{background-position:-150% 0}}}
+/* Paso 2: la hora elegida y los datos */
+.elegida{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;margin-bottom:22px;padding:14px 16px;border:0;border-radius:16px;background:var(--acento-sutil);color:var(--texto);font:inherit;text-align:left;cursor:pointer;box-shadow:var(--filo),0 0 0 1px var(--borde);transition:box-shadow .2s ease}
+.elegida:hover{box-shadow:var(--filo),0 0 0 1.5px var(--acento)}
+.elegida .icono{color:var(--acento-texto)}
+.elegida-texto{display:grid;line-height:1.3}
+.elegida-texto b{font-weight:700}
+.elegida-texto b::first-letter{text-transform:uppercase}
+.elegida-texto span{color:var(--texto-2);font-size:15.5px}
+.elegida-cambiar{font-size:15px;color:var(--acento-texto);text-decoration:underline;text-underline-offset:4px}
+#form-llamada{margin-top:0}
+/* Paso 3: hecho */
+.agenda-hecho{display:grid;justify-items:start;gap:12px;padding:6px 0 4px;outline:0}
+.agenda-hecho > .icono{width:52px;height:52px;padding:12px;border-radius:50%;background:var(--positivo-fondo);color:var(--positivo-tinta);stroke-width:2}
+.agenda-hecho h3{font-size:clamp(24px,6.4vw,32px);line-height:1.15;letter-spacing:-.02em;max-width:22ch}
+.agenda-hecho p{color:var(--texto-2);max-width:48ch}
+.agenda-hecho p b{color:var(--texto);font-weight:400}
+.agenda-hecho a{color:var(--texto)}
+.agenda-demo{padding:10px 14px;border-radius:12px;background:var(--acento-sutil);font-size:15px}
+.agenda-hecho .acciones{margin-top:8px}
+@media (prefers-reduced-motion:no-preference){
+  .agenda[open] .agenda-caja{animation:agenda-sube .5s var(--curva)}
+  @keyframes agenda-sube{from{transform:translateY(24px);opacity:0}}
+  .agenda-paso:not([hidden]){animation:agenda-paso .4s var(--curva)}
+  @keyframes agenda-paso{from{transform:translateY(8px);opacity:0}}
+}
+@media (min-width:760px){
+  /* En grande, el calendario sale como un tique: papel con los dientes abajo y su sombra */
+  .agenda{width:min(860px,calc(100% - 48px));height:fit-content;max-height:calc(100dvh - 40px);margin:auto;
+    filter:drop-shadow(0 34px 40px color-mix(in srgb,var(--sombra) 34%,transparent)) drop-shadow(0 3px 6px color-mix(in srgb,var(--sombra) 16%,transparent))}
+  .agenda-caja{--diente:18px;height:auto;max-height:calc(100dvh - 40px);border-radius:8px 8px 0 0;padding:30px 36px 58px;
+    -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / var(--diente) 100%;
+            mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / var(--diente) 100%}
+  .agenda-rejilla{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+  .horas{padding-left:40px;border-left:1.5px dashed var(--borde-fuerte);min-height:100%}
+  .dia{min-height:44px}
+}
+
 .pie{border-top:1px solid var(--borde);padding-block:32px 40px;font-size:15px;color:var(--texto-2)}
 .pie .envoltura{display:grid;gap:18px}
 .pie nav{display:flex;flex-wrap:wrap;gap:4px 18px}
@@ -587,6 +688,10 @@ p{margin:0;text-wrap:pretty}
   .pie nav{justify-content:flex-end}
   .pie .envoltura > span:last-child{grid-column:1 / -1}
 }
+/* Los dos tiques del contacto (WhatsApp y llamada) no caben en la columna estrecha hasta 1024 px:
+   entre 768 y 1023 van debajo del formulario, uno al lado del otro */
+@media (min-width:768px) and (max-width:1023px){ .tiques{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start} }
+@media (min-width:900px) and (max-width:1023px){ .contacto .rejilla-contacto{grid-template-columns:minmax(0,1fr)} }
 /* La historia en grande: la pantalla se queda quieta a la derecha mientras los pasos suben */
 @media (min-width:1000px){
   .historia-rejilla{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:64px;align-items:start}
@@ -629,7 +734,7 @@ p{margin:0;text-wrap:pretty}
 </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="i-chef-hat" viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="i-folder-archive" viewBox="0 0 24 24"><circle cx="15" cy="19" r="2"/><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"/><path d="M15 11v-1"/><path d="M15 17v-2"/></symbol><symbol id="i-shopping-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-boxes" viewBox="0 0 24 24"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol><symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></symbol><symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="i-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol><symbol id="i-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol><symbol id="i-ayuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-forward" viewBox="0 0 24 24"><path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="i-chef-hat" viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="i-folder-archive" viewBox="0 0 24 24"><circle cx="15" cy="19" r="2"/><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"/><path d="M15 11v-1"/><path d="M15 17v-2"/></symbol><symbol id="i-shopping-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-boxes" viewBox="0 0 24 24"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol><symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></symbol><symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="i-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol><symbol id="i-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol><symbol id="i-ayuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-forward" viewBox="0 0 24 24"><path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-calendar-check" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol><symbol id="i-calendar-plus" viewBox="0 0 24 24"><path d="M16 19h6"/><path d="M16 2v4"/><path d="M19 16v6"/><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5"/><path d="M3 10h18"/><path d="M8 2v4"/></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol></svg>
 <a class="salta" href="#principal">Saltar al contenido</a>
 <header class="cabecera">
   <div class="envoltura cabecera-fila">
@@ -1118,19 +1223,106 @@ p{margin:0;text-wrap:pretty}
             <p>Te contestamos a <b data-a></b> lo antes posible.</p>
           </div>
         </div>
-        <aside class="tique-sombra aparece" aria-label="Por WhatsApp">
-          <div class="tique">
-            <h3>¿Prefieres WhatsApp?</h3>
-            <p>Te contamos cómo funciona y resolvemos tus dudas.</p>
-            <div class="acciones">
-              <a class="boton" data-wa href="https://wa.me/34689022884" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
+        <div class="tiques">
+          <aside class="tique-sombra aparece" aria-label="Por WhatsApp">
+            <div class="tique">
+              <h3>¿Prefieres WhatsApp?</h3>
+              <p>Te contamos cómo funciona y resolvemos tus dudas.</p>
+              <div class="acciones">
+                <a class="boton" data-wa href="https://wa.me/34689022884" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
+              </div>
+              <span class="telefono">o al <b data-telefono>689 022 884</b></span>
             </div>
-            <span class="telefono">o al <b data-telefono>689 022 884</b></span>
-          </div>
-        </aside>
+          </aside>
+          <aside class="tique-sombra tique-llamada aparece" aria-label="Agendar una llamada">
+            <div class="tique">
+              <h3>¿Mejor que te llamemos?</h3>
+              <p>Elige el día y la hora que te vengan bien y te llamamos nosotros.</p>
+              <div class="acciones">
+                <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
+              </div>
+              <span class="telefono"><span class="punto-vivo" aria-hidden="true"></span>Ves al momento las horas libres</span>
+            </div>
+          </aside>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
+  <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
+    <div class="agenda-caja">
+      <header class="agenda-cabeza">
+        <span class="agenda-icono" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
+        <div>
+          <h2 id="agenda-titulo">Agenda una llamada</h2>
+          <p>Elige el día y la hora. Te llamamos nosotros.</p>
+        </div>
+        <button class="agenda-cerrar" type="button" data-cerrar aria-label="Cerrar"><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </header>
+
+      <section class="agenda-paso" data-paso="elegir">
+        <p class="agenda-aviso" role="alert" hidden></p>
+        <div class="agenda-rejilla">
+          <div class="mes">
+            <div class="mes-cabeza">
+              <button class="mes-flecha" type="button" data-mes="-1" aria-label="Mes anterior"><svg class="icono" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+              <b class="mes-nombre" aria-live="polite"></b>
+              <button class="mes-flecha" type="button" data-mes="1" aria-label="Mes siguiente"><svg class="icono" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+            </div>
+            <div class="mes-semana" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+            <div class="mes-dias"></div>
+          </div>
+          <div class="horas">
+            <p class="horas-dia"></p>
+            <div class="horas-lista"></div>
+            <div class="horas-fallo" hidden>
+              <p>No hemos podido ver las horas libres ahora mismo.</p>
+              <div class="acciones">
+                <button class="boton boton-borde" type="button" data-reintentar><svg class="icono" aria-hidden="true"><use href="#i-rotate-cw"/></svg>Probar otra vez</button>
+                <a class="enlace" data-wa href="https://wa.me/34689022884" target="_blank" rel="noopener">o escríbenos por WhatsApp</a>
+              </div>
+            </div>
+            <p class="horas-pie"><span class="punto-vivo" aria-hidden="true"></span><span class="horas-estado">Las horas tachadas ya están cogidas.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="agenda-paso" data-paso="datos" hidden>
+        <button class="elegida" type="button" data-volver>
+          <svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="elegida-texto"><b data-elegida-dia></b><span data-elegida-hora></span></span>
+          <span class="elegida-cambiar">Cambiar</span>
+        </button>
+        <form class="formulario" id="form-llamada" novalidate>
+          <div class="dos">
+            <div class="campo"><label for="l-nombre">Nombre</label><input id="l-nombre" name="nombre" autocomplete="name" maxlength="120" required><span class="error" hidden></span></div>
+            <div class="campo"><label for="l-telefono">Teléfono</label><input id="l-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required><span class="error" hidden></span></div>
+          </div>
+          <div class="dos">
+            <div class="campo"><label for="l-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="l-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar o tienda, y dónde"></div>
+            <div class="campo"><label for="l-correo">Correo <span class="opcional">(si quieres)</span></label><input id="l-correo" name="correo" type="email" autocomplete="email" maxlength="160"><span class="error" hidden></span></div>
+          </div>
+          <div class="campo"><label for="l-nota">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="l-nota" name="nota" rows="3" maxlength="1500"></textarea></div>
+          <div class="trampa" aria-hidden="true"><label for="l-web">No rellenes esto</label><input id="l-web" name="web" tabindex="-1" autocomplete="off"></div>
+          <div class="acepto"><input type="checkbox" id="l-acepto" name="acepto" required><label for="l-acepto">He leído la <a href="https://costes.delamotech.es/privacidad" target="_blank" rel="noopener">política de privacidad</a> y quiero que me llaméis.</label><span class="error" hidden></span></div>
+          <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Confirmar la llamada</button>
+          <p class="estado" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="agenda-paso agenda-hecho" data-paso="hecho" hidden tabindex="-1">
+        <svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>
+        <h3>Hecho. Te llamamos el <span data-hecho-cuando></span>.</h3>
+        <p>Al <b data-hecho-tel></b>. Si te surge algo, escríbenos por <a data-wa href="https://wa.me/34689022884" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p class="agenda-demo" hidden>Esto es una vista previa: aquí no se apunta nada. En la web de verdad, la llamada queda en vuestro calendario y os llega un correo.</p>
+        <div class="acciones">
+          <button class="boton boton-borde" type="button" data-ics><svg class="icono" aria-hidden="true"><use href="#i-calendar-plus"/></svg>Añadir a mi calendario</button>
+          <button class="boton" type="button" data-cerrar>Listo</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
 </main>
 
 <footer class="pie">
@@ -1465,6 +1657,314 @@ p{margin:0;text-wrap:pretty}
     location.href = "mailto:" + M.correo + "?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo);
     estado.innerHTML = "Se ha abierto tu programa de correo con el mensaje ya escrito: solo te queda darle a enviar. Si no se ha abierto, escríbenos a <b></b>.";
     estado.querySelector("b").textContent = M.correo;
+  });
+})();
+
+/* ── AGENDAR UNA LLAMADA ──
+   Las horas las da el flujo de n8n (MARCA.horas) mirando el calendario «Llamadas Kontrol»: la web
+   no decide nada, enseña lo que le dicen y lo vuelve a pedir cada 40 s mientras está abierta (y al
+   volver a la pestaña). Al apuntarla (MARCA.agendar) n8n comprueba OTRA VEZ que sigue libre: si otra
+   persona la ha cogido justo antes, se dice y se vuelven a enseñar las horas.
+   Sin MARCA.horas (el artifact) o abierta como fichero: horas de ejemplo y no se apunta nada. */
+(function () {
+  var dlg = document.getElementById("agenda"), abrir = document.querySelectorAll("[data-agenda]");
+  if (!dlg || !abrir.length) return;
+  var M = window.MARCA || {}, raiz = document.documentElement;
+  if (typeof dlg.showModal !== "function") {
+    /* Navegadores muy viejos sin ventanas: al WhatsApp, que siempre funciona */
+    abrir.forEach(function (b) { b.addEventListener("click", function () { location.href = "https://wa.me/" + M.whatsapp; }); });
+    return;
+  }
+  var demo = !M.horas || location.protocol === "file:";
+  var caja = dlg.querySelector(".agenda-caja"), aviso = dlg.querySelector(".agenda-aviso");
+  var pasos = {};
+  dlg.querySelectorAll("[data-paso]").forEach(function (p) { pasos[p.getAttribute("data-paso")] = p; });
+  var mesNombre = dlg.querySelector(".mes-nombre"), mesDias = dlg.querySelector(".mes-dias"), flechas = dlg.querySelectorAll("[data-mes]");
+  var horasDia = dlg.querySelector(".horas-dia"), horasLista = dlg.querySelector(".horas-lista");
+  var horasFallo = dlg.querySelector(".horas-fallo"), horasPie = dlg.querySelector(".horas-pie"), horasEstado = dlg.querySelector(".horas-estado");
+  var f = document.getElementById("form-llamada"), estado = f.querySelector(".estado"), boton = f.querySelector('button[type="submit"]');
+  var fDia = new Intl.DateTimeFormat("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
+  var fDiaLocal = new Intl.DateTimeFormat("es-ES", { weekday: "long", day: "numeric", month: "long" });
+  var fMes = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric", timeZone: "UTC" });
+  var fHora = new Intl.DateTimeFormat("es-ES", { hour: "2-digit", minute: "2-digit" });
+  var fHoraMadrid = new Intl.DateTimeFormat("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Madrid" });
+  var st = { dias: [], mes: "", dia: "", hora: "", paso: "elegir", reloj: 0, pidiendo: false, t2: 0, hecha: null };
+
+  function dos(n) { return (n < 10 ? "0" : "") + n; }
+  function hoy() { var d = new Date(); return d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()); }
+  /* Un día «AAAA-MM-DD» dicho en largo, sin que la zona horaria lo mueva: «lunes 28 de septiembre» */
+  function diaLargo(fecha) { return fDia.format(new Date(fecha + "T12:00:00Z")).replace(",", ""); }
+  function cuando(iso) { var t = new Date(iso); return fDiaLocal.format(t).replace(",", "") + " a las " + fHora.format(t); }
+  function libres(d) { return d.horas.filter(function (h) { return h.libre; }).length; }
+  function buscaDia(fecha) { return st.dias.filter(function (d) { return d.fecha === fecha; })[0] || null; }
+  function buscaHora(iso) {
+    for (var i = 0; i < st.dias.length; i++) for (var j = 0; j < st.dias[i].horas.length; j++) if (st.dias[i].horas[j].inicio === iso) return st.dias[i].horas[j];
+    return null;
+  }
+  function meses() { var m = []; st.dias.forEach(function (d) { var x = d.fecha.slice(0, 7); if (m.indexOf(x) < 0) m.push(x); }); return m; }
+  function decir(texto) { aviso.textContent = texto; aviso.hidden = !texto; }
+
+  /* Horas de ejemplo (el artifact y el fichero suelto): el mismo horario, alguna ya cogida */
+  function ejemplo() {
+    var dias = [], ahora = Date.now(), base = new Date();
+    for (var d = 0; d <= 14; d++) {
+      var dia = new Date(base.getFullYear(), base.getMonth(), base.getDate() + d);
+      if (dia.getDay() === 0 || dia.getDay() === 6) continue;
+      var horas = [];
+      [[10, 0], [10, 30], [11, 0], [11, 30], [12, 0], [12, 30], [13, 0], [16, 0], [16, 30], [17, 0], [17, 30], [18, 0], [18, 30]].forEach(function (hm, i) {
+        var t = new Date(dia.getFullYear(), dia.getMonth(), dia.getDate(), hm[0], hm[1]);
+        if (t.getTime() < ahora + 2 * 3600000) return;
+        horas.push({ inicio: t.toISOString().replace(/\.\d{3}Z$/, "Z"), libre: (d * 7 + i * 5) % 6 !== 0 });
+      });
+      if (horas.length) dias.push({ fecha: dia.getFullYear() + "-" + dos(dia.getMonth() + 1) + "-" + dos(dia.getDate()), horas: horas });
+    }
+    return { dias: dias };
+  }
+
+  function cargar(callado) {
+    if (st.pidiendo) return;
+    st.pidiendo = true;
+    if (!callado) { dlg.classList.add("cargando"); dlg.setAttribute("aria-busy", "true"); esqueleto(); }
+    var pedir = demo
+      ? new Promise(function (ok) { setTimeout(function () { ok(ejemplo()); }, 500); })
+      : fetch(M.horas, { cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); });
+    pedir.then(function (d) { horasFallo.hidden = true; horasPie.hidden = false; dlg.classList.remove("cargando"); aplicar(d.dias || []); })
+      .catch(function () { if (!callado || !st.dias.length) fallo(); })
+      .then(function () { st.pidiendo = false; dlg.classList.remove("cargando"); dlg.removeAttribute("aria-busy"); });
+  }
+
+  function aplicar(dias) {
+    var antes = st.hora;
+    st.dias = dias;
+    /* ¿Sigue libre la hora que tenía marcada? Si no, se dice y se vuelve a elegir */
+    if (antes) {
+      var h = buscaHora(antes);
+      if (!h || !h.libre) {
+        st.hora = "";
+        decir("La hora que habías elegido la acaba de coger otra persona. Elige otra, por favor.");
+        if (st.paso === "datos") ir("elegir");
+      }
+    }
+    var d = st.dia && buscaDia(st.dia);
+    if (!d || !libres(d)) {
+      st.dia = "";
+      for (var i = 0; i < st.dias.length; i++) if (libres(st.dias[i])) { st.dia = st.dias[i].fecha; break; }
+    }
+    var m = meses();
+    if (st.dia) st.mes = st.dia.slice(0, 7);
+    else if (m.indexOf(st.mes) < 0) st.mes = m[0] || hoy().slice(0, 7);
+    pintarMes(); pintarHoras();
+  }
+
+  function pintarMes(gris) {
+    var y = +st.mes.slice(0, 4), m = +st.mes.slice(5, 7) - 1, lista = meses(), donde = lista.indexOf(st.mes);
+    mesNombre.textContent = fMes.format(new Date(Date.UTC(y, m, 15)));
+    flechas[0].disabled = gris || donde <= 0;
+    flechas[1].disabled = gris || donde < 0 || donde >= lista.length - 1;
+    var hueco = (new Date(Date.UTC(y, m, 1)).getUTCDay() + 6) % 7, total = new Date(Date.UTC(y, m + 1, 0)).getUTCDate(), hoyEs = hoy();
+    mesDias.textContent = "";
+    for (var i = 0; i < hueco; i++) mesDias.appendChild(document.createElement("i"));
+    for (var n = 1; n <= total; n++) {
+      var fecha = st.mes + "-" + dos(n), d = !gris && buscaDia(fecha), el;
+      if (d) {
+        var l = libres(d);
+        el = document.createElement("button");
+        el.type = "button"; el.className = "dia" + (l ? "" : " lleno");
+        el.setAttribute("data-fecha", fecha);
+        el.setAttribute("aria-pressed", String(fecha === st.dia));
+        el.setAttribute("aria-label", diaLargo(fecha) + (l ? ", " + l + (l === 1 ? " hora libre" : " horas libres") : ", completo"));
+        if (!l) el.disabled = true;
+      } else {
+        el = document.createElement("span"); el.className = "dia"; el.setAttribute("aria-hidden", "true");
+      }
+      if (fecha === hoyEs) el.classList.add("hoy");
+      el.appendChild(document.createTextNode(String(n)));
+      mesDias.appendChild(el);
+    }
+  }
+
+  function pintarHoras() {
+    horasLista.textContent = "";
+    var d = st.dia && buscaDia(st.dia);
+    if (!d) { horasDia.textContent = st.dias.length ? "Ese día ya no quedan horas libres." : "No quedan horas libres estos días."; return; }
+    horasDia.textContent = diaLargo(d.fecha);
+    var grupos = [["Por la mañana", []], ["Por la tarde", []]];
+    d.horas.forEach(function (h) { grupos[new Date(h.inicio).getHours() < 15 ? 0 : 1][1].push(h); });
+    grupos.forEach(function (g) {
+      if (!g[1].length) return;
+      var p = document.createElement("p"); p.className = "horas-grupo"; p.textContent = g[0];
+      var fila = document.createElement("div"); fila.className = "fila"; fila.setAttribute("role", "group"); fila.setAttribute("aria-label", g[0]);
+      g[1].forEach(function (h) {
+        var b = document.createElement("button"), txt = fHora.format(new Date(h.inicio));
+        b.type = "button"; b.className = "hora"; b.textContent = txt; b.setAttribute("data-inicio", h.inicio);
+        if (h.libre) b.setAttribute("aria-pressed", String(h.inicio === st.hora));
+        else { b.disabled = true; b.classList.add("cogida"); b.setAttribute("aria-label", txt + ", ya cogida"); }
+        fila.appendChild(b);
+      });
+      horasLista.appendChild(p); horasLista.appendChild(fila);
+    });
+    /* Quien no está en la hora de Madrid (Canarias, fuera de España) ve SU hora, y se le dice */
+    var t = new Date(d.horas[0].inicio);
+    horasEstado.textContent = fHora.format(t) !== fHoraMadrid.format(t) ? "Las horas van en tu hora. Las tachadas ya están cogidas." : "Las horas tachadas ya están cogidas.";
+  }
+
+  /* Mientras llegan las horas: el mes y unas horas en gris, del mismo tamaño que lo de verdad */
+  function esqueleto() {
+    if (!st.mes) st.mes = hoy().slice(0, 7);
+    pintarMes(true);
+    horasDia.textContent = "Mirando las horas libres…";
+    horasLista.textContent = "";
+    var fila = document.createElement("div"); fila.className = "fila"; fila.setAttribute("aria-hidden", "true");
+    for (var i = 0; i < 9; i++) { var s = document.createElement("span"); s.className = "hora"; s.textContent = "00:00"; fila.appendChild(s); }
+    horasLista.appendChild(fila);
+  }
+
+  function fallo() {
+    horasFallo.hidden = false; horasPie.hidden = true;
+    horasDia.textContent = ""; horasLista.textContent = "";
+    pintarMes(true);
+  }
+
+  function ir(p) {
+    st.paso = p;
+    Object.keys(pasos).forEach(function (k) { pasos[k].hidden = k !== p; });
+    if (p === "datos") {
+      dlg.querySelector("[data-elegida-dia]").textContent = diaLargo(st.dia);
+      dlg.querySelector("[data-elegida-hora]").textContent = "a las " + fHora.format(new Date(st.hora));
+      st.t2 = Date.now();
+    }
+    caja.scrollTop = 0;
+  }
+
+  function reiniciar() { st.hora = ""; st.hecha = null; f.reset(); estado.textContent = ""; decir(""); ir("elegir"); }
+
+  function abrirAgenda() {
+    if (st.paso === "hecho") reiniciar();
+    decir("");
+    dlg.showModal();
+    raiz.classList.add("agenda-abierta");
+    if (!st.dias.length) esqueleto();
+    cargar(st.dias.length > 0);
+    clearInterval(st.reloj);
+    st.reloj = setInterval(function () { if (!document.hidden) cargar(true); }, 40000);
+  }
+  abrir.forEach(function (b) { b.addEventListener("click", abrirAgenda); });
+  dlg.addEventListener("close", function () { raiz.classList.remove("agenda-abierta"); clearInterval(st.reloj); });
+  /* Tocar fuera del tique lo cierra (en el móvil ocupa toda la pantalla: ahí se cierra con la X) */
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.querySelectorAll("[data-cerrar]").forEach(function (b) { b.addEventListener("click", function () { dlg.close(); }); });
+  document.addEventListener("visibilitychange", function () { if (dlg.open && !document.hidden) cargar(true); });
+  dlg.querySelector("[data-reintentar]").addEventListener("click", function () { cargar(false); });
+
+  mesDias.addEventListener("click", function (e) {
+    var b = e.target.closest("button.dia");
+    if (!b || b.disabled) return;
+    st.dia = b.getAttribute("data-fecha"); st.hora = ""; decir("");
+    pintarMes(); pintarHoras();
+    mesDias.querySelector('[data-fecha="' + st.dia + '"]').focus();
+    if (innerWidth < 760) horasDia.scrollIntoView({ block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  flechas.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var lista = meses(), nuevo = lista[lista.indexOf(st.mes) + Number(b.getAttribute("data-mes"))];
+      if (!nuevo) return;
+      st.mes = nuevo;
+      if (st.dia.slice(0, 7) !== nuevo) {
+        var d = st.dias.filter(function (x) { return x.fecha.slice(0, 7) === nuevo && libres(x); })[0];
+        st.dia = d ? d.fecha : ""; st.hora = "";
+      }
+      pintarMes(); pintarHoras();
+    });
+  });
+  horasLista.addEventListener("click", function (e) {
+    var b = e.target.closest("button.hora");
+    if (!b || b.disabled) return;
+    st.hora = b.getAttribute("data-inicio"); decir("");
+    ir("datos");
+    document.getElementById("l-nombre").focus({ preventScroll: true });
+  });
+  dlg.querySelector("[data-volver]").addEventListener("click", function () {
+    ir("elegir"); pintarHoras();
+    var b = horasLista.querySelector('[aria-pressed="true"]'); if (b) b.focus();
+  });
+
+  /* El formulario: lo justo para poder llamar (nombre y teléfono), y el resto si quieren */
+  function mal(id, texto) {
+    var c = document.getElementById(id).closest(".campo, .acepto");
+    c.setAttribute("data-mal", "");
+    var e = c.querySelector(".error"); if (e) { e.textContent = texto; e.hidden = false; }
+    document.getElementById(id).setAttribute("aria-invalid", "true");
+  }
+  function bien(c) {
+    c.removeAttribute("data-mal");
+    var e = c.querySelector(".error"); if (e) e.hidden = true;
+    var i = c.querySelector("input, textarea"); if (i) i.removeAttribute("aria-invalid");
+  }
+  f.addEventListener("input", function (ev) { var c = ev.target.closest(".campo, .acepto"); if (c && c.hasAttribute("data-mal")) bien(c); });
+  f.addEventListener("change", function (ev) { var c = ev.target.closest(".acepto"); if (c && c.hasAttribute("data-mal")) bien(c); });
+
+  function hecha(d) {
+    st.hecha = { inicio: st.hora, fin: new Date(new Date(st.hora).getTime() + 30 * 60000).toISOString(), tel: d.telefono };
+    dlg.querySelector("[data-hecho-cuando]").textContent = cuando(st.hora);
+    dlg.querySelector("[data-hecho-tel]").textContent = d.telefono;
+    dlg.querySelector(".agenda-demo").hidden = !demo;
+    ir("hecho");
+    pasos.hecho.focus();
+  }
+
+  f.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    f.querySelectorAll("[data-mal]").forEach(bien);
+    estado.textContent = "";
+    var d = {
+      inicio: st.hora, nombre: f.nombre.value.trim(), telefono: f.telefono.value.trim(), negocio: f.negocio.value.trim(),
+      correo: f.correo.value.trim(), nota: f.nota.value.trim(), acepto: f.acepto.checked, web: f.web.value, producto: M.producto
+    };
+    var fallos = [];
+    if (!d.nombre) { mal("l-nombre", "Escribe tu nombre."); fallos.push("l-nombre"); }
+    if ((d.telefono.match(/\d/g) || []).length < 9) { mal("l-telefono", "Escribe un teléfono para poder llamarte, por ejemplo 600\u00a0123\u00a0456."); fallos.push("l-telefono"); }
+    if (d.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.correo)) { mal("l-correo", "Revisa el correo (o déjalo vacío), por ejemplo nombre@correo.com."); fallos.push("l-correo"); }
+    if (!d.acepto) { mal("l-acepto", "Márcala para que podamos llamarte."); fallos.push("l-acepto"); }
+    if (fallos.length) { document.getElementById(fallos[0]).focus(); return; }
+    /* Robots: rellenan la casilla escondida o envían en un instante. Se les dice que sí y no sale nada. */
+    if (d.web || Date.now() - st.t2 < 2000) { hecha(d); return; }
+    boton.disabled = true; estado.textContent = "Apuntando la llamada…";
+    if (demo) { setTimeout(function () { boton.disabled = false; estado.textContent = ""; hecha(d); }, 700); return; }
+    fetch(M.agendar, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+      .then(function (x) {
+        var j = x.j || {};
+        if (x.r.ok && j.ok) { estado.textContent = ""; hecha(d); return; }
+        if (j.motivo === "ocupada" || j.motivo === "hora") {
+          estado.textContent = ""; st.hora = "";
+          if (j.dias) aplicar(j.dias);
+          decir(j.motivo === "ocupada" ? "Esa hora la acaba de coger otra persona. Elige otra, por favor." : "Esa hora ya no se puede coger. Elige otra, por favor.");
+          ir("elegir");
+          return;
+        }
+        if (j.motivo === "ya") { estado.textContent = "Ya tienes una llamada apuntada el " + cuando(j.inicio) + ". Si quieres cambiarla, escríbenos por WhatsApp."; return; }
+        if (j.motivo === "datos") { estado.textContent = ""; mal("l-telefono", "Revisa el teléfono: tiene que ser un número al que podamos llamar."); document.getElementById("l-telefono").focus(); return; }
+        throw new Error(String(x.r.status));
+      })
+      .catch(function () { estado.textContent = "No se ha podido apuntar ahora mismo. Prueba otra vez en un momento, o escríbenos por WhatsApp."; })
+      .then(function () { boton.disabled = false; });
+  });
+
+  /* «Añadir a mi calendario»: un .ics con la llamada (el móvil lo abre con su calendario) */
+  dlg.querySelector("[data-ics]").addEventListener("click", function () {
+    var h = st.hecha; if (!h) return;
+    function z(iso) { return iso.replace(/\.\d{3}Z$/, "Z").replace(/[-:]/g, ""); }
+    function e(s) { return String(s).replace(/([,;\\])/g, "\\$1"); }
+    var ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//" + e(M.producto) + "//Llamada//ES", "METHOD:PUBLISH", "BEGIN:VEVENT",
+      "UID:" + z(h.inicio) + "-" + Math.random().toString(36).slice(2) + "@" + (location.hostname || "kontrol"),
+      "DTSTAMP:" + z(new Date().toISOString()), "DTSTART:" + z(h.inicio), "DTEND:" + z(h.fin),
+      "SUMMARY:" + e("Llamada de " + M.producto), "DESCRIPTION:" + e("Te llamamos al " + h.tel + "."),
+      "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    a.download = "llamada-" + String(M.producto || "kontrol").toLowerCase() + ".ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
   });
 })();
 </script>
