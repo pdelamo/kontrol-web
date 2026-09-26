@@ -25,7 +25,7 @@ window.MARCA = {
   horas: "https://n8n.delamotech.es/webhook/kontrol-huecos",     /* las horas libres para la llamada (n8n);
                                                         vacía = horas de ejemplo y no se apunta nada */
   agendar: "https://n8n.delamotech.es/webhook/kontrol-llamada",  /* donde se apunta la llamada (n8n) */
-  entrar: "https://costes.delamotech.es/app/entrar",
+  entrar: "https://app.kontrolapp.es/app/entrar",
   mensaje: "Hola, quiero saber más de {producto}."
 };
 /* Abre en claro; el oscuro solo si esta persona lo eligió con el interruptor (o #oscuro en la dirección) */
@@ -744,7 +744,7 @@ button.dia.lleno::after{display:none}
       <a class="nav-enlace" href="#teresa" data-marca="ayudante">Teresa</a>
       <a class="nav-enlace" href="#preguntas">Preguntas</a>
     </nav>
-    <a class="nav-enlace cab-entrar" data-entrar href="https://costes.delamotech.es/app/entrar">Entrar</a>
+    <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
     <a class="boton boton-borde boton-cab" href="#contacto"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Contacto</a>
     <button class="redondo tema-boton cab-tema" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button>
     <button class="redondo menu-boton" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menú" data-menu><svg class="icono abrir" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icono cerrar" aria-hidden="true"><use href="#i-x"/></svg></button>
@@ -765,7 +765,7 @@ button.dia.lleno::after{display:none}
           <li><a href="#tiendas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg></span><b>Tiendas</b><small>También para tu tienda</small></a></li>
         </ul>
         <div class="menu-pie">
-          <div class="fila"><a class="enlace" href="#preguntas">Preguntas</a><a class="enlace" data-entrar href="https://costes.delamotech.es/app/entrar">Entrar</a></div>
+          <div class="fila"><a class="enlace" href="#preguntas">Preguntas</a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
           <div class="fila"><span>Modo oscuro</span><button class="redondo tema-boton" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
           <a class="boton" data-wa href="https://wa.me/34689022884" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
         </div>
@@ -1181,7 +1181,7 @@ button.dia.lleno::after{display:none}
         <details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas. Hasta entonces no se reclama nada a nadie.</p></details>
         <details><summary>¿Es un TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Lo que vendes sale de tu caja: subes el Excel que exporta tu TPV, sea cual sea.</p></details>
         <details><summary>¿Podemos usarla dos personas a la vez?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, en el móvil y en el ordenador. Si los dos tocáis el mismo papel o el mismo pedido, avisa y no se pisa nada.</p></details>
-        <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Ningún otro negocio puede ver lo tuyo: cada cuenta ve lo suyo y nada más. Lo tienes todo en la <a href="https://costes.delamotech.es/privacidad">política de privacidad</a>.</p></details>
+        <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Ningún otro negocio puede ver lo tuyo: cada cuenta ve lo suyo y nada más. Lo tienes todo en la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a>.</p></details>
         <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Escríbenos por correo o por WhatsApp. Te damos tu acceso y empiezas por los papeles de este mes; los de meses atrás los puedes subir cuando quieras.</p></details>
       </div>
     </div>
@@ -1213,7 +1213,7 @@ button.dia.lleno::after{display:none}
             </div>
             <div class="campo"><label for="c-mensaje">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="c-mensaje" name="mensaje" rows="4" maxlength="2000"></textarea></div>
             <div class="trampa" aria-hidden="true"><label for="c-web">No rellenes esto</label><input id="c-web" name="web" tabindex="-1" autocomplete="off"></div>
-            <div class="acepto"><input type="checkbox" id="c-acepto" name="acepto" required><label for="c-acepto">He leído la <a href="https://costes.delamotech.es/privacidad">política de privacidad</a> y quiero que me contestéis.</label><span class="error" hidden></span></div>
+            <div class="acepto"><input type="checkbox" id="c-acepto" name="acepto" required><label for="c-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a> y quiero que me contestéis.</label><span class="error" hidden></span></div>
             <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Enviar</button>
             <p class="estado" role="status" aria-live="polite"></p>
           </form>
@@ -1305,7 +1305,7 @@ button.dia.lleno::after{display:none}
           </div>
           <div class="campo"><label for="l-nota">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="l-nota" name="nota" rows="3" maxlength="1500"></textarea></div>
           <div class="trampa" aria-hidden="true"><label for="l-web">No rellenes esto</label><input id="l-web" name="web" tabindex="-1" autocomplete="off"></div>
-          <div class="acepto"><input type="checkbox" id="l-acepto" name="acepto" required><label for="l-acepto">He leído la <a href="https://costes.delamotech.es/privacidad" target="_blank" rel="noopener">política de privacidad</a> y quiero que me llaméis.</label><span class="error" hidden></span></div>
+          <div class="acepto"><input type="checkbox" id="l-acepto" name="acepto" required><label for="l-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad" target="_blank" rel="noopener">política de privacidad</a> y quiero que me llaméis.</label><span class="error" hidden></span></div>
           <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Confirmar la llamada</button>
           <p class="estado" role="status" aria-live="polite"></p>
         </form>
@@ -1328,7 +1328,7 @@ button.dia.lleno::after{display:none}
 <footer class="pie">
   <div class="envoltura">
     <span class="marca"><img src="img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
-    <nav aria-label="Legal"><a href="https://costes.delamotech.es/legal">Aviso legal</a><a href="https://costes.delamotech.es/privacidad">Privacidad</a><a href="https://costes.delamotech.es/cookies">Cookies</a><a data-entrar href="https://costes.delamotech.es/app/entrar">Entrar</a></nav>
+    <nav aria-label="Legal"><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
     <span>Un producto de DAB. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>
