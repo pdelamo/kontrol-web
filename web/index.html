@@ -434,6 +434,20 @@ p{margin:0;text-wrap:pretty}
 .compras-almacen{background:var(--superficie-alt);border-block:1px solid var(--borde)}
 .compras-almacen .medios{display:grid;gap:44px;margin-top:40px}
 .compras-almacen .vitrina .ventana video{aspect-ratio:1080/1296}
+/* Los dos vídeos van POR TURNOS (Pablo: «al pasar los dos a la vez no sabes dónde mirar»): el que
+   suena se ve entero y con el marco encendido; el otro espera atenuado. Encima, su título numerado y
+   una rayita que se llena mientras se reproduce. Tocando un título (o un vídeo) se salta a ese. */
+.video-titulo{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:0;border:0;background:none;font:inherit;font-size:clamp(19px,4.6vw,22px);font-weight:700;letter-spacing:-.01em;color:var(--texto);cursor:pointer;text-align:left}
+.video-titulo .n{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:50%;background:var(--acento-suave);color:var(--acento-texto);font-size:15px;transition:background-color .35s ease,color .35s ease}
+.video-avance{display:block;height:4px;margin:0 0 16px;border-radius:2px;background:var(--borde);overflow:hidden}
+.video-avance i{display:block;height:100%;background:var(--acento);transform-origin:left;transform:scaleX(0)}
+.turnos .vitrina{transition:opacity .45s ease,filter .45s ease}
+.turnos .ventana{transition:box-shadow .45s ease}
+.turnos.en-turnos .vitrina:not(.activo){opacity:.55;filter:saturate(.55)}
+.turnos.en-turnos .vitrina:not(.activo) .ventana{cursor:pointer}
+.turnos .vitrina.activo .ventana{box-shadow:var(--filo),0 0 0 2px var(--acento),var(--sombra-3)}
+.turnos .vitrina.activo .video-titulo .n{background:var(--boton);color:var(--boton-texto)}
+.turnos.en-turnos .vitrina:not(.activo) .video-titulo:hover{color:var(--acento-texto)}
 .medio-pie{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14px;color:var(--texto-2)}
 .medio-pie .icono{width:17px;height:17px;color:var(--acento)}
 .compras-almacen .pastillas{margin-top:48px}
@@ -946,16 +960,20 @@ p{margin:0;text-wrap:pretty}
         <h2 id="t-compras" class="titular">Lo que compras, lo que tienes y lo que se pierde por el camino.</h2>
         <p class="explica">Pides al proveedor, marcas lo que llega y cuentas el almacén de pie, con el móvil. En restaurantes, bares y tiendas.</p>
       </div>
-      <div class="medios">
+      <div class="medios turnos">
         <figure class="vitrina aparece">
+          <button class="video-titulo" type="button" aria-pressed="false"><span class="n">1</span>Pedir al proveedor</button>
+          <span class="video-avance" aria-hidden="true"><i></i></span>
           <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <video class="clip" muted loop playsinline preload="none" poster="video/pedido.webp" width="1080" height="1296" aria-label="En la app: se hace un pedido a la pescadería, se añaden bogavante, lubina y mejillones de lo que sueles comprarle, se ponen las cantidades y abajo sale lo que te saldrá, 292 euros"><source src="video/pedido.mp4" type="video/mp4"></video>
+            <video class="turno" muted loop playsinline preload="none" poster="video/pedido.webp" width="1080" height="1296" aria-label="En la app: se hace un pedido a la pescadería, se añaden bogavante, lubina y mejillones de lo que sueles comprarle, se ponen las cantidades y abajo sale lo que te saldrá, 292 euros"><source src="video/pedido.mp4" type="video/mp4"></video>
           </div>
           <figcaption><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Un pedido de verdad: eliges, pones cantidades y ves lo que te saldrá.</figcaption>
         </figure>
         <figure class="vitrina aparece">
+          <button class="video-titulo" type="button" aria-pressed="false"><span class="n">2</span>Recuento del almacén</button>
+          <span class="video-avance" aria-hidden="true"><i></i></span>
           <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <video class="clip" muted loop playsinline preload="none" poster="video/almacen-recuento.webp" width="1080" height="1296" aria-label="En la app: se toca «Hacer recuento» y se cuentan el arroz, el bogavante y la lubina; cada cosa se guarda sola y el contador sube a 3 de 97"><source src="video/almacen-recuento.mp4" type="video/mp4"></video>
+            <video class="turno" muted loop playsinline preload="none" poster="video/almacen-recuento.webp" width="1080" height="1296" aria-label="En la app: se toca «Hacer recuento» y se cuentan el arroz, el bogavante y la lubina; cada cosa se guarda sola y el contador sube a 3 de 97"><source src="video/almacen-recuento.mp4" type="video/mp4"></video>
           </div>
           <figcaption><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg>Un recuento de verdad: buscas, escribes y se guarda solo.</figcaption>
         </figure>
@@ -1273,6 +1291,72 @@ p{margin:0;text-wrap:pretty}
     });
   }, { threshold: [0, 0.25, 0.6, 1] });
   hist.querySelectorAll(".paso-vista").forEach(function (v) { io.observe(v); });
+})();
+
+/* ── LOS DOS VÍDEOS DE COMPRAS Y ALMACÉN: NUNCA SUENAN LOS DOS A LA VEZ ──
+   Pablo: «al pasar los dos a la vez no sabes dónde mirar». Lado a lado (ordenador) van por turnos:
+   primero el pedido y, al acabar, el recuento, y vuelta a empezar; el que suena se enciende y el otro
+   espera atenuado. En el móvil, uno encima del otro, suena el que más se ve. En los dos casos la
+   rayita de encima dice cuánto le queda, y tocando un título (o un vídeo) se salta a ese. */
+(function () {
+  var caja = document.querySelector(".turnos");
+  if (!caja) return;
+  var figs = [].slice.call(caja.querySelectorAll(".vitrina"));
+  var vids = figs.map(function (f) { return f.querySelector("video"); });
+  var rayas = figs.map(function (f) { return f.querySelector(".video-avance i"); });
+  var titulos = figs.map(function (f) { return f.querySelector(".video-titulo"); });
+  var quieto = matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window);
+  var lado = matchMedia("(min-width: 900px)");
+  var actual = 0, visto = false, ratios = [0, 0];
+  var enTurnos = function () { return lado.matches; };
+  function pinta() {
+    figs.forEach(function (f, k) { f.classList.toggle("activo", k === actual); titulos[k].setAttribute("aria-pressed", String(k === actual)); });
+  }
+  function reproduce(v) { v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () { v.controls = true; }); }
+  function solo(k, desdeCero) {
+    vids.forEach(function (v, j) { if (j !== k) v.pause(); });
+    actual = k; pinta();
+    if (desdeCero) vids[k].currentTime = 0;
+    reproduce(vids[k]);
+  }
+  /* En el móvil: el que más se ve (si se ve al menos un tercio) */
+  function elMasVisto() {
+    var k = ratios[0] >= ratios[1] ? 0 : 1;
+    if (ratios[k] >= 0.35) { if (actual !== k || vids[k].paused) solo(k, false); }
+    else vids.forEach(function (v) { v.pause(); });
+  }
+  function modo() {
+    caja.classList.toggle("en-turnos", enTurnos());
+    vids.forEach(function (v) { v.loop = !enTurnos(); });
+    pinta();
+    if (enTurnos()) { if (visto) solo(actual, false); else vids.forEach(function (v) { v.pause(); }); }
+    else elMasVisto();
+  }
+  vids.forEach(function (v, k) {
+    v.addEventListener("ended", function () {
+      if (!enTurnos()) return;
+      rayas[k].style.transform = "scaleX(1)";
+      var sig = (k + 1) % vids.length;
+      if (visto) solo(sig, true); else { actual = sig; pinta(); vids[sig].currentTime = 0; }
+    });
+    v.addEventListener("timeupdate", function () { if (v.duration) rayas[k].style.transform = "scaleX(" + (v.currentTime / v.duration) + ")"; });
+    var tocar = function () { if (quieto) { vids[k].paused ? reproduce(vids[k]) : vids[k].pause(); return; } if (k !== actual || vids[k].paused) solo(k, k !== actual); };
+    figs[k].querySelector(".ventana").addEventListener("click", tocar);
+    titulos[k].addEventListener("click", tocar);
+  });
+  if (quieto) { vids.forEach(function (v) { v.controls = true; v.preload = "metadata"; }); return; }
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) { visto = e.isIntersecting; });
+    if (!enTurnos()) return;
+    if (visto) solo(actual, false); else vids[actual].pause();
+  }, { threshold: 0.35 }).observe(caja);
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { ratios[vids.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+    if (!enTurnos()) elMasVisto();
+  }, { threshold: [0, 0.2, 0.35, 0.5, 0.65, 0.8, 1] });
+  vids.forEach(function (v) { io.observe(v); });
+  if (lado.addEventListener) lado.addEventListener("change", modo);
+  modo();
 })();
 
 /* ── LOS VÍDEOS: se ponen en marcha al verse y se paran al salir (con menos movimiento, quietos y con mandos) ── */
