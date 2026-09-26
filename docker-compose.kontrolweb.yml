@@ -1,10 +1,14 @@
-# LA WEB DE VENTA DE KONTROL — `kontrol.delamotech.es` (de momento, para enseñarla: NO sale en Google)
+# LA WEB DE VENTA DE KONTROL — `kontrolapp.es` (dominio propio, comprado el 26-sep-2026). De momento
+# sigue sin salir en Google (X-Robots-Tag abajo y web/robots.txt): se quitan el día que Pablo diga.
+# `www.kontrolapp.es` y el subdominio de antes, `kontrol.delamotech.es`, REDIRIGEN aquí con un 301
+# (el enlace que ya se ha repartido sigue llegando, y conservando la ruta).
 #
 # La primera vez, en el VPS:
 #   cd /root && git clone https://github.com/pdelamo/kontrol-web.git && cd kontrol-web && docker compose -p kontrolweb -f docker-compose.kontrolweb.yml up -d
 # Para cada versión nueva basta con:
 #   cd /root/kontrol-web && git pull
-# (nginx sirve la carpeta tal cual: no hay nada que construir ni que reiniciar).
+# (nginx sirve la carpeta tal cual: no hay nada que construir ni que reiniciar). Si cambian estas
+# etiquetas (un dominio, una cabecera), además: docker compose -p kontrolweb -f docker-compose.kontrolweb.yml up -d
 #
 # Copiado de la web de OLIMPO (`olimpo-web` en docker-compose.olimpo.yml), que es la que funciona en
 # este VPS: un nginx pelado sirviendo ficheros quietos, en su propio proyecto (-p kontrolweb) para que
@@ -27,13 +31,18 @@ services:
     networks: [n8n_default]
     labels:
       - traefik.enable=true
-      - traefik.http.routers.kweb-http.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kweb-http.rule=Host(`kontrolapp.es`) || Host(`www.kontrolapp.es`)
       - traefik.http.routers.kweb-http.entrypoints=web
       - traefik.http.routers.kweb-http.middlewares=kweb-https
       - traefik.http.middlewares.kweb-https.redirectscheme.scheme=https
-      - traefik.http.routers.kweb.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kweb.rule=Host(`kontrolapp.es`) || Host(`www.kontrolapp.es`)
       - traefik.http.routers.kweb.entrypoints=websecure
-      - traefik.http.routers.kweb.middlewares=kweb-freno,kweb-cabeceras
+      - traefik.http.routers.kweb.middlewares=kweb-www,kweb-freno,kweb-cabeceras
+      # `www` no es otro sitio: es el mismo. Redirección permanente, como en olimpoapp.es.
+      # ⚠️ El certificado se pide para los DOS nombres a la vez: si uno no apunta al VPS, fallan los dos.
+      - traefik.http.middlewares.kweb-www.redirectregex.regex=^https?://www\.kontrolapp\.es/(.*)
+      - traefik.http.middlewares.kweb-www.redirectregex.replacement=https://kontrolapp.es/$${1}
+      - traefik.http.middlewares.kweb-www.redirectregex.permanent=true
       # El mismo freno que OLIMPO: no protege datos (aquí no hay), protege la máquina.
       - traefik.http.middlewares.kweb-freno.ratelimit.average=60
       - traefik.http.middlewares.kweb-freno.ratelimit.burst=120
@@ -55,6 +64,23 @@ services:
       # El emisor de certificados de este VPS se llama así (el mismo que el panel, el camarero y OLIMPO).
       - traefik.http.routers.kweb.tls.certresolver=mytlschallenge
       - traefik.http.services.kweb.loadbalancer.server.port=80
+
+      # ── EL SUBDOMINIO DE ANTES: SOLO REDIRIGE ──────────────────────────────────────────
+      # `$$` es un `$` de verdad (docker compose se come uno). Conserva la ruta. Su certificado se
+      # mantiene: sin él, el navegador avisaría de sitio inseguro ANTES de llegar a la redirección.
+      - traefik.http.middlewares.kweb-mudanza.redirectregex.regex=^https?://kontrol\.delamotech\.es/(.*)
+      - traefik.http.middlewares.kweb-mudanza.redirectregex.replacement=https://kontrolapp.es/$${1}
+      - traefik.http.middlewares.kweb-mudanza.redirectregex.permanent=true
+      - traefik.http.routers.kviejo-http.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kviejo-http.entrypoints=web
+      - traefik.http.routers.kviejo-http.middlewares=kweb-mudanza
+      - traefik.http.routers.kviejo-http.service=kweb
+      - traefik.http.routers.kviejo.rule=Host(`kontrol.delamotech.es`)
+      - traefik.http.routers.kviejo.entrypoints=websecure
+      - traefik.http.routers.kviejo.middlewares=kweb-mudanza
+      - traefik.http.routers.kviejo.service=kweb
+      - traefik.http.routers.kviejo.tls=true
+      - traefik.http.routers.kviejo.tls.certresolver=mytlschallenge
 
 networks:
   # La red donde vive Traefik en este VPS (se llama así por herencia de n8n).
