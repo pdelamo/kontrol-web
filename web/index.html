@@ -433,8 +433,6 @@ p{margin:0;text-wrap:pretty}
 /* ── COMPRAS Y ALMACÉN ── */
 .compras-almacen{background:var(--superficie-alt);border-block:1px solid var(--borde)}
 .compras-almacen .medios{display:grid;gap:44px;margin-top:40px}
-.compras-almacen .foto-marco{aspect-ratio:4/5}
-.compras-almacen .foto-marco img{object-position:50% 40%}
 .compras-almacen .vitrina .ventana video{aspect-ratio:1080/1296}
 .medio-pie{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14px;color:var(--texto-2)}
 .medio-pie .icono{width:17px;height:17px;color:var(--acento)}
@@ -527,7 +525,7 @@ p{margin:0;text-wrap:pretty}
   .dos{grid-template-columns:1fr 1fr}
   .leyenda{grid-template-columns:repeat(4,minmax(0,1fr))}
   .mosaico{grid-template-columns:1fr 1fr}
-  .tesela.ancha{grid-column:1 / -1}
+  .tesela-foto{grid-column:1 / -1}
   .problema .foto-marco{aspect-ratio:3/2}
 }
 @media (max-width:899px){ html.menu-abierto{overflow:hidden} }
@@ -555,7 +553,7 @@ p{margin:0;text-wrap:pretty}
   .banda-teresa .rejilla{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:64px}
   .reglas{grid-template-columns:repeat(4,minmax(0,1fr))}
   .mosaico{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(270px,auto)}
-  .tesela.ancha{grid-column:span 2}
+  .tesela-foto{grid-column:span 2;grid-row:span 2;min-height:0}
   .compras-almacen .medios{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
   .compras-almacen .pastillas{grid-template-columns:repeat(4,minmax(0,1fr))}
   .chip-aviso{left:24px;top:24px}
@@ -949,14 +947,12 @@ p{margin:0;text-wrap:pretty}
         <p class="explica">Pides al proveedor, marcas lo que llega y cuentas el almacén de pie, con el móvil. En restaurantes, bares y tiendas.</p>
       </div>
       <div class="medios">
-        <div>
-          <figure class="foto aparece">
-            <div class="foto-marco"><img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 540px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán del proveedor junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async"></div>
-            <div class="chip-app claro-fijo chip-aviso" aria-hidden="true"><span class="marca-aviso"><svg class="icono"><use href="#i-triangle-alert"/></svg></span><span><b>Falta una cosa</b> respecto a lo que pediste. Queda apuntado en el pedido para que puedas reclamarlo.</span></div>
-            <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
-          </figure>
-          <p class="medio-pie"><svg class="icono" aria-hidden="true"><use href="#i-truck"/></svg>Pides y recibes: lo que falta queda apuntado para reclamarlo.</p>
-        </div>
+        <figure class="vitrina aparece">
+          <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
+            <video class="clip" muted loop playsinline preload="none" poster="video/pedido.webp" width="1080" height="1296" aria-label="En la app: se hace un pedido a la pescadería, se añaden bogavante, lubina y mejillones de lo que sueles comprarle, se ponen las cantidades y abajo sale lo que te saldrá, 292 euros"><source src="video/pedido.mp4" type="video/mp4"></video>
+          </div>
+          <figcaption><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Un pedido de verdad: eliges, pones cantidades y ves lo que te saldrá.</figcaption>
+        </figure>
         <figure class="vitrina aparece">
           <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
             <video class="clip" muted loop playsinline preload="none" poster="video/almacen-recuento.webp" width="1080" height="1296" aria-label="En la app: se toca «Hacer recuento» y se cuentan el arroz, el bogavante y la lubina; cada cosa se guarda sola y el contador sube a 3 de 97"><source src="video/almacen-recuento.mp4" type="video/mp4"></video>
@@ -982,6 +978,15 @@ p{margin:0;text-wrap:pretty}
         <p class="explica">Lo que llega, lo que vendes, lo que cuesta tu equipo y lo que tienes que reclamar.</p>
       </div>
       <div class="mosaico">
+        <figure class="tesela tesela-foto foto aparece">
+          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 760px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán del proveedor junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
+          <div class="chip-app claro-fijo chip-aviso" aria-hidden="true"><span class="marca-aviso"><svg class="icono"><use href="#i-triangle-alert"/></svg></span><span><b>Falta una cosa</b> respecto a lo que pediste. Queda apuntado en el pedido para que puedas reclamarlo.</span></div>
+          <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
+          <figcaption class="pie-tesela">
+            <h3>Llega el pedido y marcas lo que ha venido.</h3>
+            <p>Lo que falta queda apuntado, con sus euros, para reclamarlo.</p>
+          </figcaption>
+        </figure>
         <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
           <h3>Tus ventas, sin IVA</h3>
@@ -1006,7 +1011,7 @@ p{margin:0;text-wrap:pretty}
           <p>Una dirección solo tuya: reenvías ahí las facturas que te mandan, o haces que tu correo las reenvíe solo, y entran sin hacerles foto.</p>
           <div class="iconos-fila" aria-hidden="true"><span class="tecla"><svg class="icono"><use href="#i-mail"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-arrow-right"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-inbox"/></svg></span></div>
         </article>
-        <article class="tesela ancha aparece">
+        <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span>
           <h3>En el móvil y en el ordenador</h3>
           <p>La instalas en el móvil y se abre de un toque, como una app. Tu encargado y tú, a la vez: si tocáis lo mismo, avisa y no se pisa nada.</p>
