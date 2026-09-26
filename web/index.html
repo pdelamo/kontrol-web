@@ -1908,6 +1908,7 @@ button.dia.lleno::after{display:none}
     dlg.querySelector("[data-hecho-cuando]").textContent = cuando(st.hora);
     dlg.querySelector("[data-hecho-tel]").textContent = d.telefono;
     dlg.querySelector(".agenda-demo").hidden = !demo;
+    dlg.querySelector("[data-ics]").hidden = demo;   /* en la vista previa no se puede descargar nada */
     ir("hecho");
     pasos.hecho.focus();
   }
