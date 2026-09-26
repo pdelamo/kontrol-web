@@ -430,6 +430,17 @@ p{margin:0;text-wrap:pretty}
 .chip-boton span{display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:0 20px 0 16px;border-radius:999px;background:var(--boton);color:var(--boton-texto);font-size:15.5px;font-weight:700;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--luz) 30%,transparent),0 16px 30px -12px color-mix(in srgb,var(--sombra) 70%,transparent)}
 .chip-boton .icono{width:19px;height:19px}
 
+/* ── COMPRAS Y ALMACÉN ── */
+.compras-almacen{background:var(--superficie-alt);border-block:1px solid var(--borde)}
+.compras-almacen .medios{display:grid;gap:44px;margin-top:40px}
+.compras-almacen .foto-marco{aspect-ratio:4/5}
+.compras-almacen .foto-marco img{object-position:50% 40%}
+.compras-almacen .vitrina .ventana video{aspect-ratio:1080/1296}
+.medio-pie{display:flex;align-items:center;gap:8px;margin-top:22px;font-size:14px;color:var(--texto-2)}
+.medio-pie .icono{width:17px;height:17px;color:var(--acento)}
+.compras-almacen .pastillas{margin-top:48px}
+.compras-almacen .nota{margin-top:26px}
+
 /* ── TIENDAS ── */
 .tiendas{background:var(--superficie-alt);border-block:1px solid var(--borde)}
 .tiendas .rejilla{display:grid;gap:40px}
@@ -516,7 +527,7 @@ p{margin:0;text-wrap:pretty}
   .dos{grid-template-columns:1fr 1fr}
   .leyenda{grid-template-columns:repeat(4,minmax(0,1fr))}
   .mosaico{grid-template-columns:1fr 1fr}
-  .tesela-foto{grid-column:1 / -1}
+  .tesela.ancha{grid-column:1 / -1}
   .problema .foto-marco{aspect-ratio:3/2}
 }
 @media (max-width:899px){ html.menu-abierto{overflow:hidden} }
@@ -544,7 +555,9 @@ p{margin:0;text-wrap:pretty}
   .banda-teresa .rejilla{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:64px}
   .reglas{grid-template-columns:repeat(4,minmax(0,1fr))}
   .mosaico{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(270px,auto)}
-  .tesela-foto{grid-column:span 2;grid-row:span 2;min-height:0}
+  .tesela.ancha{grid-column:span 2}
+  .compras-almacen .medios{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+  .compras-almacen .pastillas{grid-template-columns:repeat(4,minmax(0,1fr))}
   .chip-aviso{left:24px;top:24px}
   .chip-boton{right:24px;top:40%}
   .tiendas .rejilla{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:72px}
@@ -628,9 +641,9 @@ p{margin:0;text-wrap:pretty}
           <li><a href="#avisos"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Avisos</b><small>Subidas y cobros de más, en euros</small></a></li>
           <li><a href="#escandallo"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg></span><b>Escandallo</b><small>Lo que te cuesta cada plato</small></a></li>
           <li><a href="#margen"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chart-column"/></svg></span><b>Margen</b><small>Lo que te queda a fin de mes</small></a></li>
-          <li><a href="#compras"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span><b>Compras</b><small>Pedidos, proveedores y almacén</small></a></li>
           <li><a href="#gestoria"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg></span><b>Gestoría</b><small>Lo del gestor, en un clic</small></a></li>
           <li><a href="#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>Te lo explica y le preguntas</small></a></li>
+          <li><a href="#compras"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span><b>Compras y almacén</b><small>Pedidos, recuento y lo que se pierde</small></a></li>
           <li><a href="#resto"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-layout-grid"/></svg></span><b>Y el resto</b><small>Buzón, ventas, personal, incidencias</small></a></li>
           <li><a href="#tiendas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg></span><b>Tiendas</b><small>También para tu tienda</small></a></li>
         </ul>
@@ -837,26 +850,8 @@ p{margin:0;text-wrap:pretty}
             </ul>
           </li>
 
-          <li class="paso" id="compras">
-            <p class="paso-num"><span class="n">5</span><svg class="icono" aria-hidden="true"><use href="#i-shopping-cart"/></svg>Compras</p>
-            <h3>Pedir, recibir y contar, desde el móvil.</h3>
-            <p>Lo que le compras a cada proveedor, lo que te cuesta y lo que tienes en el almacén.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:89.6%;--oy:5.0%;--s:2.82;--fx:59.06%;--fy:11.64%;--fw:32.89%;--fh:7.47%"><div class="lienzo"><img src="img/zoom-compras.webp" alt="En el ordenador, de cerca: los precios que se han movido, con la gamba roja de 31,87 a 44,87 euros, un 41 por ciento más" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La gamba roja, de 31,87&nbsp;€ a 44,87&nbsp;€: un 41&nbsp;% más.</span></figcaption>
-            </figure>
-            <ul class="checks">
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Pedidos por WhatsApp o correo:</b> eliges el proveedor y te sale lo que sueles comprarle, con el último precio. Lo mandas tú.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Cuando llega,</b> marcas lo que ha venido. Lo que falta queda apuntado para reclamarlo.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Proveedores y precios:</b> en quién se te va el dinero y qué te han subido, producto a producto.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Almacén y merma:</b> cuentas de pie, con el móvil, y con dos recuentos sale lo que se pierde, en euros. En restaurantes.</span></li>
-            </ul>
-          </li>
-
           <li class="paso" id="gestoria">
-            <p class="paso-num"><span class="n">6</span><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg>Gestoría</p>
+            <p class="paso-num"><span class="n">5</span><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg>Gestoría</p>
             <h3>Lo del gestor, en un clic.</h3>
             <p>Cada mes, lo que tu asesor necesita, ordenado. Desde el móvil se lo mandas; en el ordenador lo descargas.</p>
             <figure class="paso-vista">
@@ -890,7 +885,6 @@ p{margin:0;text-wrap:pretty}
               <div class="plano" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
               <div class="plano" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
               <div class="plano" style="--ox:38.4%;--oy:19.9%;--s:2.54;--fx:25.28%;--fy:24.71%;--fw:22.11%;--fh:9.07%"><div class="lienzo"><img src="img/zoom-margen.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-              <div class="plano" style="--ox:89.6%;--oy:5.0%;--s:2.82;--fx:59.06%;--fy:11.64%;--fw:32.89%;--fh:7.47%"><div class="lienzo"><img src="img/zoom-compras.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
               <div class="plano" style="--ox:46.1%;--oy:100.0%;--s:1.98;--fx:25.28%;--fy:77.42%;--fw:16.33%;--fh:6.93%"><div class="lienzo"><img src="img/zoom-gestoria.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
             </div>
           </div>
@@ -900,10 +894,9 @@ p{margin:0;text-wrap:pretty}
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La langosta, de 53,45 a 54,65&nbsp;€ el kilo.</span></p>
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Arroz caldoso de bogavante: te deja 6,45&nbsp;€ por ración.</span></p>
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Te quedan 6.216&nbsp;€: 20,05&nbsp;€ de cada 100&nbsp;€ que entran.</span></p>
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La gamba roja, de 31,87&nbsp;€ a 44,87&nbsp;€: un 41&nbsp;% más.</span></p>
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>El Excel del mes, listo para tu gestor.</span></p>
             </div>
-            <div class="escenario-progreso"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="escenario-progreso"><i></i><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
       </div>
@@ -947,6 +940,40 @@ p{margin:0;text-wrap:pretty}
     </div>
   </section>
 
+  <!-- COMPRAS Y ALMACÉN: van de la mano (pedir, recibir y contar) -->
+  <section class="compras-almacen bloque" id="compras" aria-labelledby="t-compras">
+    <div class="envoltura">
+      <div class="aparece">
+        <p class="antetitulo">Compras y almacén</p>
+        <h2 id="t-compras" class="titular">Lo que compras, lo que tienes y lo que se pierde por el camino.</h2>
+        <p class="explica">Pides al proveedor, marcas lo que llega y cuentas el almacén de pie, con el móvil. En restaurantes, bares y tiendas.</p>
+      </div>
+      <div class="medios">
+        <div>
+          <figure class="foto aparece">
+            <div class="foto-marco"><img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 540px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán del proveedor junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async"></div>
+            <div class="chip-app claro-fijo chip-aviso" aria-hidden="true"><span class="marca-aviso"><svg class="icono"><use href="#i-triangle-alert"/></svg></span><span><b>Falta una cosa</b> respecto a lo que pediste. Queda apuntado en el pedido para que puedas reclamarlo.</span></div>
+            <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
+          </figure>
+          <p class="medio-pie"><svg class="icono" aria-hidden="true"><use href="#i-truck"/></svg>Pides y recibes: lo que falta queda apuntado para reclamarlo.</p>
+        </div>
+        <figure class="vitrina aparece">
+          <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
+            <video class="clip" muted loop playsinline preload="none" poster="video/almacen-recuento.webp" width="1080" height="1296" aria-label="En la app: se toca «Hacer recuento» y se cuentan el arroz, el bogavante y la lubina; cada cosa se guarda sola y el contador sube a 3 de 97"><source src="video/almacen-recuento.mp4" type="video/mp4"></video>
+          </div>
+          <figcaption><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg>Un recuento de verdad: buscas, escribes y se guarda solo.</figcaption>
+        </figure>
+      </div>
+      <ul class="pastillas cuatro cascada">
+        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg></span><b>Pedidos por WhatsApp o correo</b><span>Eliges el proveedor y te sale lo que sueles comprarle, con el último precio. Lo mandas tú.</span></li>
+        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-package"/></svg></span><b>Lo que llega, marcado</b><span>Marcas lo que ha venido; lo que falta queda apuntado con sus euros.</span></li>
+        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span><b>Recuento de pie, con el móvil</b><span>Una casilla por producto y un buscador, aunque tengas mil referencias. Se guarda solo y podéis contar dos a la vez.</span></li>
+        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Lo que vale y lo que se pierde</b><span>El valor de tu almacén y, entre dos recuentos, lo que se ha ido por el camino. En una tienda, lo que falta según lo vendido.</span></li>
+      </ul>
+      <p class="nota aparece"><svg class="icono" aria-hidden="true"><use href="#i-users"/></svg>Y en «Proveedores y precios», en quién se te va el dinero y qué te ha subido cada uno.</p>
+    </div>
+  </section>
+
   <!-- EL RESTO DEL DÍA A DÍA -->
   <section class="resto bloque" id="resto" aria-labelledby="t-resto">
     <div class="envoltura">
@@ -955,15 +982,6 @@ p{margin:0;text-wrap:pretty}
         <p class="explica">Lo que llega, lo que vendes, lo que cuesta tu equipo y lo que tienes que reclamar.</p>
       </div>
       <div class="mosaico">
-        <figure class="tesela tesela-foto foto aparece">
-          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 760px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán del proveedor junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
-          <div class="chip-app claro-fijo chip-aviso" aria-hidden="true"><span class="marca-aviso"><svg class="icono"><use href="#i-triangle-alert"/></svg></span><span><b>Falta una cosa</b> respecto a lo que pediste. Queda apuntado en el pedido para que puedas reclamarlo.</span></div>
-          <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
-          <figcaption class="pie-tesela">
-            <h3>Llega el pedido y marcas lo que ha venido.</h3>
-            <p>Lo que falta queda apuntado, con sus euros, para reclamarlo.</p>
-          </figcaption>
-        </figure>
         <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
           <h3>Tus ventas, sin IVA</h3>
@@ -988,7 +1006,7 @@ p{margin:0;text-wrap:pretty}
           <p>Una dirección solo tuya: reenvías ahí las facturas que te mandan, o haces que tu correo las reenvíe solo, y entran sin hacerles foto.</p>
           <div class="iconos-fila" aria-hidden="true"><span class="tecla"><svg class="icono"><use href="#i-mail"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-arrow-right"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-inbox"/></svg></span></div>
         </article>
-        <article class="tesela aparece">
+        <article class="tesela ancha aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span>
           <h3>En el móvil y en el ordenador</h3>
           <p>La instalas en el móvil y se abre de un toque, como una app. Tu encargado y tú, a la vez: si tocáis lo mismo, avisa y no se pisa nada.</p>
@@ -1012,12 +1030,12 @@ p{margin:0;text-wrap:pretty}
         <div class="aparece">
           <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg>En tiendas</p>
           <h2 id="t-tiendas" class="titular">¿Tienes una tienda? También es para ti.</h2>
-          <p class="explica">Sin la parte de cocina: tus facturas de compra, tus proveedores, tus pedidos, tu margen y lo del gestor.</p>
+          <p class="explica">Sin la parte de cocina: tus facturas de compra, tus proveedores, tus pedidos, tu almacén, tu margen y lo del gestor.</p>
         </div>
         <ul class="pastillas cuatro cascada">
           <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-calculator"/></svg></span><b>Tu IVA, en cristiano</b><span>Lo normal, recargo de equivalencia o exento: lo eliges una vez y tu margen se calcula como en tu caso.</span></li>
           <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-check-check"/></svg></span><b>Facturas con recargo que cuadran</b><span>Base, IVA y recargo: cada factura cuadra al céntimo.</span></li>
-          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Mercancía y material</b><span>Lo que compras para vender, aparte de la luz, el alquiler y los servicios.</span></li>
+          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Tu almacén, también</b><span>Cuentas tu stock con el móvil y ves lo que falta según lo vendido: robos, roturas o errores al cobrar.</span></li>
           <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-spreadsheet"/></svg></span><b>Tus ventas</b><span>Con el Excel de tu caja o de tu programa de facturación.</span></li>
         </ul>
       </div>
