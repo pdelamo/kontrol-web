@@ -6,7 +6,7 @@
 <title>Kontrol</title>
 <meta name="description" content="Haz una foto al albarán o sube la factura que te llega por correo. Kontrol la lee, vigila los precios de tus proveedores y te dice en euros cómo va tu restaurante o tu tienda.">
 <meta property="og:title" content="Kontrol · Tú, a tus clientes. Kontrol, a tus papeles.">
-<meta property="og:description" content="Lee tus albaranes y facturas, vigila lo que te cobran y te dice en euros cómo va tu negocio.">
+<meta property="og:description" content="Lee tus albaranes y facturas, vigila los precios de tus proveedores y te dice en euros cómo va tu negocio.">
 <meta name="theme-color" content="#F5F1EA">
 <link rel="icon" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -755,7 +755,7 @@ button.dia.lleno::after{display:none}
         <p class="menu-rotulo">Qué hace <span data-marca="producto">Kontrol</span></p>
         <ul class="menu-lista">
           <li><a href="#papeles"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Papeles</b><small>Foto, PDF o correo, leído línea a línea</small></a></li>
-          <li><a href="#avisos"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Avisos</b><small>Subidas y cobros de más, en euros</small></a></li>
+          <li><a href="#avisos"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Avisos</b><small>Subidas y errores en el precio</small></a></li>
           <li><a href="#escandallo"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg></span><b>Escandallo</b><small>Lo que te cuesta cada plato</small></a></li>
           <li><a href="#margen"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chart-column"/></svg></span><b>Margen</b><small>Lo que te queda a fin de mes</small></a></li>
           <li><a href="#gestoria"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg></span><b>Gestoría</b><small>Lo del gestor, en un clic</small></a></li>
@@ -790,7 +790,7 @@ button.dia.lleno::after{display:none}
     <div class="escena">
       <figure class="papel"><img src="img/albaran-lonja.webp" alt="Albarán de una pescadería: siete productos y un total de 751,99 euros" width="620" height="877" fetchpriority="high"></figure>
       <div class="movil"><div class="pantalla">
-        <img src="img/hoy-m-claro.webp" alt="La pantalla Hoy de la app: 18.244 euros gastados en septiembre y lo que te han cobrado de más, subido o podrías ahorrar" width="780" height="1688" fetchpriority="high">
+        <img src="img/hoy-m-claro.webp" alt="La pantalla Hoy de la app: 18.244 euros gastados en septiembre, los errores en el precio, las subidas y lo que podrías ahorrar" width="780" height="1688" fetchpriority="high">
       </div></div>
       <p class="sello"><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Leído y cuadrado</b>7 productos · 751,99&nbsp;€</span></p>
     </div>
@@ -849,7 +849,7 @@ button.dia.lleno::after{display:none}
               <li><span>Leer cada línea: producto, cantidad y precio</span><i></i><b data-marca="ayudante">Teresa</b></li>
               <li><span>Comprobar que las cuentas del papel cuadran</span><i></i><b data-marca="ayudante">Teresa</b></li>
               <li><span>Mirar lo que no cuadra, con el papel delante</span><i></i><b class="tu">Tú</b></li>
-              <li><span>Avisarte de subidas y cobros de más</span><i></i><b data-marca="ayudante">Teresa</b></li>
+              <li><span>Avisar de subidas y errores en el precio</span><i></i><b data-marca="ayudante">Teresa</b></li>
               <li><span>Escribir al proveedor</span><i></i><b>Ella lo escribe, tú lo mandas</b></li>
               <li><span>Preparar lo del gestor</span><i></i><b>Un clic</b></li>
             </ul>
@@ -911,7 +911,7 @@ button.dia.lleno::after{display:none}
             </figure>
             <ul class="checks">
               <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Te han subido precios:</b> el mismo producto, del mismo proveedor, más caro. Y lo que llevas pagado de más desde entonces.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Te han cobrado de más:</b> una línea que no multiplica bien o un total que no cuadra con el papel.</span></li>
+              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Errores en el precio:</b> una línea que no multiplica bien o un total que no cuadra con el papel.</span></li>
               <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Podrías ahorrar:</b> lo mismo, más barato, en otro proveedor al que ya le compras.</span></li>
               <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Lo que apuntas tú:</b> faltó mercancía o venía en mal estado. Queda apuntado con sus euros hasta que lo cobres.</span></li>
             </ul>
@@ -1030,7 +1030,7 @@ button.dia.lleno::after{display:none}
           <p class="explica">Junto a cada aviso hay un «<span data-marca="ayudante">Teresa</span>, explícamelo». Y desde cualquier pantalla le preguntas lo que quieras: te contesta con tus números o te dice qué botón tocar.</p>
           <ul class="pastillas cuatro">
             <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-camera"/></svg></span><b>Lee tus papeles</b><span>La foto, el PDF o lo que llega a tu buzón, línea a línea.</span></li>
-            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Te avisa de lo que importa</b><span>Subidas, cobros de más y papeles que faltan, en euros.</span></li>
+            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Te avisa de lo que importa</b><span>Subidas, errores en el precio y papeles que faltan.</span></li>
             <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg></span><b>Te deja el mensaje escrito</b><span>Para el proveedor o para el pedido. Lo mandas tú.</span></li>
             <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b>Te lo explica en cristiano</b><span>Con tus números, sin palabras de contable.</span></li>
           </ul>
