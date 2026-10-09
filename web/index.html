@@ -458,6 +458,22 @@ p{margin:0;text-wrap:pretty}
 
 /* ── TIENDAS ── */
 .tiendas{background:var(--superficie-alt);border-block:1px solid var(--borde)}
+/* ── PRECIOS (9-oct-2026; Pablo eligió la 1 de tres: cada paquete, un tique) ── */
+.tiques-precio{display:grid;gap:34px;margin-top:44px;align-items:start}
+.tiques-precio>.tique-sombra:nth-child(2) .tique{transform:rotate(.7deg)}
+.tiques-precio>.tique-sombra:nth-child(3) .tique{transform:rotate(-.6deg)}
+.tiques-precio .tique-cabeza b{font-size:20px;line-height:1.2}
+.tiques-precio .lineas li b .icono{width:18px;height:18px;color:var(--acento);vertical-align:-3px}
+.tiques-precio .lineas li.pq-antes,.tiques-precio .lineas li.pq-dato{color:var(--texto-2)}
+.tiques-precio .lineas li.pq-dato b{color:var(--texto)}
+.tiques-precio .tique-total b{font-size:clamp(30px,7vw,38px)}
+.tiques-precio .recomendado .tique{box-shadow:inset 0 0 0 2px var(--acento)}
+.sello-rec{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--luz);background:var(--boton);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.instalacion{margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px;padding:26px 28px;border-radius:var(--radio);background:var(--superficie);box-shadow:var(--filo),0 0 0 1px var(--borde),var(--sombra-1)}
+.instalacion>div{flex:1 1 420px}
+.instalacion b{font-size:20px}
+.instalacion p{margin:6px 0 0;color:var(--texto-2);font-size:17px;max-width:60ch}
+@media (min-width:900px){ .tiques-precio{grid-template-columns:repeat(3,minmax(0,1fr))} .tiques-precio>.recomendado{transform:translateY(-14px)} }
 .tiendas .rejilla{display:grid;gap:40px}
 .tiendas .foto-marco{aspect-ratio:4/5}
 .tiendas .pastillas{margin-top:30px}
@@ -742,6 +758,7 @@ button.dia.lleno::after{display:none}
     <nav class="nav-principal" aria-label="Principal">
       <button class="nav-boton" type="button" aria-expanded="false" aria-controls="menu" data-menu>Qué hace<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
       <a class="nav-enlace" href="#teresa" data-marca="ayudante">Teresa</a>
+      <a class="nav-enlace" href="#precios">Precios</a>
       <a class="nav-enlace" href="#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -765,7 +782,7 @@ button.dia.lleno::after{display:none}
           <li><a href="#tiendas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg></span><b>Tiendas</b><small>También para tu tienda</small></a></li>
         </ul>
         <div class="menu-pie">
-          <div class="fila"><a class="enlace" href="#preguntas">Preguntas</a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
+          <div class="fila"><a class="enlace" href="#precios">Precios</a><a class="enlace" href="#preguntas">Preguntas</a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
           <div class="fila"><span>Modo oscuro</span><button class="redondo tema-boton" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
           <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
         </div>
@@ -1170,6 +1187,69 @@ button.dia.lleno::after{display:none}
     </div>
   </section>
 
+  <!-- PRECIOS (9-oct-2026): los tres paquetes, cada uno en su tique -->
+  <section class="precios bloque" id="precios" aria-labelledby="t-precios">
+    <div class="envoltura">
+      <div class="aparece">
+        <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg>Precios</p>
+        <h2 id="t-precios" class="titular">Tú eliges cuánto hace <span data-marca="producto">Kontrol</span> por ti.</h2>
+        <p class="explica">Sin permanencia. Precios al mes y sin IVA. Si un mes tienes más papeles, los leemos igual.</p>
+      </div>
+      <div class="tiques-precio">
+          <div class="tique-sombra aparece">
+            <div class="tique">
+              <div class="tique-cabeza"><b>Paquete <span data-marca="ayudante">Teresa</span></b><small>Tus papeles</small></div>
+              <ul class="lineas">
+              <li><span>Lee tus facturas y albaranes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Te avisa si te suben un precio</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Cuadra cada factura con sus albaranes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Todo archivado y listo para tu gestoría</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+                <li class="pq-dato"><span>Papeles al mes</span><i></i><b>150</b></li>
+                <li class="pq-dato"><span>Personas que entran</span><i></i><b>1</b></li>
+              </ul>
+              <div class="tique-total"><span>Al mes</span><b>119 €</b></div>
+            </div>
+          </div>
+          <div class="tique-sombra aparece">
+            <div class="tique">
+              <div class="tique-cabeza"><b><span data-marca="ayudante">Teresa</span> + Operaciones</b><small>Y tus números</small></div>
+              <ul class="lineas">
+              <li class="pq-antes"><span>Todo lo del Paquete <span data-marca="ayudante">Teresa</span></span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Lo que te cuesta cada plato y lo que te deja</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Lo que te queda cada mes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Pedidos a tus proveedores</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Tu almacén y el inventario</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+                <li class="pq-dato"><span>Papeles al mes</span><i></i><b>350</b></li>
+                <li class="pq-dato"><span>Personas que entran</span><i></i><b>3</b></li>
+              </ul>
+              <div class="tique-total"><span>Al mes</span><b>199 €</b></div>
+            </div>
+          </div>
+          <div class="tique-sombra aparece recomendado">
+            <div class="tique">
+              <div class="tique-cabeza"><b>Paquete Full</b><span class="sello-rec">Recomendado</span></div>
+              <ul class="lineas">
+              <li class="pq-antes"><span>Todo lo de Operaciones</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Horarios y cuadrantes de tu equipo</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Vacaciones y bajas</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Todos los empleados que tengas</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+                <li class="pq-dato"><span>Papeles al mes</span><i></i><b>700</b></li>
+                <li class="pq-dato"><span>Personas que entran</span><i></i><b>Sin límite</b></li>
+              </ul>
+              <div class="tique-total"><span>Al mes</span><b>263 €</b></div>
+            </div>
+          </div>
+      </div>
+      <div class="instalacion aparece">
+        <div>
+          <b>Y para empezar, la instalación: 150 €</b>
+          <p>Te cargamos los papeles de tus últimos 3 meses y, el primer mes, te enseñamos y te atendemos. Se ajusta al tamaño de tu negocio.</p>
+        </div>
+        <a class="boton" href="#contacto"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo</a>
+      </div>
+    </div>
+  </section>
+
   <!-- PREGUNTAS -->
   <section class="preguntas bloque" id="preguntas" aria-labelledby="t-preguntas">
     <div class="envoltura">
@@ -1180,9 +1260,10 @@ button.dia.lleno::after{display:none}
         <details><summary>¿Y si me mandan las facturas por correo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Las subes tal cual, en PDF, o las reenvías a tu buzón de facturas. Incluso puedes hacer que tu correo se las reenvíe solo y entren sin que hagas nada.</p></details>
         <details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas. Hasta entonces no se reclama nada a nadie.</p></details>
         <details><summary>¿Es un TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Lo que vendes sale de tu caja: subes el Excel que exporta tu TPV, sea cual sea.</p></details>
-        <details><summary>¿Podemos usarla dos personas a la vez?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, en el móvil y en el ordenador. Si los dos tocáis el mismo papel o el mismo pedido, avisa y no se pisa nada.</p></details>
+        <details><summary>¿Podemos usarla varias personas?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, cada uno con su propio acceso: con Teresa + Operaciones entráis tres, y con el Full, los que queráis. En el móvil y en el ordenador; si dos tocáis el mismo papel o el mismo pedido, avisa y no se pisa nada.</p></details>
+        <details><summary>¿Y si un mes tengo más papeles?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Los leemos igual, todos. Si te pasa a menudo, te contamos qué paquete te sale mejor.</p></details>
         <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Ningún otro negocio puede ver lo tuyo: cada cuenta ve lo suyo y nada más. Lo tienes todo en la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a>.</p></details>
-        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Escríbenos por correo o por WhatsApp. Te damos tu acceso y empiezas por los papeles de este mes; los de meses atrás los puedes subir cuando quieras.</p></details>
+        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Escríbenos por correo o por WhatsApp. Te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses, te damos tu acceso y te enseñamos a usarlo.</p></details>
       </div>
     </div>
   </section>
