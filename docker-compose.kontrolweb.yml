@@ -1,5 +1,6 @@
-# LA WEB DE VENTA DE KONTROL — `kontrolapp.es` (dominio propio, comprado el 26-sep-2026). De momento
-# sigue sin salir en Google (X-Robots-Tag abajo y web/robots.txt): se quitan el día que Pablo diga.
+# LA WEB DE VENTA DE KONTROL — `kontrolapp.es` (dominio propio, comprado el 26-sep-2026). En Google desde
+# el 12-oct-2026 (con los primeros clientes): fuera la cabecera «noindex» que la escondía mientras era un borrador,
+# y web/robots.txt abierto, con su sitemap.
 # `www.kontrolapp.es` y el subdominio de antes, `kontrol.delamotech.es`, REDIRIGEN aquí con un 301
 # (el enlace que ya se ha repartido sigue llegando, y conservando la ruta).
 #
@@ -57,9 +58,6 @@ services:
       # ⚠️ `connect-src` deja hablar con n8n.delamotech.es: ahí irá el flujo que manda solo el formulario
       # de contacto. Sin esa línea, el día que se active, el navegador bloquearía el envío en silencio.
       - "traefik.http.middlewares.kweb-cabeceras.headers.customResponseHeaders.Content-Security-Policy=default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https://n8n.delamotech.es"
-      # ⚠️ MIENTRAS ES UN BORRADOR, FUERA DE GOOGLE. El día que sea la web de verdad (con su dominio y su
-      # nombre definitivo), se quita esta línea y el `robots.txt` de web/.
-      - "traefik.http.middlewares.kweb-cabeceras.headers.customResponseHeaders.X-Robots-Tag=noindex, nofollow"
       - traefik.http.routers.kweb.tls=true
       # El emisor de certificados de este VPS se llama así (el mismo que el panel, el camarero y OLIMPO).
       - traefik.http.routers.kweb.tls.certresolver=mytlschallenge
