@@ -870,7 +870,7 @@ button.dia.lleno::after{display:none}
 /* Portada con la foto de Teresa: la foto manda; encima, quién es, el móvil con la app y el «leído» */
 .escena-teresa{min-height:0;padding-bottom:40px}
 .foto-portada{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/5;background:var(--pino-profundo);box-shadow:var(--sombra-3)}
-.foto-portada img{width:100%;height:100%;object-fit:cover;object-position:52% 30%}
+.foto-portada img{width:100%;height:100%;object-fit:cover;object-position:70% 50%}
 .chip-teresa{position:absolute;left:14px;top:14px;z-index:3;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:16px;background:var(--superficie);box-shadow:var(--filo),0 0 0 1px var(--borde),var(--sombra-2)}
 .chip-teresa img{width:34px;height:34px;border-radius:9px}
 .chip-teresa b{display:block;font-weight:700;font-size:15px;line-height:1.2}
@@ -889,8 +889,10 @@ button.dia.lleno::after{display:none}
 
 .escena-teresa .chip-progreso{left:12px;right:12px;top:12px;max-width:340px}
 @media (min-width:900px){ .escena-teresa .chip-progreso{left:-26px;right:auto;top:34px} }
+@media (max-width:359px){ .escena-teresa .chip-progreso.leido .revisar{display:none} }
+@media (min-width:900px) and (max-width:1279px){ .escena-teresa .movil{right:-24px} }
 .reparto .foto-marco{aspect-ratio:4/3}
-.reparto .foto-marco img{object-position:50% 45%}
+.reparto .foto-marco img{object-position:50% 58%}
 .nota-papel{margin-top:14px;font-size:15px;color:var(--texto-2)}
 
 /* Barra fija abajo en el móvil: demo, WhatsApp y llamar, siempre a un dedo */
@@ -966,7 +968,7 @@ body{padding-bottom:0}
       </ul>
     </div>
     <div class="escena escena-teresa">
-      <figure class="foto-portada"><img src="img/foto-albaran-1100.webp" srcset="img/foto-albaran-700.webp 700w, img/foto-albaran-1100.webp 1100w" sizes="(min-width:900px) 520px, 100vw" alt="Un cocinero hace una foto con el móvil a un albarán sobre la mesa de acero de la cocina, junto a cajas de tomates, pimientos y limones" width="1100" height="1375" fetchpriority="high"></figure>
+      <figure class="foto-portada"><img src="img/foto-noche2-990.webp" srcset="img/foto-noche2-640.webp 640w, img/foto-noche2-990.webp 990w" sizes="(min-width:900px) 870px, 180vw" alt="De noche, con el restaurante ya cerrado, el dueño se sujeta la cabeza delante del portátil, en una mesa llena de tiques y facturas con una calculadora" width="990" height="684" fetchpriority="high"></figure>
       <div class="chip-app claro-fijo chip-progreso" data-progreso aria-hidden="true">
         <span class="miniatura"><img src="img/albaran-lonja.webp" alt="" width="44" height="44"><svg class="icono"><use href="#i-check"/></svg></span>
         <span class="cuerpo">
@@ -986,7 +988,7 @@ body{padding-bottom:0}
   <section class="reparto bloque" id="reparto" aria-labelledby="t-reparto">
     <div class="envoltura rejilla">
       <figure class="foto aparece">
-        <div class="foto-marco"><img src="img/foto-noche2-990.webp" srcset="img/foto-noche2-640.webp 640w, img/foto-noche2-990.webp 990w" sizes="(min-width:900px) 520px, 100vw" alt="De noche, con el restaurante ya cerrado, el dueño se sujeta la cabeza delante del portátil, en una mesa llena de tiques y facturas con una calculadora" width="990" height="684" loading="lazy" decoding="async"></div>
+        <div class="foto-marco"><img src="img/foto-albaran-1100.webp" srcset="img/foto-albaran-700.webp 700w, img/foto-albaran-1100.webp 1100w" sizes="(min-width:900px) 520px, 100vw" alt="Un cocinero hace una foto con el móvil a un albarán sobre la mesa de acero de la cocina, junto a cajas de tomates, pimientos y limones" width="1100" height="1375" loading="lazy" decoding="async"></div>
       </figure>
       <div>
         <div class="aparece">
