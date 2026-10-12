@@ -3,14 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kontrol</title>
-<meta name="description" content="Haz una foto al albarán o sube la factura que te llega por correo. Kontrol la lee, vigila los precios de tus proveedores y te dice en euros cómo va tu restaurante o tu tienda.">
+<title>Kontrol · Facturas, albaranes y escandallos de tu restaurante, sin papeleo</title>
+<meta name="description" content="Kontrol lleva los papeles de tu restaurante o bar: haz una foto al albarán y Teresa lo lee, detecta errores en los precios, calcula tus escandallos y te dice cuánto te queda a fin de mes. Pide una demo gratis.">
 <link rel="canonical" href="https://kontrolapp.es/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://kontrolapp.es/">
 <meta property="og:title" content="Kontrol · Tú, a tus clientes. Kontrol, a tus papeles.">
-<meta property="og:description" content="Lee tus albaranes y facturas, vigila los precios de tus proveedores y te dice en euros cómo va tu negocio.">
+<meta property="og:description" content="Haz una foto al albarán y Kontrol hace el resto: facturas, precios, escandallos, margen y lo del gestor. Pide una demo gratis.">
+<meta property="og:image" content="https://kontrolapp.es/img/foto-albaran-1100.webp">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F1EA">
 <link rel="icon" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preload" href="fuentes/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Kontrol",
+      "url": "https://kontrolapp.es/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "description": "Programa de gestión para restaurantes, bares y hoteles: lee facturas y albaranes, detecta errores en los precios, calcula escandallos y margen, y prepara lo del gestor.",
+      "inLanguage": "es",
+      "offers": [
+        {"@type": "Offer", "name": "Paquete Teresa", "price": "119", "priceCurrency": "EUR"},
+        {"@type": "Offer", "name": "Teresa + Operaciones", "price": "199", "priceCurrency": "EUR"},
+        {"@type": "Offer", "name": "Paquete Full", "price": "263", "priceCurrency": "EUR"}
+      ],
+      "publisher": {"@type": "Organization", "name": "DAB", "email": "ventas@kontrolapp.es", "telephone": "+34686679713"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "¿Tengo que saber de contabilidad?", "acceptedAnswer": {"@type": "Answer", "text": "No. Tú haces la foto y miras lo que no cuadra. Las cuentas las hace la app y, si algo no se entiende, Teresa te lo explica en cristiano."}},
+        {"@type": "Question", "name": "¿Sustituye a mi gestor?", "acceptedAnswer": {"@type": "Answer", "text": "No. Le deja preparado lo suyo cada mes: el Excel y los papeles. Lo fiscal lo sigue decidiendo él."}},
+        {"@type": "Question", "name": "¿Y si lee mal una cifra?", "acceptedAnswer": {"@type": "Answer", "text": "Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas."}},
+        {"@type": "Question", "name": "¿Sirve para mi bar, mi hotel o mi tienda?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. En bares y hoteles funciona igual que en un restaurante. En una tienda, sin la parte de cocina, y con recargo de equivalencia si lo tienes."}},
+        {"@type": "Question", "name": "¿Quién ve mis números?", "acceptedAnswer": {"@type": "Answer", "text": "Solo tú y las personas a las que des acceso. Ningún otro negocio puede ver lo tuyo."}},
+        {"@type": "Question", "name": "¿Cómo empiezo?", "acceptedAnswer": {"@type": "Answer", "text": "Pide una demo por teléfono, WhatsApp o correo. Si te encaja, te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo."}}
+      ]
+    }
+  ]
+}
+</script>
 <script>
 /* ── LO QUE SE PUEDE CAMBIAR, EN UN SOLO SITIO ─────────────────────────────────────────────────
    «Kontrol» es provisional, y «Teresa» es la ayudante. Se cambian AQUÍ y cambian en toda la
@@ -27,7 +66,10 @@ window.MARCA = {
                                                         vacía = horas de ejemplo y no se apunta nada */
   agendar: "https://n8n.delamotech.es/webhook/kontrol-llamada",  /* donde se apunta la llamada (n8n) */
   entrar: "https://app.kontrolapp.es/app/entrar",
-  mensaje: "Hola, quiero saber más de {producto}."
+  mensaje: "Hola, me gustaría ver una demo de {producto} para mi negocio.",
+  plazas: 10,                                         /* PROMO: plazas que QUEDAN con el primer mes gratis (de 10). Con 10 pone «para los 10 primeros»; con menos, «quedan X plazas».
+                                                        Cambia este número cada vez que entre un cliente; con 0 la promo desaparece de la web */
+  plazasTotal: 10
 };
 /* Abre en claro; el oscuro solo si esta persona lo eligió con el interruptor (o #oscuro en la dirección) */
 try {
@@ -748,44 +790,155 @@ button.dia.lleno::after{display:none}
   .lienzo,.foco{transition:none!important}
   .barra-trabajo{animation:none}
 }
+
+/* ── v4 (oct-2026): WEB CORTA, TODO EMPUJA A PEDIR LA DEMO ─────────────────────────────────────
+   Lo de arriba es la base de la v3 tal cual (colores, botones, tiques, agenda). Esto lo ajusta. */
+
+/* Cabecera: enlaces sencillos y el botón de la demo siempre a mano */
+.cabecera .boton-cab{background-color:var(--boton);color:var(--boton-texto)}
+.cabecera .boton-cab .icono{color:var(--boton-texto)}
+.menu-lista a{grid-template-columns:auto minmax(0,1fr)}
+.menu-pie .boton-borde{width:100%}
+
+/* Portada: tres formas de pedir la demo y la letra pequeña que da confianza */
+.portada .acciones{gap:12px}
+.portada .acciones .boton{flex:0 1 auto}
+.tel-enlace{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--texto);text-decoration:underline;text-decoration-color:var(--borde-fuerte);text-underline-offset:5px}
+.tel-enlace:hover{text-decoration-color:currentColor}
+.tel-enlace .icono{width:19px;height:19px;color:var(--acento)}
+.confianza{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0 0;padding:0;font-size:15px;color:var(--texto-2)}
+.confianza li{display:inline-flex;align-items:flex-start;gap:7px}
+.confianza li .icono{margin-top:2px}
+.confianza .icono{width:18px;height:18px;padding:3px;border-radius:50%;background:var(--positivo-fondo);color:var(--positivo-tinta);stroke-width:2.75}
+.promo{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:7px 14px 7px 8px;border-radius:999px;background:var(--acento-suave);color:var(--texto);font-size:14.5px;box-shadow:var(--filo)}
+.promo b{font-weight:700}
+.promo .punto-vivo{margin-left:4px}
+
+/* Reparto: menos líneas */
+.reparto .explica{max-width:44ch}
+
+/* La historia: cuatro pasos, más cortos */
+.paso > p:not([class]){max-width:40ch}
+@media (min-width:1000px){ .paso{min-height:68vh} }
+
+/* Teresa: lo que no hace, en una línea */
+.cara-k{overflow:hidden;background:var(--pino-profundo)}
+.cara-k img{width:100%;height:100%;object-fit:cover}
+.nunca-lista{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--borde)}
+.nunca-lista li{display:inline-flex;align-items:center;gap:9px;font-size:15.5px;color:var(--texto-2)}
+.nunca-lista .icono{width:22px;height:22px;padding:4px;border-radius:50%;background:var(--positivo-fondo);color:var(--positivo-tinta);stroke-width:2.5}
+
+/* Franja de la demo (entre secciones) */
+.franja{padding-block:0 8px}
+.franja-caja{display:grid;gap:22px;padding:30px 24px;border-radius:calc(var(--radio) + 6px);background:var(--pino-claro);color:var(--crudo);box-shadow:var(--sombra-3)}
+.franja-caja h2{font-size:clamp(28px,6.4vw,40px);letter-spacing:-.025em;max-width:20ch}
+.franja-caja p{color:color-mix(in srgb,var(--crudo) 80%,transparent);margin-top:10px;max-width:46ch}
+.franja-caja .acciones{margin-top:0}
+.franja-caja .boton-borde{background:transparent;background-image:none;color:var(--crudo);box-shadow:0 0 0 1px color-mix(in srgb,var(--crudo) 45%,transparent)}
+.franja-caja .boton-borde:hover{box-shadow:0 0 0 1px var(--crudo)}
+.franja-caja .tel-enlace{color:var(--crudo);text-decoration-color:color-mix(in srgb,var(--crudo) 40%,transparent)}
+.franja-caja .tel-enlace .icono{color:var(--crudo)}
+@media (min-width:900px){
+  .franja-caja{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:40px;padding:44px 52px}
+  .franja-caja .acciones{justify-content:flex-end;max-width:420px}
+}
+
+/* Mosaico: la foto y cinco teselas */
+.tesela-foto{min-height:440px}
+@media (max-width:599px){ .tesela:not(.tesela-foto){min-height:0} }
+@media (min-width:900px){ .franja-caja .acciones{flex-wrap:nowrap;max-width:none} }
+
+/* Contacto: las tres formas, en tres tiques; el correo debajo */
+.contacto .titular{max-width:18ch}
+.contacto .tiques{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;margin-top:44px}
+.contacto .tique{display:flex;flex-direction:column;align-items:center;height:100%}
+.contacto .tique .acciones{margin-top:auto;padding-top:22px}
+.contacto .tique .tecla{width:52px;height:52px;border-radius:16px;margin-bottom:14px}
+.contacto .tique .tecla .icono{width:24px;height:24px}
+.contacto .tique-sombra{height:100%}
+.contacto .tique-principal .tique{box-shadow:inset 0 0 0 2px var(--acento)}
+.contacto .tique-sombra:nth-child(3) .tique{transform:rotate(.6deg)}
+.contacto .formulario-caja{max-width:780px;margin:56px auto 0}
+@media (min-width:768px) and (max-width:1023px){ .contacto .tiques{grid-template-columns:minmax(0,1fr)} }
+@media (min-width:900px){
+  .contacto .tiques{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:stretch}
+  .contacto .tique{margin-top:0}
+  .contacto .tique-principal{transform:translateY(-12px)}
+}
+
+
+/* Portada con la foto de Teresa: la foto manda; encima, quién es, el móvil con la app y el «leído» */
+.escena-teresa{min-height:0;padding-bottom:40px}
+.foto-portada{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/5;background:var(--pino-profundo);box-shadow:var(--sombra-3)}
+.foto-portada img{width:100%;height:100%;object-fit:cover;object-position:52% 30%}
+.chip-teresa{position:absolute;left:14px;top:14px;z-index:3;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:16px;background:var(--superficie);box-shadow:var(--filo),0 0 0 1px var(--borde),var(--sombra-2)}
+.chip-teresa img{width:34px;height:34px;border-radius:9px}
+.chip-teresa b{display:block;font-weight:700;font-size:15px;line-height:1.2}
+.chip-teresa span{font-size:13.5px;line-height:1.3;color:var(--texto-2)}
+.escena-teresa .movil{position:absolute;right:-6px;bottom:0;width:38%;max-width:200px;padding:6px;border-radius:32px;transform:rotate(3deg)}
+.escena-teresa .movil .pantalla{border-radius:27px;padding-top:22px}
+.escena-teresa .movil .pantalla::before{top:6px;width:56px;height:16px}
+.escena-teresa .sello{left:12px;bottom:12px}
+@media (min-width:900px){
+  .escena-teresa{min-height:0}
+  .foto-portada{aspect-ratio:4/4.6}
+  .escena-teresa .movil{right:-34px;bottom:-10px;max-width:210px}
+  .escena-teresa .sello{left:-26px;bottom:56px}
+  .chip-teresa{left:-22px;top:34px}
+}
+
+.escena-teresa .chip-progreso{left:12px;right:12px;top:12px;max-width:340px}
+@media (min-width:900px){ .escena-teresa .chip-progreso{left:-26px;right:auto;top:34px} }
+.reparto .foto-marco{aspect-ratio:4/3}
+.reparto .foto-marco img{object-position:50% 45%}
+.nota-papel{margin-top:14px;font-size:15px;color:var(--texto-2)}
+
+/* Barra fija abajo en el móvil: demo, WhatsApp y llamar, siempre a un dedo */
+.barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px);background:color-mix(in srgb,var(--fondo) 94%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);border-top:1px solid var(--borde);box-shadow:0 -10px 24px -20px color-mix(in srgb,var(--pino-claro) 45%,transparent);transform:translateY(110%);transition:transform .4s var(--curva)}
+.barra-movil.visible{transform:none}
+.barra-movil .boton{min-height:48px;padding:0 10px;font-size:15.5px;gap:7px}
+.barra-movil .boton .icono{width:18px;height:18px}
+.barra-movil .boton-borde{padding:0 8px}
+body{padding-bottom:0}
+@media (max-width:899px){ body.con-barra{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 72px)} }
+@media (min-width:900px){ .barra-movil{display:none} }
+@media (max-width:359px){ .barra-movil{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:6px;padding-left:10px;padding-right:10px} .barra-movil .boton{font-size:14.5px;padding:0 6px} .barra-movil .boton .icono{display:none} }
+@media (prefers-reduced-motion:reduce){ .barra-movil{transition:none} }
+
 </style>
 </head>
+
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="i-chef-hat" viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="i-folder-archive" viewBox="0 0 24 24"><circle cx="15" cy="19" r="2"/><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"/><path d="M15 11v-1"/><path d="M15 17v-2"/></symbol><symbol id="i-shopping-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-boxes" viewBox="0 0 24 24"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol><symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></symbol><symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="i-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol><symbol id="i-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol><symbol id="i-ayuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-forward" viewBox="0 0 24 24"><path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-calendar-check" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol><symbol id="i-calendar-plus" viewBox="0 0 24 24"><path d="M16 19h6"/><path d="M16 2v4"/><path d="M19 16v6"/><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5"/><path d="M3 10h18"/><path d="M8 2v4"/></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol></svg>
 <a class="salta" href="#principal">Saltar al contenido</a>
 <header class="cabecera">
   <div class="envoltura cabecera-fila">
-    <a class="marca" href="#inicio" aria-label="Inicio"><img src="img/kontrol-icono.webp" alt="" width="34" height="34"><span class="nombre-marca" data-marca="producto">Kontrol</span></a>
+    <a class="marca" href="#inicio" aria-label="Kontrol, inicio"><img src="img/kontrol-icono.webp" alt="" width="34" height="34"><span class="nombre-marca" data-marca="producto">Kontrol</span></a>
     <nav class="nav-principal" aria-label="Principal">
-      <button class="nav-boton" type="button" aria-expanded="false" aria-controls="menu" data-menu>Qué hace<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
+      <a class="nav-enlace" href="#como">Cómo funciona</a>
       <a class="nav-enlace" href="#teresa" data-marca="ayudante">Teresa</a>
       <a class="nav-enlace" href="#precios">Precios</a>
       <a class="nav-enlace" href="#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
-    <a class="boton boton-borde boton-cab" href="#contacto"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Contacto</a>
+    <button class="boton boton-cab" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo</button>
     <button class="redondo tema-boton cab-tema" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button>
     <button class="redondo menu-boton" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menú" data-menu><svg class="icono abrir" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icono cerrar" aria-hidden="true"><use href="#i-x"/></svg></button>
   </div>
   <div class="menu" id="menu" hidden>
     <div class="envoltura">
       <div class="menu-caja">
-        <p class="menu-rotulo">Qué hace <span data-marca="producto">Kontrol</span></p>
         <ul class="menu-lista">
-          <li><a href="#papeles"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Papeles</b><small>Foto, PDF o correo, leído línea a línea</small></a></li>
-          <li><a href="#avisos"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Avisos</b><small>Subidas y errores en el precio</small></a></li>
-          <li><a href="#escandallo"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg></span><b>Escandallo</b><small>Lo que te cuesta cada plato</small></a></li>
-          <li><a href="#margen"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chart-column"/></svg></span><b>Margen</b><small>Lo que te queda a fin de mes</small></a></li>
-          <li><a href="#gestoria"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg></span><b>Gestoría</b><small>Lo del gestor, en un clic</small></a></li>
-          <li><a href="#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>Te lo explica y le preguntas</small></a></li>
-          <li><a href="#compras"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span><b>Compras y almacén</b><small>Pedidos, recuento y lo que se pierde</small></a></li>
-          <li><a href="#resto"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-layout-grid"/></svg></span><b>Y el resto</b><small>Buzón, ventas, personal, incidencias</small></a></li>
-          <li><a href="#tiendas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg></span><b>Tiendas</b><small>También para tu tienda</small></a></li>
+          <li><a href="#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
+          <li><a href="#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
+          <li><a href="#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes, sin permanencia</small></a></li>
+          <li><a href="#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
-          <div class="fila"><a class="enlace" href="#precios">Precios</a><a class="enlace" href="#preguntas">Preguntas</a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
+          <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
+          <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
+          <div class="fila"><a class="tel-enlace" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
           <div class="fila"><span>Modo oscuro</span><button class="redondo tema-boton" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
-          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
         </div>
       </div>
     </div>
@@ -794,67 +947,52 @@ button.dia.lleno::after{display:none}
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <!-- PORTADA -->
+  <!-- 1 · PORTADA: qué es, para quién y las tres formas de pedir la demo -->
   <section class="portada envoltura" id="inicio" aria-labelledby="t-portada">
     <div>
-      <p class="antetitulo entra">Para restaurantes, bares y tiendas</p>
+      <p class="promo entra" data-promo><span class="punto-vivo" aria-hidden="true"></span><span><b>El primer mes, gratis</b> <span data-promo-texto>para los 10 primeros negocios</span></span></p>
+      <p class="antetitulo entra">Para restaurantes, bares y hoteles</p>
       <h1 id="t-portada" class="entra">Tú, a tus clientes.<br><span class="marca-en-frase" data-marca="producto">Kontrol</span>,<br>a tus papeles.</h1>
-      <p class="entradilla entra">Haz una foto al albarán o sube la factura que te llega por correo. <span data-marca="ayudante">Teresa</span> la lee y te dice en euros cómo va tu negocio.</p>
+      <p class="entradilla entra">Haz una foto al albarán y <span data-marca="ayudante">Teresa</span>, la administrativa inteligente de <span data-marca="producto">Kontrol</span>, hace el resto: lee cada línea, comprueba que cuadra al céntimo, te avisa si cambia un precio y, con tus ventas, te dice cuánto te queda a fin de mes.</p>
       <div class="acciones entra">
-        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
-        <a class="enlace" href="#como">Mira cómo funciona<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
+        <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
+        <a class="tel-enlace" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a>
       </div>
-    </div>
-    <div class="escena">
-      <figure class="papel"><img src="img/albaran-lonja.webp" alt="Albarán de una pescadería: siete productos y un total de 751,99 euros" width="620" height="877" fetchpriority="high"></figure>
-      <div class="movil"><div class="pantalla">
-        <img src="img/hoy-m-claro.webp" alt="La pantalla Hoy de la app: 18.244 euros gastados en septiembre, los errores en el precio, las subidas y lo que podrías ahorrar" width="780" height="1688" fetchpriority="high">
-      </div></div>
-      <p class="sello"><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Leído y cuadrado</b>7 productos · 751,99&nbsp;€</span></p>
-    </div>
-  </section>
-
-  <!-- EL PROBLEMA -->
-  <section class="problema bloque" id="problema" aria-labelledby="t-problema">
-    <div class="envoltura">
-      <div class="rejilla">
-        <div class="aparece">
-          <p class="antetitulo">Te suena</p>
-          <h2 id="t-problema" class="titular">Acabas el servicio y empiezan los papeles.</h2>
-          <p class="explica">Albaranes en una caja, facturas en el correo y la calculadora a mano. Y a final de mes, la duda de siempre: ¿cuánto me queda?</p>
-        </div>
-        <figure class="foto aparece">
-          <div class="foto-marco"><img src="img/foto-noche2-990.webp" srcset="img/foto-noche2-640.webp 640w, img/foto-noche2-990.webp 990w" sizes="(min-width:900px) 640px, 100vw" alt="De noche, con el restaurante ya cerrado, el dueño se sujeta la cabeza delante del portátil, en una mesa llena de tiques y facturas con una calculadora; al fondo, un cocinero recoge la cocina" width="990" height="684" loading="lazy" decoding="async"></div>
-        </figure>
-      </div>
-      <ul class="pastillas cuatro dolor">
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-inbox"/></svg></span><b>Papeles sin mirar</b><span>Se amontonan hasta que el gestor los pide.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-trending-up"/></svg></span><b>Subidas que no ves</b><span>El proveedor te sube el precio y te enteras tarde, si te enteras.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg></span><b>Platos a ojo</b><span>Lo que cuesta cada plato se calculó un día y nunca más.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg></span><b>El margen, meses después</b><span>Cuando llega el trimestre, ya no hay nada que arreglar.</span></li>
+      <ul class="confianza entra">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Media hora, sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los que hacen <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
       </ul>
     </div>
+    <div class="escena escena-teresa">
+      <figure class="foto-portada"><img src="img/foto-albaran-1100.webp" srcset="img/foto-albaran-700.webp 700w, img/foto-albaran-1100.webp 1100w" sizes="(min-width:900px) 520px, 100vw" alt="Un cocinero hace una foto con el móvil a un albarán sobre la mesa de acero de la cocina, junto a cajas de tomates, pimientos y limones" width="1100" height="1375" fetchpriority="high"></figure>
+      <div class="chip-app claro-fijo chip-progreso" data-progreso aria-hidden="true">
+        <span class="miniatura"><img src="img/albaran-lonja.webp" alt="" width="44" height="44"><svg class="icono"><use href="#i-check"/></svg></span>
+        <span class="cuerpo">
+          <span class="leyendo"><span class="barra-trabajo"></span><span><span data-marca="ayudante">Teresa</span> lo está leyendo…</span></span>
+          <b class="ya">Leído y cuadrado · 751,99&nbsp;€</b>
+          <span class="ya">7 líneas comprobadas · 1 precio ha cambiado</span>
+        </span>
+        <span class="revisar">Revisar</span>
+      </div>
+      <div class="movil"><div class="pantalla">
+        <img src="img/hoy-m-claro.webp" alt="La pantalla Hoy de la app: 18.244 euros gastados en septiembre, los errores en el precio, los cambios de precio y lo que podrías ahorrar" width="780" height="1688" loading="lazy">
+      </div></div>
+    </div>
   </section>
 
-  <!-- EL REPARTO DEL TRABAJO -->
+  <!-- 2 · EL PROBLEMA Y EL REPARTO DEL TRABAJO, EN UNO -->
   <section class="reparto bloque" id="reparto" aria-labelledby="t-reparto">
     <div class="envoltura rejilla">
       <figure class="foto aparece">
-        <div class="foto-marco"><img src="img/foto-albaran-1100.webp" srcset="img/foto-albaran-700.webp 700w, img/foto-albaran-1100.webp 1100w" sizes="(min-width:900px) 520px, 100vw" alt="Un cocinero hace una foto con el móvil a un albarán sobre la mesa de acero de la cocina, junto a cajas de tomates, pimientos y limones" width="1100" height="1375" loading="lazy" decoding="async"></div>
-        <div class="chip-app claro-fijo chip-progreso" data-progreso aria-hidden="true">
-          <span class="miniatura"><img src="img/albaran-lonja.webp" alt="" width="44" height="44" loading="lazy"><svg class="icono"><use href="#i-check"/></svg></span>
-          <span class="cuerpo">
-            <span class="leyendo"><span class="barra-trabajo"></span><span><span data-marca="ayudante">Teresa</span> lo está leyendo…</span></span>
-            <b class="ya">Pescadería La Lonja</b>
-            <span class="ya">Leído · 751,99&nbsp;€</span>
-          </span>
-          <span class="revisar">Revisar</span>
-        </div>
+        <div class="foto-marco"><img src="img/foto-noche2-990.webp" srcset="img/foto-noche2-640.webp 640w, img/foto-noche2-990.webp 990w" sizes="(min-width:900px) 520px, 100vw" alt="De noche, con el restaurante ya cerrado, el dueño se sujeta la cabeza delante del portátil, en una mesa llena de tiques y facturas con una calculadora" width="990" height="684" loading="lazy" decoding="async"></div>
       </figure>
       <div>
         <div class="aparece">
+          <p class="antetitulo">Acabas el servicio y empiezan los papeles</p>
           <h2 id="t-reparto" class="titular">Tú haces la foto. Lo demás ya no es cosa tuya.</h2>
-          <p class="explica">Lo que cuadra entra solo y solo te pide mirar lo que no. Revisas una parte pequeña, con el papel al lado.</p>
+          <p class="explica">Se acabaron los albaranes en una caja y las cuentas a mano. Lo que cuadra entra solo; tú solo miras lo que no.</p>
         </div>
         <div class="tique-sombra aparece" style="margin-top:36px">
           <div class="tique">
@@ -863,11 +1001,9 @@ button.dia.lleno::after{display:none}
               <small>Reparto del trabajo</small>
             </div>
             <ul class="lineas">
-              <li><span>Hacer la foto o subir el PDF que te mandan</span><i></i><b class="tu">Tú</b></li>
-              <li><span>Leer cada línea: producto, cantidad y precio</span><i></i><b data-marca="ayudante">Teresa</b></li>
-              <li><span>Comprobar que las cuentas del papel cuadran</span><i></i><b data-marca="ayudante">Teresa</b></li>
-              <li><span>Mirar lo que no cuadra, con el papel delante</span><i></i><b class="tu">Tú</b></li>
-              <li><span>Avisar de subidas y errores en el precio</span><i></i><b data-marca="ayudante">Teresa</b></li>
+              <li><span>Hacer la foto o subir el PDF</span><i></i><b class="tu">Tú</b></li>
+              <li><span>Leer cada línea y cuadrar las cuentas</span><i></i><b data-marca="ayudante">Teresa</b></li>
+              <li><span>Avisar de errores y cambios de precio</span><i></i><b data-marca="ayudante">Teresa</b></li>
               <li><span>Escribir al proveedor</span><i></i><b>Ella lo escribe, tú lo mandas</b></li>
               <li><span>Preparar lo del gestor</span><i></i><b>Un clic</b></li>
             </ul>
@@ -878,138 +1014,62 @@ button.dia.lleno::after{display:none}
     </div>
   </section>
 
-  <!-- CÓMO FUNCIONA: LA HISTORIA -->
+  <!-- 3 · CÓMO FUNCIONA: cuatro pasos, cada uno con su pantalla real -->
   <section class="historia bloque" id="como" aria-labelledby="t-como">
     <div class="envoltura">
       <div class="historia-cabeza aparece">
         <p class="antetitulo">Cómo funciona</p>
-        <h2 id="t-como" class="titular">Todo lo que hace, pantalla a pantalla.</h2>
-        <p class="explica">Así se ve la app, con un restaurante de ejemplo. Al bajar, la pantalla se acerca al dato que importa.</p>
+        <h2 id="t-como" class="titular">Cuatro cosas que dejas de hacer a mano.</h2>
+        <p class="explica">Pantallas reales de la app, con un restaurante de ejemplo.</p>
       </div>
       <div class="historia-rejilla">
         <ol class="pasos">
           <li class="paso" id="papeles">
             <p class="paso-num"><span class="n">1</span><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg>Papeles</p>
-            <h3>Tus papeles, leídos y en orden.</h3>
-            <p>Haz la foto con el móvil, sube el PDF o reenvía el correo del proveedor a tu buzón. <span data-marca="ayudante">Teresa</span> lee cada papel línea a línea y lo deja en su mes.</p>
+            <h3>Facturas y albaranes, leídos y en orden.</h3>
+            <p>Foto, PDF o el correo del proveedor reenviado. <span data-marca="ayudante">Teresa</span> lee cada línea, comprueba que cuadra y lo guarda en su mes.</p>
             <figure class="paso-vista">
               <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
                 <div class="planos"><div class="plano activo" style="--ox:40.1%;--oy:18.8%;--s:2.36;--fx:25.06%;--fy:37.60%;--fw:6.11%;--fh:3.82%"><div class="lienzo"><img src="img/zoom-papeles.webp" alt="En el ordenador, de cerca: la línea del bogavante, 8 kg a 35,795 euros, 286,36 euros, marcada como que cuadra" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
               </div>
               <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Bogavante: 8 kg a 35,795&nbsp;€ = 286,36&nbsp;€. Cuadra.</span></figcaption>
             </figure>
-            <ul class="checks">
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Foto, galería o PDF</b>, varios a la vez. En el ordenador, los sueltas encima de la app.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Lo que cuadra entra solo:</b> si las líneas, la base y el IVA dan el total, se confirma sin que lo toques.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Lo que no, con el papel al lado.</b> Lo miras y le das a «Coincide con el papel».</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Nada se cuenta dos veces.</b> Si el mismo papel entra dos veces, no suma dos veces.</span></li>
-            </ul>
-            <details class="mas-detalle">
-              <summary>Y además<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-              <ul>
-                <li><b>Tu buzón de facturas:</b> una dirección solo tuya. Reenvías ahí las del proveedor, o haces que tu correo las reenvíe solo.</li>
-                <li><b>Una factura que recoge albaranes que ya tenías:</b> te avisa con los euros delante y decides tú, «Sí, la factura los recoge» o «No, son compras distintas».</li>
-                <li><b>Abonos, retenciones y recargo:</b> un abono resta, y el recibo del alquiler con su retención o la factura con recargo de equivalencia cuadran.</li>
-                <li><b>Facturas en otra moneda:</b> se pasan a euros con el cambio oficial del día de la factura.</li>
-                <li><b>Tu archivo de otros meses:</b> súbelo de golpe; se lee poco a poco y cada papel va a su mes.</li>
-                <li><b>Fechas que no pueden ser:</b> si un papel parece del futuro o de hace años, te lo dice.</li>
-              </ul>
-            </details>
           </li>
 
           <li class="paso" id="avisos">
-            <p class="paso-num"><span class="n">2</span><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg>Avisos</p>
-            <h3>Si te suben un precio, lo sabes en euros.</h3>
-            <p>Cada línea de cada albarán se compara con lo que pagabas antes. Con el papel de prueba y el mensaje para el proveedor ya escrito.</p>
+            <p class="paso-num"><span class="n">2</span><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg>Precios</p>
+            <h3>Errores y cambios de precio, al momento.</h3>
+            <p>Cada línea se compara con lo que pagabas antes. Si algo no cuadra lo ves en euros, con el mensaje para el proveedor ya escrito. Lo mandas tú.</p>
             <figure class="paso-vista">
               <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="En el ordenador, de cerca: la langosta te la han subido de 53,45 a 54,65 euros el kilo, con los botones Escribirle y Teresa, explícamelo" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
+                <div class="planos"><div class="plano activo" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="En el ordenador, de cerca: la langosta pasa de 53,45 a 54,65 euros el kilo, con los botones Escribirle y Teresa, explícamelo" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
               </div>
               <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La langosta, de 53,45 a 54,65&nbsp;€ el kilo.</span></figcaption>
             </figure>
-            <ul class="checks">
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Te han subido precios:</b> el mismo producto, del mismo proveedor, más caro. Y lo que llevas pagado de más desde entonces.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Errores en el precio:</b> una línea que no multiplica bien o un total que no cuadra con el papel.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Podrías ahorrar:</b> lo mismo, más barato, en otro proveedor al que ya le compras.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Lo que apuntas tú:</b> faltó mercancía o venía en mal estado. Queda apuntado con sus euros hasta que lo cobres.</span></li>
-            </ul>
-            <p class="nota"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>El mensaje lo mandas tú, por WhatsApp o por correo. Nada sale solo.</p>
           </li>
 
           <li class="paso" id="escandallo">
             <p class="paso-num"><span class="n">3</span><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg>Escandallo</p>
-            <h3>Lo que te cuesta cada plato, con el precio del último albarán.</h3>
-            <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg>En restaurantes</p>
-            <p>Sube el pescado y el plato se mueve solo. Ves lo que te deja cada uno sin hacer una sola cuenta.</p>
+            <h3>Lo que te cuesta cada plato, siempre al día.</h3>
+            <p>Con el precio del último albarán. <span data-marca="ayudante">Teresa</span> te propone la receta y ves lo que te deja cada cosa: el menú del día, la tapa de la barra o la caña.</p>
             <figure class="paso-vista">
               <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="En el ordenador, de cerca: el arroz caldoso de bogavante te cuesta 15,82 euros por ración, lo vendes a 24,50 y te deja 6,45" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
+                <div class="planos"><div class="plano activo" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="En el ordenador, de cerca: el arroz caldoso de bogavante cuesta 15,82 euros por ración, se vende a 24,50 y deja 6,45" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
               </div>
               <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Arroz caldoso de bogavante: te deja 6,45&nbsp;€ por ración.</span></figcaption>
             </figure>
-            <ul class="checks">
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b><span data-marca="ayudante">Teresa</span> te propone la receta</b> de cada plato de tu carta. Tú la repasas y la das por buena.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>O la escribes tú,</b> aunque no tengas la carta en digital.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bases y salsas:</b> el fondo o el sofrito que va en varios platos, con su precio por litro o por kilo, al día.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>De un vistazo:</b> en verde lo que te deja bien; en rojo lo que te deja poco.</span></li>
-            </ul>
           </li>
 
           <li class="paso" id="margen">
             <p class="paso-num"><span class="n">4</span><svg class="icono" aria-hidden="true"><use href="#i-chart-column"/></svg>Margen</p>
             <h3>Lo que te queda a fin de mes, sin esperar al gestor.</h3>
-            <p>Las ventas llegan de tu caja; las compras, de tus papeles; el personal y el alquiler, de lo que apuntas una vez. Todo sin IVA, como lo mira tu gestor.</p>
+            <p>Tus ventas menos compras, personal y gastos fijos, todo sin IVA y antes de impuestos. Y lo que necesita tu gestoría, listo para mandar en un clic.</p>
             <figure class="paso-vista">
               <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
                 <div class="planos"><div class="plano activo" style="--ox:38.4%;--oy:19.9%;--s:2.54;--fx:25.28%;--fy:24.71%;--fw:22.11%;--fh:9.07%"><div class="lienzo"><img src="img/zoom-margen.webp" alt="En el ordenador, de cerca: te quedan 6.216 euros en septiembre, 20,05 de cada 100 que entran" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
               </div>
               <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Te quedan 6.216&nbsp;€: 20,05&nbsp;€ de cada 100&nbsp;€ que entran.</span></figcaption>
             </figure>
-            <div class="cuenta">
-              <p class="rotulo">De cada 100&nbsp;€ que vendes</p>
-              <div class="barra-100" role="img" aria-label="De cada 100 euros: 53,5 en comida y bebida, 18,2 en personal, 8,3 en luz, alquiler y demás, y te quedan 20">
-                <span class="c-comida" style="--p:53.5"></span><span class="c-personal" style="--p:18.2"></span><span class="c-gastos" style="--p:8.3"></span><span class="c-queda" style="--p:20"></span>
-              </div>
-              <dl class="leyenda">
-                <div class="c-comida"><dt>Comida y bebida</dt><dd>53,5&nbsp;€</dd></div>
-                <div class="c-personal"><dt>Personal</dt><dd>18,2&nbsp;€</dd></div>
-                <div class="c-gastos"><dt>Luz, alquiler…</dt><dd>8,3&nbsp;€</dd></div>
-                <div class="c-queda queda"><dt>Te queda</dt><dd>20,0&nbsp;€</dd></div>
-              </dl>
-              <p class="honesto"><svg class="icono" aria-hidden="true"><use href="#i-circle-alert"/></svg><span>Si falta un papel, te lo dice: un albarán que no está hace que el margen parezca mejor de lo que es.</span></p>
-            </div>
-            <ul class="checks">
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Tus ventas:</b> sube el Excel que saca tu caja, sea cual sea el TPV. Con Square, muy pronto, entrarán solas cada noche.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Luz, alquiler y demás:</b> las facturas se apartan solas de la comida. Lo que no llega en papel lo apuntas una vez y lo traes cada mes con un botón.</span></li>
-              <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span><b>Personal:</b> lo que cuesta de verdad tu plantilla y qué parte de lo que vendes se va en sueldos.</span></li>
-            </ul>
-          </li>
-
-          <li class="paso" id="gestoria">
-            <p class="paso-num"><span class="n">5</span><svg class="icono" aria-hidden="true"><use href="#i-folder-archive"/></svg>Gestoría</p>
-            <h3>Lo del gestor, en un clic.</h3>
-            <p>Cada mes, lo que tu asesor necesita, ordenado. Desde el móvil se lo mandas; en el ordenador lo descargas.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:46.1%;--oy:100.0%;--s:1.98;--fx:25.28%;--fy:77.42%;--fw:16.33%;--fh:6.93%"><div class="lienzo"><img src="img/zoom-gestoria.webp" alt="En el ordenador, de cerca: el Excel del mes, una fila por factura, con el botón Descargar el Excel" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>El Excel del mes, listo para tu gestor.</span></figcaption>
-            </figure>
-            <div class="tique-sombra aparece"><div class="tique">
-              <div class="tique-cabeza">
-                <span class="marca"><img src="img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
-                <small>Para tu gestor</small>
-              </div>
-              <ul class="lineas">
-                <li><span>El Excel del mes</span><i></i><b>Una fila por factura</b></li>
-                <li><span>Los papeles originales</span><i></i><b>En un zip, con nombre</b></li>
-                <li><span>Facturas y abonos confirmados</span><i></i><b class="tu">Van</b></li>
-                <li><span>Por revisar y duplicados</span><i></i><b class="no">No van</b></li>
-                <li><span>Nóminas</span><i></i><b>Fuera: las hace él</b></li>
-                <li><span>Albaranes sin factura</span><i></i><b>Se la pides con un mensaje</b></li>
-              </ul>
-              <div class="tique-total"><span>Tu parte</span><b>Darle a «Mandar»</b></div>
-            </div></div>
           </li>
         </ol>
 
@@ -1020,7 +1080,6 @@ button.dia.lleno::after{display:none}
               <div class="plano" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
               <div class="plano" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
               <div class="plano" style="--ox:38.4%;--oy:19.9%;--s:2.54;--fx:25.28%;--fy:24.71%;--fw:22.11%;--fh:9.07%"><div class="lienzo"><img src="img/zoom-margen.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-              <div class="plano" style="--ox:46.1%;--oy:100.0%;--s:1.98;--fx:25.28%;--fy:77.42%;--fw:16.33%;--fh:6.93%"><div class="lienzo"><img src="img/zoom-gestoria.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
             </div>
           </div>
           <div class="escenario-pie">
@@ -1029,182 +1088,122 @@ button.dia.lleno::after{display:none}
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La langosta, de 53,45 a 54,65&nbsp;€ el kilo.</span></p>
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Arroz caldoso de bogavante: te deja 6,45&nbsp;€ por ración.</span></p>
               <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Te quedan 6.216&nbsp;€: 20,05&nbsp;€ de cada 100&nbsp;€ que entran.</span></p>
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>El Excel del mes, listo para tu gestor.</span></p>
             </div>
-            <div class="escenario-progreso"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="escenario-progreso"><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TERESA -->
+  <!-- 4 · TERESA -->
   <section class="banda-teresa oscuro-fijo" id="teresa" aria-labelledby="t-teresa">
     <div class="envoltura">
       <div class="rejilla">
         <div class="aparece">
-          <div class="quien"><span class="cara" aria-hidden="true">👩🏻</span><div><b data-marca="ayudante">Teresa</b><span>tu ayudante en <span data-marca="producto">Kontrol</span></span></div></div>
+          <div class="quien"><span class="cara cara-k" aria-hidden="true"><img src="img/kontrol-icono.webp" alt="" width="52" height="52"></span><div><b data-marca="ayudante">Teresa</b><span>la administrativa inteligente de <span data-marca="producto">Kontrol</span></span></div></div>
           <h2 id="t-teresa" class="titular">Te lo explica. Y si dudas, se lo preguntas.</h2>
-          <p class="explica">Junto a cada aviso hay un «<span data-marca="ayudante">Teresa</span>, explícamelo». Y desde cualquier pantalla le preguntas lo que quieras: te contesta con tus números o te dice qué botón tocar.</p>
-          <ul class="pastillas cuatro">
-            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-camera"/></svg></span><b>Lee tus papeles</b><span>La foto, el PDF o lo que llega a tu buzón, línea a línea.</span></li>
-            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg></span><b>Te avisa de lo que importa</b><span>Subidas, errores en el precio y papeles que faltan.</span></li>
-            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg></span><b>Te deja el mensaje escrito</b><span>Para el proveedor o para el pedido. Lo mandas tú.</span></li>
-            <li class="pastilla"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b>Te lo explica en cristiano</b><span>Con tus números, sin palabras de contable.</span></li>
-          </ul>
+          <p class="explica"><span data-marca="ayudante">Teresa</span> es la tecnología que trabaja dentro de <span data-marca="producto">Kontrol</span>, sin descanso: lee cada papel línea a línea, comprueba las cuentas al céntimo y no da nada por bueno hasta que cuadra. Y desde cualquier pantalla le preguntas lo que quieras: te contesta con tus números, sin palabras de contable.</p>
           <ul class="preguntas-chips" aria-label="Preguntas de ejemplo">
-            <li>¿Cómo voy este mes?</li><li>¿Qué tengo que reclamar?</li><li>¿Quién me ha subido precios?</li><li>¿Qué le mando al gestor?</li>
+            <li>¿Cómo voy este mes?</li><li>¿Cuánto me deja el menú del día?</li><li>¿Me han subido el barril?</li><li>¿Qué le mando al gestor?</li>
+          </ul>
+          <ul class="nunca-lista" aria-label="Por qué te puedes fiar de Teresa">
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Solo usa los números de tus papeles</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Lo que no cuadra no se confirma sin ti</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>No manda ni cambia nada sin tu visto bueno</li>
           </ul>
         </div>
         <figure class="vitrina aparece">
           <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <video class="clip" muted loop playsinline preload="none" poster="video/teresa-chat.webp" width="1108" height="1316" aria-label="En el ordenador: se toca la cara de Teresa, se le pregunta «¿Cómo voy este mes?» y contesta escribiendo, con lo que queda del mes y lo que se escapa"><source src="video/teresa-chat.mp4" type="video/mp4"></video>
+            <video class="clip" muted loop playsinline preload="none" poster="video/teresa-chat.webp" width="1108" height="1316" aria-label="En el ordenador: se toca la cara de Teresa, se le pregunta «¿Cómo voy este mes?» y contesta escribiendo, con lo que queda del mes"><source src="video/teresa-chat.mp4" type="video/mp4"></video>
           </div>
           <figcaption><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Le preguntas «¿Cómo voy este mes?» y te contesta con tus números.</figcaption>
         </figure>
       </div>
-      <div class="nunca">
-        <h3 class="aparece">Lo que <span data-marca="ayudante">Teresa</span> no hace nunca</h3>
-        <ul class="reglas cascada">
-          <li class="aparece"><b><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg>Inventarse un número.</b><p>Las cuentas las hace la app con tus papeles. Si falta un dato, te dice dónde mirarlo.</p></li>
-          <li class="aparece"><b><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg>Mandar nada sin ti.</b><p>Te deja escrito el mensaje al proveedor o el pedido. Lo envías tú.</p></li>
-          <li class="aparece"><b><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg>Borrar o cambiar tus datos.</b><p>Te dice qué botón tocar; lo tocas tú.</p></li>
-          <li class="aparece"><b><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg>Hacer de gestor.</b><p>Qué IVA lleva algo o qué te puedes deducir, eso con tu gestor.</p></li>
-        </ul>
-      </div>
     </div>
   </section>
 
-  <!-- COMPRAS Y ALMACÉN: van de la mano (pedir, recibir y contar) -->
-  <section class="compras-almacen bloque" id="compras" aria-labelledby="t-compras">
-    <div class="envoltura">
-      <div class="aparece">
-        <p class="antetitulo">Compras y almacén</p>
-        <h2 id="t-compras" class="titular">Lo que compras, lo que tienes y lo que se pierde por el camino.</h2>
-        <p class="explica">Pides al proveedor, marcas lo que llega y cuentas el almacén de pie, con el móvil. En restaurantes, bares y tiendas.</p>
-      </div>
-      <div class="medios turnos">
-        <figure class="vitrina aparece">
-          <button class="video-titulo" type="button" aria-pressed="false"><span class="n">1</span>Pedir al proveedor</button>
-          <span class="video-avance" aria-hidden="true"><i></i></span>
-          <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <video class="turno" muted loop playsinline preload="none" poster="video/pedido.webp" width="1080" height="1296" aria-label="En la app: se hace un pedido a la pescadería, se añaden bogavante, lubina y mejillones de lo que sueles comprarle, se ponen las cantidades y abajo sale lo que te saldrá, 292 euros"><source src="video/pedido.mp4" type="video/mp4"></video>
-          </div>
-          <figcaption><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Un pedido de verdad: eliges, pones cantidades y ves lo que te saldrá.</figcaption>
-        </figure>
-        <figure class="vitrina aparece">
-          <button class="video-titulo" type="button" aria-pressed="false"><span class="n">2</span>Recuento del almacén</button>
-          <span class="video-avance" aria-hidden="true"><i></i></span>
-          <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <video class="turno" muted loop playsinline preload="none" poster="video/almacen-recuento.webp" width="1080" height="1296" aria-label="En la app: se toca «Hacer recuento» y se cuentan el arroz, el bogavante y la lubina; cada cosa se guarda sola y el contador sube a 3 de 97"><source src="video/almacen-recuento.mp4" type="video/mp4"></video>
-          </div>
-          <figcaption><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg>Un recuento de verdad: buscas, escribes y se guarda solo.</figcaption>
-        </figure>
-      </div>
-      <ul class="pastillas cuatro cascada">
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg></span><b>Pedidos por WhatsApp o correo</b><span>Eliges el proveedor y te sale lo que sueles comprarle, con el último precio. Lo mandas tú.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-package"/></svg></span><b>Lo que llega, marcado</b><span>Marcas lo que ha venido; lo que falta queda apuntado con sus euros.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span><b>Recuento de pie, con el móvil</b><span>Una casilla por producto y un buscador, aunque tengas mil referencias. Se guarda solo y podéis contar dos a la vez.</span></li>
-        <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Lo que vale y lo que se pierde</b><span>El valor de tu almacén y, entre dos recuentos, lo que se ha ido por el camino. En una tienda, lo que falta según lo vendido.</span></li>
-      </ul>
-      <p class="nota aparece"><svg class="icono" aria-hidden="true"><use href="#i-users"/></svg>Y en «Proveedores y precios», en quién se te va el dinero y qué te ha subido cada uno.</p>
-    </div>
-  </section>
-
-  <!-- EL RESTO DEL DÍA A DÍA -->
+  <!-- 5 · TODO LO DEMÁS, EN UN VISTAZO -->
   <section class="resto bloque" id="resto" aria-labelledby="t-resto">
     <div class="envoltura">
       <div class="aparece">
-        <h2 id="t-resto" class="titular">Y el resto del día a día, en su sitio.</h2>
-        <p class="explica">Lo que llega, lo que vendes, lo que cuesta tu equipo y lo que tienes que reclamar.</p>
+        <p class="antetitulo">Y además</p>
+        <h2 id="t-resto" class="titular">Todo el día a día de tu negocio, en una sola app.</h2>
       </div>
       <div class="mosaico">
         <figure class="tesela tesela-foto foto aparece">
-          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 760px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán del proveedor junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
-          <div class="chip-app claro-fijo chip-aviso" aria-hidden="true"><span class="marca-aviso"><svg class="icono"><use href="#i-triangle-alert"/></svg></span><span><b>Falta una cosa</b> respecto a lo que pediste. Queda apuntado en el pedido para que puedas reclamarlo.</span></div>
+          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 760px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
           <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
           <figcaption class="pie-tesela">
-            <h3>Llega el pedido y marcas lo que ha venido.</h3>
-            <p>Lo que falta queda apuntado, con sus euros, para reclamarlo.</p>
+            <h3>Pedidos a tus proveedores, por WhatsApp o correo.</h3>
+            <p>El barril, el pan o el café: con lo que sueles pedirle y el último precio. Al llegar, marcas lo que ha venido.</p>
           </figcaption>
         </figure>
         <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
-          <h3>Tus ventas, sin IVA</h3>
-          <p>Sube el Excel que saca tu caja, sea cual sea el TPV. Con Square, muy pronto, entrarán solas cada noche.</p>
-          <div class="recorte"><img src="img/recorte-ventas.webp" alt="Vendido en septiembre, sin IVA: 31.002 euros, un 48 por ciento más que el mes pasado" width="900" height="275" loading="lazy" decoding="async"></div>
+          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span>
+          <h3>Almacén e inventario</h3>
+          <p>Cuentas barriles, botellas y cajas de pie, con el móvil. Ves lo que vale tu almacén y lo que se pierde entre recuentos.</p>
         </article>
         <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-users"/></svg></span>
-          <h3>Lo que cuesta tu equipo</h3>
-          <p>Cuánto te cuesta una hora y qué parte de lo que vendes se va en sueldos.</p>
+          <h3>Tu equipo y sus cuadrantes</h3>
+          <p>Horarios, vacaciones y bajas, y lo que te cuesta de verdad cada hora de personal.</p>
           <div class="recorte"><img src="img/recorte-personal.webp" alt="Te cuesta la plantilla 9.940 euros, 12,75 euros la hora, y es el 18,2 por ciento de las ventas" width="900" height="261" loading="lazy" decoding="async"></div>
         </article>
         <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-clipboard-list"/></svg></span>
-          <h3>Lo que tienes que reclamar</h3>
-          <p>Lo que ha visto <span data-marca="ayudante">Teresa</span> en tus papeles y lo que apuntas tú, en un sitio, hasta que lo cobres.</p>
-          <div class="recorte"><img src="img/recorte-incidencias.webp" alt="Tienes que reclamar 545 euros en 66 cosas, como unas gambas rojas que te subieron de 31,87 a 40,37 euros el kilo" width="900" height="457" loading="lazy" decoding="async"></div>
+          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
+          <h3>Tus ventas, sin IVA</h3>
+          <p>Subes el Excel de tu caja, sea cual sea tu TPV.</p>
+          <div class="recorte"><img src="img/recorte-ventas.webp" alt="Vendido en septiembre, sin IVA: 31.002 euros, un 48 por ciento más que el mes pasado" width="900" height="275" loading="lazy" decoding="async"></div>
         </article>
         <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-forward"/></svg></span>
           <h3>Tu buzón de facturas</h3>
-          <p>Una dirección solo tuya: reenvías ahí las facturas que te mandan, o haces que tu correo las reenvíe solo, y entran sin hacerles foto.</p>
-          <div class="iconos-fila" aria-hidden="true"><span class="tecla"><svg class="icono"><use href="#i-mail"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-arrow-right"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-inbox"/></svg></span></div>
+          <p>Una dirección solo tuya: las facturas que te llegan por correo entran solas, sin hacerles foto.</p>
         </article>
         <article class="tesela aparece">
           <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span>
           <h3>En el móvil y en el ordenador</h3>
-          <p>La instalas en el móvil y se abre de un toque, como una app. Tu encargado y tú, a la vez: si tocáis lo mismo, avisa y no se pisa nada.</p>
-          <div class="iconos-fila" aria-hidden="true"><span class="tecla"><svg class="icono"><use href="#i-smartphone"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-monitor"/></svg></span><span class="tecla"><svg class="icono"><use href="#i-users"/></svg></span></div>
+          <p>Tu encargado y tú, a la vez y cada uno con su acceso.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- TIENDAS -->
-  <section class="tiendas bloque" id="tiendas" aria-labelledby="t-tiendas">
-    <div class="envoltura rejilla">
-      <figure class="foto aparece">
-        <div class="foto-marco"><img src="img/foto-tienda-1100.webp" srcset="img/foto-tienda-700.webp 700w, img/foto-tienda-1100.webp 1100w" sizes="(min-width:900px) 520px, 100vw" alt="La dueña de una tienda de barrio repasa las facturas de sus proveedores en el mostrador" width="1100" height="1375" loading="lazy" decoding="async"></div>
-        <div class="chip-app claro-fijo chip-iva" aria-hidden="true">
-          <p>¿Cómo va el IVA en tu negocio?</p>
-          <ul><li>Lo normal</li><li class="elegido">Recargo de equivalencia</li><li>Exento de IVA</li></ul>
+  <!-- FRANJA DE LA DEMO -->
+  <section class="franja" aria-labelledby="t-franja">
+    <div class="envoltura">
+      <div class="franja-caja aparece">
+        <div>
+          <h2 id="t-franja">¿Lo vemos con tu negocio?</h2>
+          <p>En media hora te enseñamos cómo quedarían tus papeles en <span data-marca="producto">Kontrol</span>. Sin compromiso.</p>
         </div>
-      </figure>
-      <div>
-        <div class="aparece">
-          <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-store"/></svg>En tiendas</p>
-          <h2 id="t-tiendas" class="titular">¿Tienes una tienda? También es para ti.</h2>
-          <p class="explica">Sin la parte de cocina: tus facturas de compra, tus proveedores, tus pedidos, tu almacén, tu margen y lo del gestor.</p>
+        <div class="acciones">
+          <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
+          <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
         </div>
-        <ul class="pastillas cuatro cascada">
-          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-calculator"/></svg></span><b>Tu IVA, en cristiano</b><span>Lo normal, recargo de equivalencia o exento: lo eliges una vez y tu margen se calcula como en tu caso.</span></li>
-          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-check-check"/></svg></span><b>Facturas con recargo que cuadran</b><span>Base, IVA y recargo: cada factura cuadra al céntimo.</span></li>
-          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Tu almacén, también</b><span>Cuentas tu stock con el móvil y ves lo que falta según lo vendido: robos, roturas o errores al cobrar.</span></li>
-          <li class="pastilla aparece"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-spreadsheet"/></svg></span><b>Tus ventas</b><span>Con el Excel de tu caja o de tu programa de facturación.</span></li>
-        </ul>
       </div>
     </div>
   </section>
 
-  <!-- PRECIOS (9-oct-2026): los tres paquetes, cada uno en su tique -->
+  <!-- 6 · PRECIOS -->
   <section class="precios bloque" id="precios" aria-labelledby="t-precios">
     <div class="envoltura">
       <div class="aparece">
         <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg>Precios</p>
         <h2 id="t-precios" class="titular">Tú eliges cuánto hace <span data-marca="producto">Kontrol</span> por ti.</h2>
-        <p class="explica">Sin permanencia: cambias de paquete o lo dejas cuando quieras.</p>
+        <p class="explica">Sin permanencia: cambias de paquete o lo dejas cuando quieras.<span data-promo> Y el primer mes, gratis para los 10 primeros negocios.</span></p>
       </div>
+      <p class="nota-papel">Un papel es una factura o un albarán.</p>
       <div class="tiques-precio">
           <div class="tique-sombra aparece">
             <div class="tique">
               <div class="tique-cabeza"><b>Paquete <span data-marca="ayudante">Teresa</span></b><small>Tus papeles</small></div>
               <ul class="lineas">
               <li><span>Lee tus facturas y albaranes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
-              <li><span>Te avisa si te suben un precio</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Te avisa de errores y cambios de precio</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
               <li><span>Cuadra cada factura con sus albaranes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
-              <li><span>Todo archivado y listo para tu gestoría</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Todo listo para tu gestoría</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
                 <li class="pq-dato"><span>Papeles al mes</span><i></i><b>150</b></li>
                 <li class="pq-dato"><span>Personas que entran</span><i></i><b>1</b></li>
               </ul>
@@ -1216,10 +1215,10 @@ button.dia.lleno::after{display:none}
               <div class="tique-cabeza"><b><span data-marca="ayudante">Teresa</span> + Operaciones</b><small>Y tus números</small></div>
               <ul class="lineas">
               <li class="pq-antes"><span>Todo lo del Paquete <span data-marca="ayudante">Teresa</span></span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
-              <li><span>Lo que te cuesta cada plato y lo que te deja</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Escandallo de cada plato</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
               <li><span>Lo que te queda cada mes</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
               <li><span>Pedidos a tus proveedores</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
-              <li><span>Tu almacén y el inventario</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
+              <li><span>Almacén e inventario</span><i></i><b><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg></b></li>
                 <li class="pq-dato"><span>Papeles al mes</span><i></i><b>350</b></li>
                 <li class="pq-dato"><span>Personas que entran</span><i></i><b>3</b></li>
               </ul>
@@ -1243,88 +1242,92 @@ button.dia.lleno::after{display:none}
       </div>
       <div class="instalacion aparece">
         <div>
-          <b>Y para empezar, la instalación: 150 €</b>
-          <p>Te cargamos los papeles de tus últimos 3 meses y, el primer mes, te enseñamos y te atendemos. Se ajusta al tamaño de tu negocio.</p>
+          <b>¿No sabes cuál te encaja?</b>
+          <p>Te lo decimos en la demo, con lo que mueve tu negocio. Y te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo.</p>
         </div>
-        <a class="boton" href="#contacto"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo</a>
+        <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
       </div>
     </div>
   </section>
 
-  <!-- PREGUNTAS -->
+  <!-- 7 · PREGUNTAS -->
   <section class="preguntas bloque" id="preguntas" aria-labelledby="t-preguntas">
     <div class="envoltura">
       <h2 id="t-preguntas" class="titular aparece">Lo que nos suelen preguntar.</h2>
       <div class="faq aparece">
         <details><summary>¿Tengo que saber de contabilidad?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Tú haces la foto y miras lo que no cuadra. Las cuentas las hace la app y, si algo no se entiende, <span data-marca="ayudante">Teresa</span> te lo explica en cristiano.</p></details>
         <details><summary>¿Sustituye a mi gestor?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Le deja preparado lo suyo cada mes: el Excel y los papeles. Lo fiscal lo sigue decidiendo él.</p></details>
-        <details><summary>¿Y si me mandan las facturas por correo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Las subes tal cual, en PDF, o las reenvías a tu buzón de facturas. Incluso puedes hacer que tu correo se las reenvíe solo y entren sin que hagas nada.</p></details>
-        <details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas. Hasta entonces no se reclama nada a nadie.</p></details>
-        <details><summary>¿Es un TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Lo que vendes sale de tu caja: subes el Excel que exporta tu TPV, sea cual sea.</p></details>
-        <details><summary>¿Podemos usarla varias personas?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, cada uno con su propio acceso: con Teresa + Operaciones entráis tres, y con el Full, los que queráis. En el móvil y en el ordenador; si dos tocáis el mismo papel o el mismo pedido, avisa y no se pisa nada.</p></details>
-        <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Ningún otro negocio puede ver lo tuyo: cada cuenta ve lo suyo y nada más. Lo tienes todo en la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a>.</p></details>
-        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Escríbenos por correo o por WhatsApp. Te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses, te damos tu acceso y te enseñamos a usarlo.</p></details>
+        <details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas.</p></details>
+        <details><summary>¿Sirve para mi bar, mi hotel o mi tienda?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. En bares y hoteles funciona igual que en un restaurante. En una tienda, sin la parte de cocina, y con recargo de equivalencia si lo tienes.</p></details>
+        <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Solo tú y las personas a las que des acceso: ningún otro negocio puede ver lo tuyo. Lo tienes todo en la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a>.</p></details>
+        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Pide una demo por teléfono, WhatsApp o correo. Si te encaja, te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses, te damos tu acceso y te enseñamos a usarlo. Solo necesitas tus facturas y el Excel de tu caja, sea cual sea tu TPV.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
+  <!-- 8 · CONTACTO: pedir la demo, como mejor le venga -->
   <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
     <div class="envoltura">
-      <h2 id="t-contacto" class="titular aparece">¿Empezamos con tus papeles?</h2>
-      <p class="explica aparece">Cuéntanos qué negocio tienes y te contamos cómo empezar. Por la mañana, un vistazo, y a lo tuyo.</p>
-      <figure class="foto aparece">
-        <div class="foto-marco"><img src="img/foto-manana-1600.webp" srcset="img/foto-manana-900.webp 900w, img/foto-manana-1600.webp 1600w" sizes="(min-width:1180px) 1100px, 100vw" alt="Por la mañana, antes de abrir, el dueño del restaurante mira el móvil sentado en la barra, con un café" width="1600" height="1062" loading="lazy" decoding="async"></div>
-        <div class="chip-app claro-fijo chip-margen" aria-hidden="true">
-          <span class="chip-rotulo">Te queda, en septiembre</span>
-          <b class="cifra">6.216&nbsp;€</b>
-          <span>De cada 100&nbsp;€ que entran, te quedan <b>20,05&nbsp;€</b></span>
-        </div>
-      </figure>
-      <div class="rejilla-contacto">
-        <div class="formulario-caja aparece">
-          <h3>Escríbenos un correo</h3>
-          <p>Te contestamos a tu correo.</p>
-          <form class="formulario" id="form-contacto" novalidate>
-            <div class="campo"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required><span class="error" hidden></span></div>
-            <div class="campo"><label for="c-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="c-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar o tienda, y dónde"></div>
-            <div class="dos">
-              <div class="campo"><label for="c-correo">Correo</label><input id="c-correo" name="correo" type="email" autocomplete="email" maxlength="160" required><span class="error" hidden></span></div>
-              <div class="campo"><label for="c-telefono">Teléfono <span class="opcional">(si quieres)</span></label><input id="c-telefono" name="telefono" type="tel" autocomplete="tel" maxlength="40"></div>
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo, como mejor te venga.</h2>
+      <p class="explica aparece">Media hora, sin compromiso: te enseñamos <span data-marca="producto">Kontrol</span> y resolvemos tus dudas.</p>
+      <div class="tiques">
+        <aside class="tique-sombra tique-llamada aparece" aria-label="Agendar una llamada">
+          <div class="tique">
+            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-calendar-check"/></svg></span>
+            <h3>Te llamamos</h3>
+            <p>Elige el día y la hora que te vengan bien.</p>
+            <div class="acciones">
+              <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
             </div>
-            <div class="campo"><label for="c-mensaje">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="c-mensaje" name="mensaje" rows="4" maxlength="2000"></textarea></div>
-            <div class="trampa" aria-hidden="true"><label for="c-web">No rellenes esto</label><input id="c-web" name="web" tabindex="-1" autocomplete="off"></div>
-            <div class="acepto"><input type="checkbox" id="c-acepto" name="acepto" required><label for="c-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a> y quiero que me contestéis.</label><span class="error" hidden></span></div>
-            <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Enviar</button>
-            <p class="estado" role="status" aria-live="polite"></p>
-          </form>
-          <div class="hecho" id="contacto-hecho" hidden tabindex="-1">
-            <svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>
-            <h3>Recibido.</h3>
-            <p>Te contestamos a <b data-a></b> lo antes posible.</p>
+            <span class="telefono"><span class="punto-vivo" aria-hidden="true"></span>Ves al momento las horas libres</span>
           </div>
-        </div>
-        <div class="tiques">
-          <aside class="tique-sombra aparece" aria-label="Por WhatsApp">
-            <div class="tique">
-              <h3>¿Prefieres WhatsApp?</h3>
-              <p>Te contamos cómo funciona y resolvemos tus dudas.</p>
-              <div class="acciones">
-                <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
-              </div>
-              <span class="telefono">o al <b data-telefono>686 679 713</b></span>
+        </aside>
+        <aside class="tique-sombra tique-principal aparece" aria-label="Por WhatsApp">
+          <div class="tique">
+            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
+            <h3>Por WhatsApp</h3>
+            <p>Cuéntanos qué negocio tienes y resolvemos tus dudas.</p>
+            <div class="acciones">
+              <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos</a>
             </div>
-          </aside>
-          <aside class="tique-sombra tique-llamada aparece" aria-label="Agendar una llamada">
-            <div class="tique">
-              <h3>¿Mejor que te llamemos?</h3>
-              <p>Elige el día y la hora que te vengan bien y te llamamos nosotros.</p>
-              <div class="acciones">
-                <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
-              </div>
-              <span class="telefono"><span class="punto-vivo" aria-hidden="true"></span>Ves al momento las horas libres</span>
+            <span class="telefono">Lo más rápido</span>
+          </div>
+        </aside>
+        <aside class="tique-sombra aparece" aria-label="Por teléfono">
+          <div class="tique">
+            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
+            <h3>Llámanos</h3>
+            <p>Si lo prefieres, llámanos ahora.</p>
+            <div class="acciones">
+              <a class="boton" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a>
             </div>
-          </aside>
+            <span class="telefono">Hablas con Luis o con Pablo, los que hacen <span data-marca="producto">Kontrol</span></span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="formulario-caja aparece">
+        <h3>¿Prefieres un correo?</h3>
+        <p>Déjanos tus datos y te escribimos para la demo.</p>
+        <form class="formulario" id="form-contacto" novalidate>
+          <div class="dos">
+            <div class="campo"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required><span class="error" hidden></span></div>
+            <div class="campo"><label for="c-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="c-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar u hotel, y dónde"></div>
+          </div>
+          <div class="dos">
+            <div class="campo"><label for="c-correo">Correo</label><input id="c-correo" name="correo" type="email" autocomplete="email" maxlength="160" required><span class="error" hidden></span></div>
+            <div class="campo"><label for="c-telefono">Teléfono <span class="opcional">(si quieres)</span></label><input id="c-telefono" name="telefono" type="tel" autocomplete="tel" maxlength="40"></div>
+          </div>
+          <div class="campo"><label for="c-mensaje">¿Algo que quieras contarnos? <span class="opcional">(si quieres)</span></label><textarea id="c-mensaje" name="mensaje" rows="3" maxlength="2000"></textarea></div>
+          <div class="trampa" aria-hidden="true"><label for="c-web">No rellenes esto</label><input id="c-web" name="web" tabindex="-1" autocomplete="off"></div>
+          <div class="acepto"><input type="checkbox" id="c-acepto" name="acepto" required><label for="c-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a> y quiero que me contestéis.</label><span class="error" hidden></span></div>
+          <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-send"/></svg>Pedir la demo</button>
+          <p class="estado" role="status" aria-live="polite"></p>
+        </form>
+        <div class="hecho" id="contacto-hecho" hidden tabindex="-1">
+          <svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>
+          <h3>Recibido.</h3>
+          <p>Te escribimos a <b data-a></b> lo antes posible para la demo.</p>
         </div>
       </div>
     </div>
@@ -1336,8 +1339,8 @@ button.dia.lleno::after{display:none}
       <header class="agenda-cabeza">
         <span class="agenda-icono" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
         <div>
-          <h2 id="agenda-titulo">Agenda una llamada</h2>
-          <p>Elige el día y la hora. Te llamamos nosotros.</p>
+          <h2 id="agenda-titulo">Agenda tu demo</h2>
+          <p>Elige el día y la hora. Te llamamos y te enseñamos <span data-marca="producto">Kontrol</span>.</p>
         </div>
         <button class="agenda-cerrar" type="button" data-cerrar aria-label="Cerrar"><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg></button>
       </header>
@@ -1381,13 +1384,13 @@ button.dia.lleno::after{display:none}
             <div class="campo"><label for="l-telefono">Teléfono</label><input id="l-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required><span class="error" hidden></span></div>
           </div>
           <div class="dos">
-            <div class="campo"><label for="l-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="l-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar o tienda, y dónde"></div>
+            <div class="campo"><label for="l-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="l-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar u hotel, y dónde"></div>
             <div class="campo"><label for="l-correo">Correo <span class="opcional">(si quieres)</span></label><input id="l-correo" name="correo" type="email" autocomplete="email" maxlength="160"><span class="error" hidden></span></div>
           </div>
           <div class="campo"><label for="l-nota">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="l-nota" name="nota" rows="3" maxlength="1500"></textarea></div>
           <div class="trampa" aria-hidden="true"><label for="l-web">No rellenes esto</label><input id="l-web" name="web" tabindex="-1" autocomplete="off"></div>
           <div class="acepto"><input type="checkbox" id="l-acepto" name="acepto" required><label for="l-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad" target="_blank" rel="noopener">política de privacidad</a> y quiero que me llaméis.</label><span class="error" hidden></span></div>
-          <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Confirmar la llamada</button>
+          <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Confirmar la demo</button>
           <p class="estado" role="status" aria-live="polite"></p>
         </form>
       </section>
@@ -1409,10 +1412,17 @@ button.dia.lleno::after{display:none}
 <footer class="pie">
   <div class="envoltura">
     <span class="marca"><img src="img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
-    <nav aria-label="Legal"><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <span>Un producto de DAB. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
+    <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
+    <span>Un producto de DAB, hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>
+
+<!-- En el móvil: la demo, el WhatsApp y la llamada, siempre a un dedo (sale al bajar de la portada) -->
+<nav class="barra-movil" aria-label="Pide una demo">
+  <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide demo</button>
+  <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
+  <a class="boton boton-borde" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Llamar</a>
+</nav>
 <script>
 /* ── EL DESPLEGABLE «QUÉ HACE» (en el móvil, el menú entero) ── */
 (function () {
@@ -1564,72 +1574,6 @@ button.dia.lleno::after{display:none}
     });
   }, { threshold: [0, 0.25, 0.6, 1] });
   hist.querySelectorAll(".paso-vista").forEach(function (v) { io.observe(v); });
-})();
-
-/* ── LOS DOS VÍDEOS DE COMPRAS Y ALMACÉN: NUNCA SUENAN LOS DOS A LA VEZ ──
-   Pablo: «al pasar los dos a la vez no sabes dónde mirar». Lado a lado (ordenador) van por turnos:
-   primero el pedido y, al acabar, el recuento, y vuelta a empezar; el que suena se enciende y el otro
-   espera atenuado. En el móvil, uno encima del otro, suena el que más se ve. En los dos casos la
-   rayita de encima dice cuánto le queda, y tocando un título (o un vídeo) se salta a ese. */
-(function () {
-  var caja = document.querySelector(".turnos");
-  if (!caja) return;
-  var figs = [].slice.call(caja.querySelectorAll(".vitrina"));
-  var vids = figs.map(function (f) { return f.querySelector("video"); });
-  var rayas = figs.map(function (f) { return f.querySelector(".video-avance i"); });
-  var titulos = figs.map(function (f) { return f.querySelector(".video-titulo"); });
-  var quieto = matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window);
-  var lado = matchMedia("(min-width: 900px)");
-  var actual = 0, visto = false, ratios = [0, 0];
-  var enTurnos = function () { return lado.matches; };
-  function pinta() {
-    figs.forEach(function (f, k) { f.classList.toggle("activo", k === actual); titulos[k].setAttribute("aria-pressed", String(k === actual)); });
-  }
-  function reproduce(v) { v.preload = "auto"; var p = v.play(); if (p && p.catch) p.catch(function () { v.controls = true; }); }
-  function solo(k, desdeCero) {
-    vids.forEach(function (v, j) { if (j !== k) v.pause(); });
-    actual = k; pinta();
-    if (desdeCero) vids[k].currentTime = 0;
-    reproduce(vids[k]);
-  }
-  /* En el móvil: el que más se ve (si se ve al menos un tercio) */
-  function elMasVisto() {
-    var k = ratios[0] >= ratios[1] ? 0 : 1;
-    if (ratios[k] >= 0.35) { if (actual !== k || vids[k].paused) solo(k, false); }
-    else vids.forEach(function (v) { v.pause(); });
-  }
-  function modo() {
-    caja.classList.toggle("en-turnos", enTurnos());
-    vids.forEach(function (v) { v.loop = !enTurnos(); });
-    pinta();
-    if (enTurnos()) { if (visto) solo(actual, false); else vids.forEach(function (v) { v.pause(); }); }
-    else elMasVisto();
-  }
-  vids.forEach(function (v, k) {
-    v.addEventListener("ended", function () {
-      if (!enTurnos()) return;
-      rayas[k].style.transform = "scaleX(1)";
-      var sig = (k + 1) % vids.length;
-      if (visto) solo(sig, true); else { actual = sig; pinta(); vids[sig].currentTime = 0; }
-    });
-    v.addEventListener("timeupdate", function () { if (v.duration) rayas[k].style.transform = "scaleX(" + (v.currentTime / v.duration) + ")"; });
-    var tocar = function () { if (quieto) { vids[k].paused ? reproduce(vids[k]) : vids[k].pause(); return; } if (k !== actual || vids[k].paused) solo(k, k !== actual); };
-    figs[k].querySelector(".ventana").addEventListener("click", tocar);
-    titulos[k].addEventListener("click", tocar);
-  });
-  if (quieto) { vids.forEach(function (v) { v.controls = true; v.preload = "metadata"; }); return; }
-  new IntersectionObserver(function (es) {
-    es.forEach(function (e) { visto = e.isIntersecting; });
-    if (!enTurnos()) return;
-    if (visto) solo(actual, false); else vids[actual].pause();
-  }, { threshold: 0.35 }).observe(caja);
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { ratios[vids.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
-    if (!enTurnos()) elMasVisto();
-  }, { threshold: [0, 0.2, 0.35, 0.5, 0.65, 0.8, 1] });
-  vids.forEach(function (v) { io.observe(v); });
-  if (lado.addEventListener) lado.addEventListener("change", modo);
-  modo();
 })();
 
 /* ── LOS VÍDEOS: se ponen en marcha al verse y se paran al salir (con menos movimiento, quietos y con mandos) ── */
@@ -2070,6 +2014,36 @@ button.dia.lleno::after{display:none}
     if (h === "claro") document.documentElement.removeAttribute("data-tema");
   }
   addEventListener("hashchange", tema);
+})();
+</script>
+<script>
+/* ── v4: EL TELÉFONO SE PUEDE PULSAR Y LA BARRA DE ABAJO DEL MÓVIL ──
+   El número sale de MARCA.whatsapp (el mismo que el WhatsApp). La barra aparece al pasar la
+   portada y se esconde cuando ya se ve la sección de contacto, para no repetir botones. */
+(function () {
+  var M = window.MARCA || {};
+  /* La promo: «quedan X de 10 plazas», desde MARCA.plazas; con 0 desaparece */
+  var libres = Number(M.plazas), total = Number(M.plazasTotal) || 10;
+  /* Con todas las plazas libres: «para los 10 primeros negocios»; en cuanto entra uno: «· quedan 7 plazas» */
+  document.querySelectorAll("[data-promo-texto]").forEach(function (el) {
+    el.textContent = libres < total ? "· quedan " + libres + (libres === 1 ? " plaza" : " plazas") : "para los " + total + " primeros negocios";
+  });
+  if (!(libres > 0)) document.querySelectorAll("[data-promo]").forEach(function (el) { el.hidden = true; });
+  if (M.whatsapp) document.querySelectorAll("[data-tel]").forEach(function (a) { a.href = "tel:+" + M.whatsapp; });
+  var barra = document.querySelector(".barra-movil");
+  if (!barra) return;
+  document.body.classList.add("con-barra");
+  var portada = document.getElementById("inicio"), contacto = document.getElementById("contacto");
+  var pendiente = false;
+  function mirar() {
+    pendiente = false;
+    var pasada = portada.getBoundingClientRect().bottom < 80;
+    var r = contacto.getBoundingClientRect(), enContacto = r.top < innerHeight * 0.85 && r.bottom > 0;
+    barra.classList.toggle("visible", pasada && !enContacto);
+  }
+  addEventListener("scroll", function () { if (!pendiente) { pendiente = true; requestAnimationFrame(mirar); } }, { passive: true });
+  addEventListener("resize", mirar);
+  mirar();
 })();
 </script>
 
