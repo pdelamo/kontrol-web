@@ -44,7 +44,7 @@
         {"@type": "Question", "name": "¿Y si lee mal una cifra?", "acceptedAnswer": {"@type": "Answer", "text": "Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas."}},
         {"@type": "Question", "name": "¿Sirve para mi bar, mi hotel o mi tienda?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. En bares y hoteles funciona igual que en un restaurante. En una tienda, sin la parte de cocina, y con recargo de equivalencia si lo tienes."}},
         {"@type": "Question", "name": "¿Quién ve mis números?", "acceptedAnswer": {"@type": "Answer", "text": "Solo tú y las personas a las que des acceso. Ningún otro negocio puede ver lo tuyo."}},
-        {"@type": "Question", "name": "¿Cómo empiezo?", "acceptedAnswer": {"@type": "Answer", "text": "Pide una demo por teléfono, WhatsApp o correo. Si te encaja, te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo."}}
+        {"@type": "Question", "name": "¿Cómo empiezo?", "acceptedAnswer": {"@type": "Answer", "text": "Mándanos 3 o 4 facturas o albaranes por WhatsApp o por correo. Te preparamos tu Kontrol con esos datos, te lo enviamos y luego lo vemos juntos. Si te encaja, te lo montamos nosotros."}}
       ]
     }
   ]
@@ -66,7 +66,7 @@ window.MARCA = {
                                                         vacía = horas de ejemplo y no se apunta nada */
   agendar: "https://n8n.delamotech.es/webhook/kontrol-llamada",  /* donde se apunta la llamada (n8n) */
   entrar: "https://app.kontrolapp.es/app/entrar",
-  mensaje: "Hola, me gustaría ver una demo de {producto} para mi negocio.",
+  mensaje: "Hola, os mando 3 o 4 facturas para ver cómo quedaría {producto} con los datos de mi negocio.",
   plazas: 10,                                         /* PROMO: plazas que QUEDAN con el primer mes gratis (de 10). Con 10 pone «para los 10 primeros»; con menos, «quedan X plazas».
                                                         Cambia este número cada vez que entre un cliente; con 0 la promo desaparece de la web */
   plazasTotal: 10
@@ -889,12 +889,127 @@ button.dia.lleno::after{display:none}
 
 .escena-teresa .chip-progreso{left:12px;right:12px;top:12px;max-width:340px}
 @media (min-width:900px){ .escena-teresa .chip-progreso{left:-26px;right:auto;top:34px} }
-@media (max-width:359px){ .escena-teresa .chip-progreso.leido .revisar{display:none} }
-@media (min-width:900px) and (max-width:1279px){ .escena-teresa .movil{right:-24px} }
 .reparto .foto-marco{aspect-ratio:4/3}
 .reparto .foto-marco img{object-position:50% 58%}
+@media (max-width:359px){ .escena-teresa .chip-progreso.leido .revisar{display:none} }
+@media (min-width:900px) and (max-width:1279px){ .escena-teresa .movil{right:-24px} }
 .nota-papel{margin-top:14px;font-size:15px;color:var(--texto-2)}
 
+
+/* ── v5 (13-oct): MÁS VISUAL Y MÁS CORTA, en tarjetas como las de Haddock ─────────────────── */
+.titular{max-width:22ch}
+.bloque{padding-block:72px}
+@media (min-width:900px){ .bloque{padding-block:96px} }
+
+/* Portada: un botón principal (demo), uno secundario (WhatsApp) y el teléfono como línea */
+.portada .acciones{flex-wrap:nowrap;gap:10px}
+.tel-linea{margin-top:14px;font-size:15.5px;color:var(--texto-2)}
+.tel-linea a{color:var(--texto);font-weight:700;text-decoration:underline;text-decoration-color:var(--borde-fuerte);text-underline-offset:4px}
+@media (max-width:899px){
+  .portada{padding-block:20px 48px;gap:28px}
+  .portada .entradilla{font-size:17px;margin-top:16px}
+  .portada .acciones{margin-top:22px}
+  .portada .acciones .boton{min-height:50px;padding:0 14px;font-size:15.5px;flex:1 1 auto;min-width:0}
+  .portada .acciones .boton-borde{flex:0 1 auto}
+  .escena-teresa .movil{right:8px}
+  .promo{font-size:13.5px;margin-bottom:12px}
+  .confianza{margin-top:16px;gap:6px 14px;font-size:14px}
+  .foto-portada{aspect-ratio:4/3.4}
+  .escena-teresa{padding-bottom:28px}
+  .escena-teresa .movil{width:34%}
+}
+@media (max-width:379px){ .portada .acciones .boton{font-size:15px;padding:0 12px} }
+@media (max-width:359px){ .portada .acciones{gap:8px} .portada .acciones .boton{padding:0 10px} .portada .acciones .boton .icono{display:none} }
+
+/* Las tarjetas (bento): fondo un punto más oscuro que el crudo, titular grande y el dibujo abajo */
+.bento{display:grid;gap:14px;margin-top:36px}
+.caja{position:relative;overflow:hidden;display:flex;flex-direction:column;margin:0;padding:26px 24px 0;border-radius:26px;background:color-mix(in srgb,var(--niebla) 42%,var(--fondo));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--borde) 70%,transparent)}
+:root[data-tema="oscuro"] .caja{background:var(--superficie)}
+.caja h3{font-size:clamp(23px,5.6vw,30px);line-height:1.08;letter-spacing:-.025em;max-width:16ch}
+.caja > p{margin-top:10px;color:var(--texto-2);font-size:16px;max-width:38ch}
+.caja-dibujo{position:relative;margin-top:auto;padding-top:24px;display:flex;justify-content:center;align-items:flex-end;min-height:190px}
+.recorte-app{margin:0 -4px 0;width:min(100%,460px);border-radius:16px 16px 0 0;overflow:hidden;background:var(--crudo);box-shadow:0 0 0 1px var(--borde),0 24px 40px -22px color-mix(in srgb,var(--pino-claro) 45%,transparent);transform:translateY(2px)}
+.recorte-app img{width:100%;height:auto;max-height:250px;object-fit:cover;object-position:top left}
+#escandallo .recorte-app{width:min(100%,380px)}
+/* Los tres papeles con su sello: foto, PDF y correo */
+.papeles-dibujo{gap:14px;padding-bottom:0}
+.hoja{position:relative;flex:0 1 120px;height:150px;border-radius:6px 6px 0 0;background:var(--luz);box-shadow:0 0 0 1px var(--borde),0 18px 30px -18px color-mix(in srgb,var(--pino-claro) 40%,transparent);background-image:repeating-linear-gradient(to bottom,transparent 0 13px,var(--niebla) 13px 15px);background-size:70% 100%;background-repeat:no-repeat;background-position:50% 48px}
+.sello-hoja{position:absolute;top:-22px;right:-14px;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:var(--pino-claro);color:var(--crudo);font-style:normal;font-weight:700;font-size:15px;letter-spacing:.02em;box-shadow:0 10px 20px -10px color-mix(in srgb,var(--sombra) 70%,transparent)}
+.sello-hoja .icono{width:24px;height:24px}
+.sello-pdf{background:var(--verde-vivo)}
+.pie-bento{margin-top:16px;font-size:14px;color:var(--texto-2)}
+@media (min-width:900px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:44px}
+  .caja{padding:36px 36px 0;min-height:440px}
+  .caja-dibujo{min-height:230px}
+}
+
+/* "Y todo el día a día": la foto del pedido grande y la lista con iconos al lado */
+.caja-foto{padding:0;min-height:420px;background:var(--pino-profundo);color:var(--crudo)}
+.caja-foto > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.caja-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,color-mix(in srgb,var(--sombra) 85%,transparent) 0%,color-mix(in srgb,var(--sombra) 35%,transparent) 38%,transparent 62%);pointer-events:none}
+.caja-foto figcaption{position:relative;z-index:2;margin-top:auto;padding:26px}
+.caja-foto h3{color:var(--crudo)}
+.caja-foto p{margin-top:8px;color:color-mix(in srgb,var(--crudo) 86%,transparent);max-width:40ch}
+.caja-foto .chip-boton{right:18px;top:18px}
+.lista-iconos{list-style:none;padding:12px 18px;gap:0;justify-content:center}
+.lista-iconos li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:center;padding:14px 4px;border-top:1px solid color-mix(in srgb,var(--borde-fuerte) 55%,transparent)}
+.lista-iconos li:first-child{border-top:0}
+.lista-iconos .tecla{grid-row:span 2;width:44px;height:44px}
+.lista-iconos b{font-weight:700;font-size:17px;line-height:1.25}
+.lista-iconos span:not(.tecla){color:var(--texto-2);font-size:15px;line-height:1.35}
+@media (min-width:900px){ .bento-resto{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)} .caja-foto{min-height:520px} .lista-iconos{padding:18px 28px} }
+
+/* Precios en el móvil: los tres tiques en fila, deslizando */
+@media (max-width:899px){
+  .tiques-precio{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:28px calc(var(--lado) * -1) 0;padding:18px var(--lado) 26px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tiques-precio::-webkit-scrollbar{display:none}
+  .tiques-precio > .tique-sombra{flex:0 0 84%;scroll-snap-align:center}
+  .desliza{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:14px;color:var(--texto-2)}
+  .desliza .icono{width:16px;height:16px}
+}
+@media (min-width:900px){ .desliza{display:none} }
+
+/* Contacto: tres tarjetas iguales; la de la demo, destacada. El correo, plegado debajo */
+.canales{display:grid;gap:12px;margin-top:32px}
+.canal{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:4px;align-items:center;padding:20px;border-radius:22px;background:color-mix(in srgb,var(--niebla) 42%,var(--fondo));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--borde) 70%,transparent)}
+.canal .tecla{grid-row:span 2}
+.canal h3{font-size:21px;letter-spacing:-.015em}
+.canal p{color:var(--texto-2);font-size:15.5px}
+.canal .boton{grid-column:1 / -1;margin-top:14px;width:100%}
+.canal .telefono{grid-column:1 / -1;display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:14px}
+.canal-principal{background:var(--pino-claro);color:var(--crudo);box-shadow:var(--sombra-2)}
+.canal-principal p,.canal-principal .telefono{color:color-mix(in srgb,var(--crudo) 80%,transparent)}
+.canal-principal .tecla{background:var(--pino-profundo);background-image:none;color:var(--crudo);box-shadow:none}
+@media (min-width:900px){
+  .canales{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+  .canal{grid-template-columns:1fr;align-content:start;padding:28px}
+  .canal .tecla{grid-row:auto;margin-bottom:12px}
+  .canal .boton{margin-top:18px}
+}
+.correo-plegable{margin-top:16px;border-radius:22px;background:var(--superficie);box-shadow:var(--filo),0 0 0 1px var(--borde)}
+.correo-plegable summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;padding:14px 20px;font-weight:700;cursor:pointer}
+.correo-plegable summary::-webkit-details-marker{display:none}
+.correo-plegable summary > span{display:inline-flex;align-items:center;gap:10px}
+.correo-plegable summary .icono{color:var(--acento)}
+.correo-plegable .flecha{color:var(--texto-2);transition:transform .35s var(--curva)}
+.correo-plegable[open] .flecha{transform:rotate(180deg)}
+.correo-plegable .formulario-caja{margin:0;max-width:none;padding:4px 20px 24px;box-shadow:none;background:none}
+@media (min-width:900px){ .correo-plegable{max-width:none} .correo-plegable .formulario-caja{padding:4px 28px 28px} }
+
+
+/* ── v6 (14-oct): la demo con las facturas del cliente ── */
+.como-demo{margin-top:14px;font-size:16px;color:var(--texto);max-width:42ch}
+.pasos-demo{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:12px;counter-reset:p}
+.pasos-demo li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;align-items:start}
+.pasos-demo .n{margin-top:2px}
+.como-demo .tel-linea{display:inline;margin:0;font-size:inherit;color:var(--texto-2)}
+.pasos-demo .n{grid-row:span 2;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--pino-claro);color:var(--crudo);font-weight:700}
+.pasos-demo b{font-weight:700;font-size:18px;line-height:1.25}
+.pasos-demo li > span:last-child{color:var(--texto-2);font-size:15.5px}
+.nota-facturas{margin-top:12px;font-size:14px;color:var(--texto-2)}
+.canal .telefono a{color:inherit;font-weight:700}
+@media (min-width:900px){ .pasos-demo{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px} }
 /* Barra fija abajo en el móvil: demo, WhatsApp y llamar, siempre a un dedo */
 .barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom,0px) + 10px);background:color-mix(in srgb,var(--fondo) 94%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);border-top:1px solid var(--borde);box-shadow:0 -10px 24px -20px color-mix(in srgb,var(--pino-claro) 45%,transparent);transform:translateY(110%);transition:transform .4s var(--curva)}
 .barra-movil.visible{transform:none}
@@ -923,7 +1038,7 @@ body{padding-bottom:0}
       <a class="nav-enlace" href="#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
-    <button class="boton boton-cab" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo</button>
+    <a class="boton boton-cab" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo</a>
     <button class="redondo tema-boton cab-tema" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button>
     <button class="redondo menu-boton" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menú" data-menu><svg class="icono abrir" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icono cerrar" aria-hidden="true"><use href="#i-x"/></svg></button>
   </div>
@@ -937,8 +1052,8 @@ body{padding-bottom:0}
           <li><a href="#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
-          <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
-          <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos por WhatsApp</a>
+          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo por WhatsApp</a>
+          <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <div class="fila"><a class="tel-enlace" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
           <div class="fila"><span>Modo oscuro</span><button class="redondo tema-boton" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
         </div>
@@ -955,15 +1070,15 @@ body{padding-bottom:0}
       <p class="promo entra" data-promo><span class="punto-vivo" aria-hidden="true"></span><span><b>El primer mes, gratis</b> <span data-promo-texto>para los 10 primeros negocios</span></span></p>
       <p class="antetitulo entra">Para restaurantes, bares y hoteles</p>
       <h1 id="t-portada" class="entra">Tú, a tus clientes.<br><span class="marca-en-frase" data-marca="producto">Kontrol</span>,<br>a tus papeles.</h1>
-      <p class="entradilla entra">Haz una foto al albarán y <span data-marca="ayudante">Teresa</span>, la administrativa inteligente de <span data-marca="producto">Kontrol</span>, hace el resto: lee cada línea, comprueba que cuadra al céntimo, te avisa si cambia un precio y, con tus ventas, te dice cuánto te queda a fin de mes.</p>
+      <p class="entradilla entra"><span data-marca="producto">Kontrol</span> es el programa que lleva los papeles de tu negocio: facturas, precios, escandallos y margen. Haz una foto al albarán y <span data-marca="ayudante">Teresa</span>, su administrativa inteligente, hace el resto.</p>
       <div class="acciones entra">
-        <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
-        <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
-        <a class="tel-enlace" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a>
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
       </div>
+      <p class="como-demo entra">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p>
       <ul class="confianza entra">
-        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Media hora, sin compromiso</li>
-        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los que hacen <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
         <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
       </ul>
     </div>
@@ -992,9 +1107,8 @@ body{padding-bottom:0}
       </figure>
       <div>
         <div class="aparece">
-          <p class="antetitulo">Acabas el servicio y empiezan los papeles</p>
           <h2 id="t-reparto" class="titular">Tú haces la foto. Lo demás ya no es cosa tuya.</h2>
-          <p class="explica">Se acabaron los albaranes en una caja y las cuentas a mano. Lo que cuadra entra solo; tú solo miras lo que no.</p>
+          <p class="explica">Acabas el servicio y empiezan los papeles. Con <span data-marca="producto">Kontrol</span>, lo que cuadra entra solo y tú solo miras lo que no.</p>
         </div>
         <div class="tique-sombra aparece" style="margin-top:36px">
           <div class="tique">
@@ -1016,85 +1130,37 @@ body{padding-bottom:0}
     </div>
   </section>
 
-  <!-- 3 · CÓMO FUNCIONA: cuatro pasos, cada uno con su pantalla real -->
-  <section class="historia bloque" id="como" aria-labelledby="t-como">
+  <!-- 3 · CÓMO FUNCIONA: cuatro tarjetas, cada una con un trozo real de la app -->
+  <section class="funciones bloque" id="como" aria-labelledby="t-como">
     <div class="envoltura">
-      <div class="historia-cabeza aparece">
-        <p class="antetitulo">Cómo funciona</p>
-        <h2 id="t-como" class="titular">Cuatro cosas que dejas de hacer a mano.</h2>
-        <p class="explica">Pantallas reales de la app, con un restaurante de ejemplo.</p>
-      </div>
-      <div class="historia-rejilla">
-        <ol class="pasos">
-          <li class="paso" id="papeles">
-            <p class="paso-num"><span class="n">1</span><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg>Papeles</p>
-            <h3>Facturas y albaranes, leídos y en orden.</h3>
-            <p>Foto, PDF o el correo del proveedor reenviado. <span data-marca="ayudante">Teresa</span> lee cada línea, comprueba que cuadra y lo guarda en su mes.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:40.1%;--oy:18.8%;--s:2.36;--fx:25.06%;--fy:37.60%;--fw:6.11%;--fh:3.82%"><div class="lienzo"><img src="img/zoom-papeles.webp" alt="En el ordenador, de cerca: la línea del bogavante, 8 kg a 35,795 euros, 286,36 euros, marcada como que cuadra" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Bogavante: 8 kg a 35,795&nbsp;€ = 286,36&nbsp;€. Cuadra.</span></figcaption>
-            </figure>
-          </li>
-
-          <li class="paso" id="avisos">
-            <p class="paso-num"><span class="n">2</span><svg class="icono" aria-hidden="true"><use href="#i-bell"/></svg>Precios</p>
-            <h3>Errores y cambios de precio, al momento.</h3>
-            <p>Cada línea se compara con lo que pagabas antes. Si algo no cuadra lo ves en euros, con el mensaje para el proveedor ya escrito. Lo mandas tú.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="En el ordenador, de cerca: la langosta pasa de 53,45 a 54,65 euros el kilo, con los botones Escribirle y Teresa, explícamelo" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La langosta, de 53,45 a 54,65&nbsp;€ el kilo.</span></figcaption>
-            </figure>
-          </li>
-
-          <li class="paso" id="escandallo">
-            <p class="paso-num"><span class="n">3</span><svg class="icono" aria-hidden="true"><use href="#i-chef-hat"/></svg>Escandallo</p>
-            <h3>Lo que te cuesta cada plato, siempre al día.</h3>
-            <p>Con el precio del último albarán. <span data-marca="ayudante">Teresa</span> te propone la receta y ves lo que te deja cada cosa: el menú del día, la tapa de la barra o la caña.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="En el ordenador, de cerca: el arroz caldoso de bogavante cuesta 15,82 euros por ración, se vende a 24,50 y deja 6,45" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Arroz caldoso de bogavante: te deja 6,45&nbsp;€ por ración.</span></figcaption>
-            </figure>
-          </li>
-
-          <li class="paso" id="margen">
-            <p class="paso-num"><span class="n">4</span><svg class="icono" aria-hidden="true"><use href="#i-chart-column"/></svg>Margen</p>
-            <h3>Lo que te queda a fin de mes, sin esperar al gestor.</h3>
-            <p>Tus ventas menos compras, personal y gastos fijos, todo sin IVA y antes de impuestos. Y lo que necesita tu gestoría, listo para mandar en un clic.</p>
-            <figure class="paso-vista">
-              <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-                <div class="planos"><div class="plano activo" style="--ox:38.4%;--oy:19.9%;--s:2.54;--fx:25.28%;--fy:24.71%;--fw:22.11%;--fh:9.07%"><div class="lienzo"><img src="img/zoom-margen.webp" alt="En el ordenador, de cerca: te quedan 6.216 euros en septiembre, 20,05 de cada 100 que entran" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div></div>
-              </div>
-              <figcaption class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Te quedan 6.216&nbsp;€: 20,05&nbsp;€ de cada 100&nbsp;€ que entran.</span></figcaption>
-            </figure>
-          </li>
-        </ol>
-
-        <div class="escenario" aria-hidden="true">
-          <div class="ventana"><div class="barra"><i></i><i></i><i></i></div>
-            <div class="planos">
-              <div class="plano" style="--ox:40.1%;--oy:18.8%;--s:2.36;--fx:25.06%;--fy:37.60%;--fw:6.11%;--fh:3.82%"><div class="lienzo"><img src="img/zoom-papeles.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-              <div class="plano" style="--ox:29.5%;--oy:1.7%;--s:3.0;--fx:25.17%;--fy:16.09%;--fw:17.11%;--fh:2.93%"><div class="lienzo"><img src="img/zoom-avisos.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-              <div class="plano" style="--ox:100.0%;--oy:13.9%;--s:2.41;--fx:69.06%;--fy:43.47%;--fw:22.11%;--fh:4.27%"><div class="lienzo"><img src="img/zoom-escandallo.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-              <div class="plano" style="--ox:38.4%;--oy:19.9%;--s:2.54;--fx:25.28%;--fy:24.71%;--fw:22.11%;--fh:9.07%"><div class="lienzo"><img src="img/zoom-margen.webp" alt="" width="2880" height="1800" loading="lazy" decoding="async"><span class="foco"></span></div></div>
-            </div>
+      <h2 id="t-como" class="titular aparece">Cuatro cosas que dejas de hacer a mano.</h2>
+      <div class="bento">
+        <article class="caja aparece" id="papeles">
+          <h3>Tus facturas y albaranes, con una foto</h3>
+          <p>Foto, PDF o el correo del proveedor reenviado. <span data-marca="ayudante">Teresa</span> lee cada línea y lo guarda en su mes.</p>
+          <div class="caja-dibujo papeles-dibujo" aria-hidden="true">
+            <span class="hoja"><i class="sello-hoja"><svg class="icono"><use href="#i-camera"/></svg></i></span>
+            <span class="hoja"><i class="sello-hoja sello-pdf">PDF</i></span>
+            <span class="hoja"><i class="sello-hoja"><svg class="icono"><use href="#i-mail"/></svg></i></span>
           </div>
-          <div class="escenario-pie">
-            <div class="datos">
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Bogavante: 8 kg a 35,795&nbsp;€ = 286,36&nbsp;€. Cuadra.</span></p>
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>La langosta, de 53,45 a 54,65&nbsp;€ el kilo.</span></p>
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Arroz caldoso de bogavante: te deja 6,45&nbsp;€ por ración.</span></p>
-              <p class="dato"><svg class="icono" aria-hidden="true"><use href="#i-zoom-in"/></svg><span>Te quedan 6.216&nbsp;€: 20,05&nbsp;€ de cada 100&nbsp;€ que entran.</span></p>
-            </div>
-            <div class="escenario-progreso"><i></i><i></i><i></i><i></i></div>
-          </div>
-        </div>
+        </article>
+        <article class="caja aparece" id="avisos">
+          <h3>Si cambia un precio, te lo decimos</h3>
+          <p>Cada línea se compara con lo que pagabas antes, con el mensaje para el proveedor ya escrito.</p>
+          <div class="caja-dibujo"><figure class="recorte-app"><img src="img/tarjeta-avisos.webp" alt="En la app, los avisos: la langosta te la han subido de 53,45 a 54,65 euros el kilo, con los botones Escribirle y Teresa, explícamelo" width="806" height="657" loading="lazy" decoding="async"></figure></div>
+        </article>
+        <article class="caja aparece" id="escandallo">
+          <h3>Lo que te deja cada plato</h3>
+          <p>El escandallo, siempre con el precio del último albarán: el menú del día, la tapa o la caña.</p>
+          <div class="caja-dibujo"><figure class="recorte-app"><img src="img/tarjeta-platos.webp" alt="En la app, el escandallo: 42 platos, cada uno con lo que cuesta, a cuánto se vende y el porcentaje que deja" width="858" height="837" loading="lazy" decoding="async"></figure></div>
+        </article>
+        <article class="caja aparece" id="margen">
+          <h3>Tu margen, sin esperar al gestor</h3>
+          <p>Ventas menos compras, personal y gastos fijos, sin IVA. Y lo de tu gestoría, listo en un clic.</p>
+          <div class="caja-dibujo"><figure class="recorte-app"><img src="img/tarjeta-margen.webp" alt="En la app, el margen del mes: te quedan 6.216 euros en septiembre, 20,05 de cada 100 que entran" width="1066" height="630" loading="lazy" decoding="async"></figure></div>
+        </article>
       </div>
+      <p class="pie-bento">Pantallas reales de la app, con un restaurante de ejemplo.</p>
     </div>
   </section>
 
@@ -1125,49 +1191,26 @@ body{padding-bottom:0}
     </div>
   </section>
 
-  <!-- 5 · TODO LO DEMÁS, EN UN VISTAZO -->
+  <!-- 5 · TODO LO DEMÁS, EN UN VISTAZO: la foto del pedido y la lista -->
   <section class="resto bloque" id="resto" aria-labelledby="t-resto">
     <div class="envoltura">
-      <div class="aparece">
-        <p class="antetitulo">Y además</p>
-        <h2 id="t-resto" class="titular">Todo el día a día de tu negocio, en una sola app.</h2>
-      </div>
-      <div class="mosaico">
-        <figure class="tesela tesela-foto foto aparece">
-          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 760px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
+      <h2 id="t-resto" class="titular aparece">Y todo el día a día, en la misma app.</h2>
+      <div class="bento bento-resto">
+        <figure class="caja caja-foto aparece">
+          <img src="img/foto-pedido-1100.webp" srcset="img/foto-pedido-700.webp 700w, img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 560px, 100vw" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán junto a la caja con hielo" width="1100" height="1375" loading="lazy" decoding="async">
           <div class="chip-app claro-fijo chip-boton" aria-hidden="true"><span><svg class="icono"><use href="#i-package"/></svg>Ya ha llegado</span></div>
-          <figcaption class="pie-tesela">
-            <h3>Pedidos a tus proveedores, por WhatsApp o correo.</h3>
-            <p>El barril, el pan o el café: con lo que sueles pedirle y el último precio. Al llegar, marcas lo que ha venido.</p>
+          <figcaption>
+            <h3>Pedidos a tus proveedores</h3>
+            <p>Por WhatsApp o correo, con lo que sueles pedirle y el último precio. Al llegar, marcas lo que ha venido.</p>
           </figcaption>
         </figure>
-        <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span>
-          <h3>Almacén e inventario</h3>
-          <p>Cuentas barriles, botellas y cajas de pie, con el móvil. Ves lo que vale tu almacén y lo que se pierde entre recuentos.</p>
-        </article>
-        <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-users"/></svg></span>
-          <h3>Tu equipo y sus cuadrantes</h3>
-          <p>Horarios, vacaciones y bajas, y lo que te cuesta de verdad cada hora de personal.</p>
-          <div class="recorte"><img src="img/recorte-personal.webp" alt="Te cuesta la plantilla 9.940 euros, 12,75 euros la hora, y es el 18,2 por ciento de las ventas" width="900" height="261" loading="lazy" decoding="async"></div>
-        </article>
-        <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span>
-          <h3>Tus ventas, sin IVA</h3>
-          <p>Subes el Excel de tu caja, sea cual sea tu TPV.</p>
-          <div class="recorte"><img src="img/recorte-ventas.webp" alt="Vendido en septiembre, sin IVA: 31.002 euros, un 48 por ciento más que el mes pasado" width="900" height="275" loading="lazy" decoding="async"></div>
-        </article>
-        <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-forward"/></svg></span>
-          <h3>Tu buzón de facturas</h3>
-          <p>Una dirección solo tuya: las facturas que te llegan por correo entran solas, sin hacerles foto.</p>
-        </article>
-        <article class="tesela aparece">
-          <span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span>
-          <h3>En el móvil y en el ordenador</h3>
-          <p>Tu encargado y tú, a la vez y cada uno con su acceso.</p>
-        </article>
+        <ul class="caja lista-iconos aparece">
+          <li><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-boxes"/></svg></span><b>Almacén e inventario</b><span>Cuentas barriles, botellas y cajas con el móvil.</span></li>
+          <li><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-users"/></svg></span><b>Tu equipo y sus cuadrantes</b><span>Horarios, vacaciones y lo que cuesta cada hora.</span></li>
+          <li><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-credit-card"/></svg></span><b>Tus ventas, sin IVA</b><span>Con el Excel de tu caja, sea cual sea tu TPV.</span></li>
+          <li><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-forward"/></svg></span><b>Tu buzón de facturas</b><span>Las que te llegan por correo entran solas.</span></li>
+          <li><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-smartphone"/></svg></span><b>En el móvil y en el ordenador</b><span>Tu encargado y tú, cada uno con su acceso.</span></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -1178,11 +1221,11 @@ body{padding-bottom:0}
       <div class="franja-caja aparece">
         <div>
           <h2 id="t-franja">¿Lo vemos con tu negocio?</h2>
-          <p>En media hora te enseñamos cómo quedarían tus papeles en <span data-marca="producto">Kontrol</span>. Sin compromiso.</p>
+          <p>Mándanos 3 o 4 facturas y te enseñamos cómo quedan en <span data-marca="producto">Kontrol</span>, con tus datos. Sin compromiso.</p>
         </div>
         <div class="acciones">
-          <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
-          <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
+          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Mándalas por WhatsApp</a>
+          <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
         </div>
       </div>
     </div>
@@ -1192,11 +1235,11 @@ body{padding-bottom:0}
   <section class="precios bloque" id="precios" aria-labelledby="t-precios">
     <div class="envoltura">
       <div class="aparece">
-        <p class="etiqueta"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg>Precios</p>
         <h2 id="t-precios" class="titular">Tú eliges cuánto hace <span data-marca="producto">Kontrol</span> por ti.</h2>
         <p class="explica">Sin permanencia: cambias de paquete o lo dejas cuando quieras.<span data-promo> Y el primer mes, gratis para los 10 primeros negocios.</span></p>
       </div>
       <p class="nota-papel">Un papel es una factura o un albarán.</p>
+      <p class="desliza" aria-hidden="true">Desliza para ver los tres paquetes<svg class="icono"><use href="#i-arrow-right"/></svg></p>
       <div class="tiques-precio">
           <div class="tique-sombra aparece">
             <div class="tique">
@@ -1247,7 +1290,7 @@ body{padding-bottom:0}
           <b>¿No sabes cuál te encaja?</b>
           <p>Te lo decimos en la demo, con lo que mueve tu negocio. Y te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo.</p>
         </div>
-        <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide una demo gratis</button>
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
       </div>
     </div>
   </section>
@@ -1262,7 +1305,7 @@ body{padding-bottom:0}
         <details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas.</p></details>
         <details><summary>¿Sirve para mi bar, mi hotel o mi tienda?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. En bares y hoteles funciona igual que en un restaurante. En una tienda, sin la parte de cocina, y con recargo de equivalencia si lo tienes.</p></details>
         <details><summary>¿Quién ve mis números?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Solo tú y las personas a las que des acceso: ningún otro negocio puede ver lo tuyo. Lo tienes todo en la <a href="https://app.kontrolapp.es/privacidad">política de privacidad</a>.</p></details>
-        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Pide una demo por teléfono, WhatsApp o correo. Si te encaja, te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses, te damos tu acceso y te enseñamos a usarlo. Solo necesitas tus facturas y el Excel de tu caja, sea cual sea tu TPV.</p></details>
+        <details><summary>¿Cómo empiezo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Mándanos 3 o 4 facturas o albaranes por WhatsApp o por correo. Te preparamos tu <span data-marca="producto">Kontrol</span> con esos datos, te lo enviamos y luego lo vemos juntos. Si te encaja, te lo montamos nosotros: cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo.</p></details>
       </div>
     </div>
   </section>
@@ -1270,47 +1313,40 @@ body{padding-bottom:0}
   <!-- 8 · CONTACTO: pedir la demo, como mejor le venga -->
   <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
     <div class="envoltura">
-      <h2 id="t-contacto" class="titular aparece">Pide tu demo, como mejor te venga.</h2>
-      <p class="explica aparece">Media hora, sin compromiso: te enseñamos <span data-marca="producto">Kontrol</span> y resolvemos tus dudas.</p>
-      <div class="tiques">
-        <aside class="tique-sombra tique-llamada aparece" aria-label="Agendar una llamada">
-          <div class="tique">
-            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-calendar-check"/></svg></span>
-            <h3>Te llamamos</h3>
-            <p>Elige el día y la hora que te vengan bien.</p>
-            <div class="acciones">
-              <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
-            </div>
-            <span class="telefono"><span class="punto-vivo" aria-hidden="true"></span>Ves al momento las horas libres</span>
-          </div>
-        </aside>
-        <aside class="tique-sombra tique-principal aparece" aria-label="Por WhatsApp">
-          <div class="tique">
-            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
-            <h3>Por WhatsApp</h3>
-            <p>Cuéntanos qué negocio tienes y resolvemos tus dudas.</p>
-            <div class="acciones">
-              <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Escríbenos</a>
-            </div>
-            <span class="telefono">Lo más rápido</span>
-          </div>
-        </aside>
-        <aside class="tique-sombra aparece" aria-label="Por teléfono">
-          <div class="tique">
-            <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
-            <h3>Llámanos</h3>
-            <p>Si lo prefieres, llámanos ahora.</p>
-            <div class="acciones">
-              <a class="boton" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a>
-            </div>
-            <span class="telefono">Hablas con Luis o con Pablo, los que hacen <span data-marca="producto">Kontrol</span></span>
-          </div>
-        </aside>
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
+        <article class="canal canal-principal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
+          <h3>Por WhatsApp</h3>
+          <p>Haz una foto a tus facturas y mándanoslas.</p>
+          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Mandar mis facturas</a>
+          <span class="telefono">Lo más rápido</span>
+        </article>
+        <article class="canal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-mail"/></svg></span>
+          <h3>Por correo</h3>
+          <p>Adjúntalas en PDF a <b data-correo>ventas@kontrolapp.es</b>.</p>
+          <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Escribir el correo</a>
+        </article>
+        <article class="canal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
+          <h3>¿Prefieres hablar antes?</h3>
+          <p>Hablas con Luis o con Pablo, los founders de <span data-marca="producto">Kontrol</span>.</p>
+          <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
+          <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
+        </article>
       </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
 
-      <div class="formulario-caja aparece">
-        <h3>¿Prefieres un correo?</h3>
-        <p>Déjanos tus datos y te escribimos para la demo.</p>
+      <details class="correo-plegable aparece">
+        <summary><span><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>¿Prefieres que te escribamos nosotros? Déjanos tus datos</span><svg class="icono flecha" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+      <div class="formulario-caja">
+        <p>Te escribimos para la demo lo antes posible.</p>
         <form class="formulario" id="form-contacto" novalidate>
           <div class="dos">
             <div class="campo"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" autocomplete="name" maxlength="120" required><span class="error" hidden></span></div>
@@ -1332,6 +1368,7 @@ body{padding-bottom:0}
           <p>Te escribimos a <b data-a></b> lo antes posible para la demo.</p>
         </div>
       </div>
+      </details>
     </div>
   </section>
 
@@ -1421,8 +1458,8 @@ body{padding-bottom:0}
 
 <!-- En el móvil: la demo, el WhatsApp y la llamada, siempre a un dedo (sale al bajar de la portada) -->
 <nav class="barra-movil" aria-label="Pide una demo">
-  <button class="boton" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>Pide demo</button>
-  <a class="boton boton-borde" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>WhatsApp</a>
+  <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo</a>
+  <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar</button>
   <a class="boton boton-borde" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Llamar</a>
 </nav>
 <script>
@@ -2031,6 +2068,9 @@ body{padding-bottom:0}
     el.textContent = libres < total ? "· quedan " + libres + (libres === 1 ? " plaza" : " plazas") : "para los " + total + " primeros negocios";
   });
   if (!(libres > 0)) document.querySelectorAll("[data-promo]").forEach(function (el) { el.hidden = true; });
+  /* «Por correo»: se abre el correo con el asunto y el texto ya puestos; solo falta adjuntar las facturas */
+  var asunto = "Demo de " + M.producto + ": mis facturas", cuerpo = "Hola,\n\nOs adjunto 3 o 4 facturas para ver cómo quedaría " + M.producto + " con los datos de mi negocio.\n\nNombre:\nNegocio:\nTeléfono:\n";
+  document.querySelectorAll("[data-mail-demo]").forEach(function (a) { a.href = "mailto:" + M.correo + "?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo); });
   if (M.whatsapp) document.querySelectorAll("[data-tel]").forEach(function (a) { a.href = "tel:+" + M.whatsapp; });
   var barra = document.querySelector(".barra-movil");
   if (!barra) return;
