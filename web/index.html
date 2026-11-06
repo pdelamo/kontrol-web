@@ -34,7 +34,7 @@
         {"@type": "Offer", "name": "Teresa + Operaciones", "price": "199", "priceCurrency": "EUR"},
         {"@type": "Offer", "name": "Paquete Full", "price": "263", "priceCurrency": "EUR"}
       ],
-      "publisher": {"@type": "Organization", "name": "DAB", "email": "ventas@kontrolapp.es", "telephone": "+34686679713"}
+      "publisher": {"@type": "Organization", "name": "Kontrol", "email": "ventas@kontrolapp.es", "telephone": "+34686679713"}
     },
     {
       "@type": "FAQPage",
@@ -1022,6 +1022,16 @@ body{padding-bottom:0}
 @media (max-width:359px){ .barra-movil{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:6px;padding-left:10px;padding-right:10px} .barra-movil .boton{font-size:14.5px;padding:0 6px} .barra-movil .boton .icono{display:none} }
 @media (prefers-reduced-motion:reduce){ .barra-movil{transition:none} }
 
+
+/* ── PANTALLA GRANDE (6-nov-2026; Pablo: «en la web se ven espacios a los lados», eligió la B) ──
+   La web vive en 1180 px (--ancho); en un monitor de 1920 quedaban 370 px vacíos a cada lado. En vez de estirarla, la
+   misma web se ve más grande por escalones. Por debajo de 1380 px, nada cambia (móvil, tablet y portátil normal). */
+@media (min-width:1380px){html{zoom:1.06}}
+@media (min-width:1500px){html{zoom:1.12}}
+@media (min-width:1660px){html{zoom:1.22}}
+@media (min-width:1840px){html{zoom:1.32}}
+@media (min-width:2200px){html{zoom:1.5}}
+@media (min-width:2500px){html{zoom:1.7}}
 </style>
 </head>
 
@@ -1451,8 +1461,8 @@ body{padding-bottom:0}
 <footer class="pie">
   <div class="envoltura">
     <span class="marca"><img src="img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
-    <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <span>Un producto de DAB, hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
+    <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
+    <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>
 
