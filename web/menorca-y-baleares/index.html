@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Programa para bares y restaurantes en Menorca | Kontrol</title>
-<meta name="description" content="En Menorca y Baleares, Luis y Pablo te ponen Kontrol en marcha en persona: cargan tus papeles de los últimos 3 meses y te enseñan a usarlo.">
+<meta name="description" content="Kontrol lleva los papeles de bares, restaurantes y tiendas de Menorca y Baleares: lee albaranes en catalán y entiende la temporada y la ecotasa.">
 <link rel="canonical" href="https://kontrolapp.es/menorca-y-baleares/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Kontrol">
 <meta property="og:url" content="https://kontrolapp.es/menorca-y-baleares/">
 <meta property="og:title" content="Programa para bares y restaurantes en Menorca | Kontrol">
-<meta property="og:description" content="En Menorca y Baleares, Luis y Pablo te ponen Kontrol en marcha en persona: cargan tus papeles de los últimos 3 meses y te enseñan a usarlo.">
+<meta property="og:description" content="Kontrol lleva los papeles de bares, restaurantes y tiendas de Menorca y Baleares: lee albaranes en catalán y entiende la temporada y la ecotasa.">
 <meta property="og:image" content="https://kontrolapp.es/img/foto-albaran-1100.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F1EA">
@@ -44,10 +44,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Vais a mi local?",
+          "name": "¿Hay algún programa para llevar un bar o restaurante en Menorca?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "En Menorca, sí. En Mallorca, Ibiza y Formentera, lo concretamos contigo en la demo."
+            "text": "Sí: Kontrol. Lee tus facturas y albaranes, también en catalán, y lleva tus escandallos, tu almacén, tu personal y tus ventas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tiene en cuenta el convenio de hostelería de Baleares?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: Teresa, la administrativa de Kontrol, lo tiene en cuenta cuando le preguntas por tu equipo. Lo que haya que decidir sobre un contrato o una nómina lo lleva tu gestoría."
           }
         },
         {
@@ -55,31 +63,7 @@
           "name": "¿Con quién hablo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Con Luis o con Pablo, los que hacemos Kontrol. El teléfono es el 686 679 713."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Y si cierro en invierno?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No hay permanencia: cambias de paquete o lo dejas cuando quieras."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Sirve para una tienda?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí. En una tienda funciona sin la parte de cocina. Está en Kontrol para tiendas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Desde 119 € al mes más IVA. Los tres paquetes están en Precios."
+            "text": "Con Luis o con Pablo, los founders de Kontrol."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,24 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Menorca y Baleares</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Kontrol en Menorca y Baleares: te lo ponemos en marcha en persona</h1><p class="entradilla">Kontrol es el programa que lleva los papeles de bares, restaurantes y tiendas: facturas, escandallos, almacén, personal y ventas. En Menorca y en el resto de Baleares, la puesta en marcha la hacemos nosotros, Luis y Pablo, en persona.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<!-- PENDIENTE DE PABLO: confirmar el alcance exacto de «en persona» (¿solo Menorca, o también Mallorca, Ibiza y Formentera?) y si se quiere decir desde qué pueblo trabajáis. El texto de abajo dice «en Menorca vamos a tu local» y deja el resto de islas «a concretar en la demo». -->
-<h2 id="el-problema-un-programa-nuevo-en-plena-temporada">El problema: un programa nuevo en plena temporada</h2>
-<p>En las islas el año se juega en unos meses. Cuando hay trabajo no hay tiempo para aprender un programa, y cuando hay tiempo, el local está cerrado o a medio gas. Por eso muchos sistemas se compran en invierno y en junio ya nadie los abre.</p><p>Kontrol está pensado para que tu parte sea una foto y un vistazo. Y el arranque, que es lo que más cuesta, no te lo dejamos a ti.</p>
-<h2 id="como-es-la-puesta-en-marcha-paso-a-paso">Cómo es la puesta en marcha, paso a paso</h2>
-<h3>1. Nos mandas 3 o 4 facturas</h3><p>Por WhatsApp o por correo; una foto con el móvil vale. Con ellas te preparamos tu Kontrol y te lo enviamos para que lo veas con tus datos, no con los de un ejemplo.</p><h3>2. Lo vemos juntos</h3><p>En Menorca, en tu local, a la hora que no haya servicio. En el resto de Baleares lo concretamos contigo en la demo. Te lo explicamos y resolvemos tus dudas, sin compromiso.</p><h3>3. Cargamos tus papeles de los últimos 3 meses</h3><p>Si te encaja, te lo montamos nosotros. Cargamos tus facturas y albaranes de los tres meses anteriores, para que el primer día ya veas tus precios, tus proveedores y tus números.</p><h3>4. Te enseñamos a usarlo, a ti y a tu equipo</h3><p>A hacer la foto, a mirar lo que no cuadra y a preguntarle a Teresa, la administrativa de Kontrol, lo que no entiendas. Si tu encargado va a entrar, le damos su propio acceso y tú decides qué ve.</p>
-<h2 id="hecho-para-como-se-trabaja-aqui">Hecho para cómo se trabaja aquí</h2>
-<h3>Los papeles en catalán</h3><p>Kontrol lee igual un «Albarà núm. 4512» que un «Albarán nº 4512», y sabe que «Ports», «Nòlit» o «Envasos» son cargos y no mercancía: no te los propone al hacer un pedido ni al contar el almacén.</p><h3>La temporada y los fijos discontinuos</h3><p>En la ficha de cada persona, el contrato puede ser indefinido, temporal o fijo discontinuo. Cuando alguien que ya trabajó contigo vuelve en primavera, su contrato nuevo va a su ficha de siempre. Y Kontrol te avisa 30 días antes de que a alguien se le acabe el contrato y 15 días antes de que acabe su periodo de prueba. <a href="/personal-y-nominas/">Personal y nóminas</a>.</p><h3>El convenio de hostelería de las Illes Balears</h3><p>Si tu negocio es de hostelería en Baleares, tu convenio es el XVII Convenio de Hostelería de las Illes Balears (BOIB núm. 104, de 5 de agosto de 2025), vigente hasta el 31 de marzo de 2028. Lo que más se pregunta:</p><ul><li>1.776 horas al año, 40 a la semana de promedio.</li><li>Dos pagas extra: el 31 de julio y el 21 de diciembre.</li><li>Los salarios subieron un 4 % el 1 de abril de 2026 y suben otro 3,5 % el 1 de abril de 2027.</li></ul><p>(Convenio de hostelería de las Illes Balears, arts. 2, 15, 24 y 27; comprobado el 29 de octubre de 2026.) Teresa lo tiene en cuenta cuando le preguntas por tu equipo. Lo que haya que decidir sobre un contrato o una nómina lo sigue llevando tu gestoría.</p><h3>Las facturas con la tasa turística</h3><p>La factura de un alojamiento trae el impuesto de turismo sostenible, la ecotasa, fuera de la base y del IVA. Kontrol lo cuenta aparte al comprobar el total, para que la factura cuadre y no salga como un error.</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar la cuenta: no son datos de ningún negocio.</em></p><p>Contratas a un camarero para la temporada con un sueldo de 1.600 € brutos al mes en 12 pagas y contrato temporal. En 2026, en hostelería, la empresa paga a la Seguridad Social un 33,35 % del bruto en un contrato temporal (Orden PJC/297/2026; comprobado en el BOE el 29 de octubre de 2026): 533,60 €. Te cuesta 2.133,60 € al mes.</p><p>Es una cuenta orientativa. En cuanto subes su primera nómina, Kontrol deja la estimación y usa lo que pone el papel: el total devengado más la aportación de la empresa.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Vais a mi local?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>En Menorca, sí. En Mallorca, Ibiza y Formentera, lo concretamos contigo en la demo.</p></details><details><summary>¿Con quién hablo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con Luis o con Pablo, los que hacemos Kontrol. El teléfono es el 686 679 713.</p></details><details><summary>¿Y si cierro en invierno?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No hay permanencia: cambias de paquete o lo dejas cuando quieras.</p></details><details><summary>¿Sirve para una tienda?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. En una tienda funciona sin la parte de cocina. Está en <a href="/tiendas/">Kontrol para tiendas</a>.</p></details><details><summary>¿Cuánto cuesta?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Desde 119 € al mes más IVA. Los tres paquetes están en <a href="/precios/">Precios</a>.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para negocios de Menorca y Baleares</p><h1>Kontrol en Menorca y Baleares: tus papeles al día, también en temporada</h1><p class="entradilla">Kontrol es el programa que lleva los papeles de bares, restaurantes y tiendas de Menorca y del resto de Baleares: facturas, escandallos, almacén, personal y ventas. Te atienden Luis y Pablo, los founders de Kontrol.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-foto"><img src="/img/foto-pedido-1100.webp" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán junto a la caja con hielo" width="1100" height="1375" decoding="async" fetchpriority="high" srcset="/img/foto-pedido-700.webp 700w, /img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 600px, 100vw"></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo queda Kontrol con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a> y quedamos.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Hecho para cómo se trabaja en las islas.</h2><div class="puntos puntos-4"><article class="punto"><h3>Tus papeles, también en catalán</h3><p>Kontrol lee igual un «Albarà» que un «Albarán», y sabe que «Ports» o «Envasos» son cargos, no mercancía.</p></article><article class="punto"><h3>La temporada y los fijos discontinuos</h3><p>Quien vuelve en primavera sigue en su ficha de siempre, y te avisamos antes de que acabe un contrato.</p></article><article class="punto"><h3>Las facturas con la tasa turística</h3><p>La ecotasa se cuenta aparte al comprobar el total, para que la factura cuadre.</p></article><article class="punto"><h3>El arranque lo hacemos nosotros</h3><p>Cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Hay algún programa para llevar un bar o restaurante en Menorca?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí: Kontrol. Lee tus facturas y albaranes, también en catalán, y lleva tus escandallos, tu almacén, tu personal y tus ventas.</p></details><details><summary>¿Tiene en cuenta el convenio de hostelería de Baleares?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí: Teresa, la administrativa de Kontrol, lo tiene en cuenta cuando le preguntas por tu equipo. Lo que haya que decidir sobre un contrato o una nómina lo lleva tu gestoría.</p></details><details><summary>¿Con quién hablo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con Luis o con Pablo, los founders de Kontrol.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -195,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/restaurantes-y-bares/">Kontrol para restaurantes y bares<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/personal-y-nominas/">Personal y nóminas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/precios/">Precios<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/restaurantes-y-bares/">Restaurantes y bares<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/personal-y-nominas/">Personal y nóminas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -278,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

@@ -44,26 +44,18 @@
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "¿Cómo digitalizar las facturas y los albaranes de un restaurante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con una foto del móvil o con el PDF. Kontrol lee el proveedor, la fecha, cada línea, el IVA y el total."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "¿Y si lee mal una cifra?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Lo que no cuadra no se confirma solo. Te lo enseña con el papel al lado para que lo mires y lo corrijas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Sirve una foto hecha con el móvil?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí. Una foto, un PDF o el correo del proveedor reenviado."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tengo que subir los albaranes o solo las facturas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Los dos. El albarán dice qué llegó y a qué precio, y de ahí salen el escandallo y el almacén. La factura es la que vale para tu gestoría. Kontrol se encarga de que no sumen dos veces."
+            "text": "Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas."
           }
         },
         {
@@ -71,15 +63,7 @@
           "name": "¿Sustituye a mi gestor?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Le deja preparado lo suyo cada mes o cada trimestre: el Excel y los papeles."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Puedo bajarme mis papeles?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí. Todo lo que entra se queda en digital y se puede descargar, papel a papel o el periodo entero."
+            "text": "No. Le deja preparado lo suyo: el Excel y los papeles. Lo fiscal lo sigue decidiendo él."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,23 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Facturas y albaranes</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Facturas y albaranes: les haces una foto y se leen solos</h1><p class="entradilla">Con Kontrol digitalizas tus albaranes y facturas con una foto, un PDF o reenviando el correo del proveedor. Teresa, su administrativa, lee cada línea, comprueba las cuentas al céntimo, te avisa si hay un error en el precio y deja preparado lo que necesita tu gestoría.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-los-papeles-llegan-cuando-menos-tiempo-tienes">El problema: los papeles llegan cuando menos tiempo tienes</h2>
-<p>El albarán llega con la mercancía, en mitad del servicio, y acaba en una carpeta. La factura llega a fin de mes, por correo o en mano. Nadie comprueba que 12 kilos a 14,90 € sumen lo que pone el papel, ni que la factura cobre lo mismo que decían los albaranes. Y cada trimestre toca ordenarlo todo para el gestor.</p><p>No es dejadez: es que repasar papeles a mano es un trabajo entero, y tú ya tienes uno.</p>
-<h2 id="como-se-hace-en-kontrol-paso-a-paso">Cómo se hace en Kontrol, paso a paso</h2>
-<h3>1. El papel entra por donde te venga mejor</h3><ul><li>Con el móvil: en «Hoy», el botón «Hacer foto a un albarán o factura».</li><li>Desde el ordenador: arrastras el PDF a cualquier pantalla.</li><li>Por correo: cada negocio tiene su propia dirección, acabada en @facturas.kontrolapp.es. Lo que tus proveedores manden ahí entra y se lee solo.</li></ul><h3>2. Teresa lo lee y comprueba las cuentas</h3><p>Lee el proveedor, la fecha, cada línea con su cantidad y su precio, la base, el IVA y el total. Y hace las cuentas que nadie hace: cantidad por precio en cada línea, la suma de las líneas contra la base y la base más el IVA contra el total.</p><p>Lo que cuadra al céntimo entra solo. Lo que no cuadra no se confirma sin ti: se queda en «Por revisar», con el papel al lado de lo leído para que lo mires y lo corrijas con el botón «Corregir».</p><p>Una precaución que viene de serie: el primer papel de un proveedor nuevo que llega por correo no entra solo aunque cuadre. Lo confirmas tú una vez («Coincide con el papel») y desde entonces ese proveedor es de confianza.</p><h3>3. Si hay un error en el precio, te lo dice con el mensaje ya escrito</h3><p>En «Para reclamar» aparecen los errores en el precio de tus papeles: una línea cuyo importe no sale de su cantidad y su precio, un total que no da, o una factura que cobra más de lo que llegó según sus albaranes. Cada uno tiene el botón «Escribirle», que abre el mensaje para el proveedor con las cifras puestas. Eliges WhatsApp o correo, lo retocas si quieres y lo mandas tú: Kontrol no envía nada por su cuenta.</p><p>Las subidas de precio van aparte, en «Precios»: el mismo producto, del mismo proveedor, más caro que antes. No es un error, es una decisión tuya: negociarlo, aceptarlo o cambiar de proveedor.</p><h3>4. El albarán y su factura no se cuentan dos veces</h3><p>Muchas veces la factura del mes junta los albaranes del mes. Si cuentan los dos, ese gasto sale dos veces. Kontrol te lo pregunta en «Albaranes y su factura» y tú contestas «Sí, la factura los junta». Y si la factura cobra más de lo que suman sus albaranes, te avisa.</p><h3>5. Lo de tu gestoría, en un clic</h3><p>En «Gestoría» eliges el mes o el trimestre y bajas dos cosas: el Excel con todas las facturas (proveedor, CIF, base e IVA de cada tipo) y los papeles originales. Antes de mandarlo, Kontrol repasa por ti: si un proveedor que te facturó los dos meses anteriores no ha mandado la de este, te lo dice y te deja el mensaje escrito con «Pedírsela».</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar el aviso: no son datos de ningún negocio.</em></p><p>Llega la factura de la pescadería. Una de sus líneas dice: lubina, 12 kg a 14,90 €/kg, importe 186,00 €.</p><p>Kontrol hace la cuenta y te lo enseña así: «"Lubina": 12 kg a 14,90 €/kg son 178,80 €, y el papel pone 186,00 € → 7,20 € de diferencia».</p><p>Tocas «Escribirle», revisas el mensaje y se lo mandas al proveedor. Cuando te lo abona, lo marcas como «Resuelto» y esos 7,20 € pasan a «Ya recuperado».</p>
-<h2 id="lo-que-kontrol-no-hace">Lo que Kontrol no hace</h2>
-<p>Kontrol no hace tus facturas ni tus tickets: lee los que te llegan. Tampoco decide nada fiscal: qué IVA lleva cada cosa o qué te puedes deducir lo sigue decidiendo tu gestor. Lo que cambia es que le llega todo ordenado y completo.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo. Te lo enseña con el papel al lado para que lo mires y lo corrijas.</p></details><details><summary>¿Sirve una foto hecha con el móvil?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. Una foto, un PDF o el correo del proveedor reenviado.</p></details><details><summary>¿Tengo que subir los albaranes o solo las facturas?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Los dos. El albarán dice qué llegó y a qué precio, y de ahí salen el escandallo y el almacén. La factura es la que vale para tu gestoría. Kontrol se encarga de que no sumen dos veces.</p></details><details><summary>¿Sustituye a mi gestor?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Le deja preparado lo suyo cada mes o cada trimestre: el Excel y los papeles.</p></details><details><summary>¿Puedo bajarme mis papeles?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. Todo lo que entra se queda en digital y se puede descargar, papel a papel o el periodo entero.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para restaurantes, bares, hoteles y tiendas</p><h1>Facturas y albaranes: les haces una foto y se leen solos</h1><p class="entradilla">Con Kontrol, tu bar, tu restaurante o tu tienda digitaliza sus facturas y albaranes con una foto. Teresa, la administrativa de Kontrol, lee cada línea, comprueba las cuentas al céntimo y te avisa si hay un error en el precio.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-foto"><img src="/img/foto-albaran-1100.webp" alt="Un cocinero hace una foto con el móvil a un albarán sobre la mesa de acero de la cocina, junto a cajas de tomates, pimientos y limones" width="1100" height="1375" decoding="async" fetchpriority="high" srcset="/img/foto-albaran-700.webp 700w, /img/foto-albaran-1100.webp 1100w" sizes="(min-width:900px) 600px, 100vw"></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo quedan en Kontrol, con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Los papeles, sin repasarlos a mano.</h2><div class="puntos puntos-4"><article class="punto"><h3>Entran por donde te venga mejor</h3><p>Una foto con el móvil, el PDF o el correo del proveedor, reenviado a tu buzón de Kontrol.</p></article><article class="punto"><h3>Lo que no cuadra, lo miras tú</h3><p>Lo que cuadra al céntimo entra solo; lo demás te espera con el papel al lado.</p></article><article class="punto"><h3>Si hay un error en el precio</h3><p>Te dejamos escrito el mensaje para el proveedor, con las cifras puestas, y lo mandas tú.</p></article><article class="punto"><h3>Lo de tu gestoría, en un clic</h3><p>Bajas el Excel con las facturas del mes o del trimestre y los papeles originales.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Cómo digitalizar las facturas y los albaranes de un restaurante?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con una foto del móvil o con el PDF. Kontrol lee el proveedor, la fecha, cada línea, el IVA y el total.</p></details><details><summary>¿Y si lee mal una cifra?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Lo que no cuadra no se confirma solo: te lo enseña con el papel al lado para que lo mires y lo corrijas.</p></details><details><summary>¿Sustituye a mi gestor?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Le deja preparado lo suyo: el Excel y los papeles. Lo fiscal lo sigue decidiendo él.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -194,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/escandallos/">Escandallos: lo que te cuesta cada plato<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/verifactu/">Verifactu: qué es y a quién le toca<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/precios/">Precios<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/verifactu/">Verifactu<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -277,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

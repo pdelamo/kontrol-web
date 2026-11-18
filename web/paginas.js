@@ -1,5 +1,5 @@
 /* GENERADO por seo/construir.py: los guiones del final de index.html (menú, tema claro/oscuro, agenda,
-   WhatsApp, teléfono y barra de abajo del móvil). No se edita a mano. */
+   WhatsApp, teléfono, barra de abajo del móvil y lo que aparece al bajar). No se edita a mano. */
 /* ── EL DESPLEGABLE «QUÉ HACE» (en el móvil, el menú entero) ── */
 (function () {
   var menu = document.getElementById("menu"), velo = document.querySelector(".menu-velo");

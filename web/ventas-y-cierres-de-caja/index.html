@@ -44,10 +44,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Con qué TPV funciona?",
+          "name": "¿Qué es un cierre de caja o ticket Z?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Con cualquiera que exporte un Excel o un CSV de ventas, o que imprima un cierre de caja. Además, Square se conecta con un clic, Glop y Numier mandan su informe por correo, y los TPV que envían sus tickets a Holded entran por Holded."
+            "text": "Es el ticket que saca tu caja al cerrar el turno: el total vendido, lo cobrado por cada forma de pago y el desglose del IVA. Kontrol lo lee con una foto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con qué TPV funciona Kontrol?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Con cualquiera que exporte un Excel o un CSV de ventas, o que imprima un cierre de caja."
           }
         },
         {
@@ -56,30 +64,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "No. Kontrol no cobra ni hace tickets: lee las ventas de tu caja. Tu TPV sigue siendo el tuyo."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Las ventas van con IVA o sin IVA?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "El cierre de caja se lee con IVA, como lo imprime tu caja. En el margen, las ventas cuentan sin IVA, igual que las compras."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tengo que cumplir Verifactu por usar Kontrol?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Verifactu es cosa del programa con el que haces tus tickets y facturas, es decir, de tu TPV. Kontrol no los hace. Lo explicamos en Verifactu."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Y si subo un cierre equivocado?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Tiene su «Deshacer» al subirlo. Y más tarde puedes quitar los cierres de un mes y subir los buenos."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,25 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Ventas y cierres de caja</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Ventas y cierres de caja: lo que vendes, dentro de tus números sin teclearlo</h1><p class="entradilla">Kontrol trae tus ventas de la forma que le vaya bien a tu caja: conectándola, recibiendo por correo el informe diario de tu TPV o leyendo la foto o el PDF del cierre de caja. Con las ventas dentro, el margen del mes, el escandallo y la merma salen solos.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-la-caja-sabe-lo-que-vendes-y-tus-cuentas-no">El problema: la caja sabe lo que vendes y tus cuentas no</h2>
-<p>El TPV tiene las ventas. Las compras están en los albaranes. El personal, en las nóminas. Cada cosa vive en un sitio y el margen del mes no vive en ninguno: o lo calculas tú en una hoja o esperas a que el gestor cierre el trimestre.</p><p>Meter las ventas no debería ser otro trabajo. Por eso en Kontrol eliges una forma y, con una, basta.</p>
-<h2 id="cuatro-formas-de-traer-tus-ventas">Cuatro formas de traer tus ventas</h2>
-<p>En «Ventas y TPV», la pregunta es «¿Cómo quieres que entren tus ventas?».</p><h3>1. Conectar tu caja</h3><p>Si cobras con Square, tocas «Conectar Square», das permiso en su pantalla y cada noche entran las ventas del día, plato a plato. Es de solo lectura: Kontrol no cambia nada en tu caja.</p><p>Si tu TPV manda sus tickets a Holded, como hace Last.app, o haces tus facturas con Holded, pegas en Kontrol una clave de solo lectura y entran solas cada noche.</p><h3>2. Que tu caja las mande por correo</h3><p>Vale para Glop, Numier y cualquier TPV que mande informes por correo. En tu TPV eliges el informe de ventas por artículo, cada día, en Excel o CSV, y pones tu dirección de Kontrol, la misma de las facturas. El informe llega solo y entra solo.</p><h3>3. La foto o el PDF del cierre de caja</h3><p>Haces el cierre de caja del turno, el ticket Z, y lo subes como cualquier papel: una foto con el móvil, el PDF o un correo a tu buzón. Kontrol lo reconoce y lee el día, el número del Z, el total vendido, lo cobrado por cada forma de pago, el desglose del IVA y, si los trae, los artículos. No guarda el nombre del cajero.</p><p>Antes de contarlo, lo comprueba al céntimo: lo cobrado por forma de pago tiene que sumar el total, y las bases más el IVA, también. Si cuadra, va a «Ventas». Si no, no lo suma ni se inventa nada: te enseña qué no cuadra y tú decides con «Es esto: mételo» o «No lo metas».</p><h3>4. Subir el Excel o apuntarlo a mano</h3><p>Arrastras el Excel o el CSV que exporta tu TPV y, antes de guardar, Kontrol te enseña lo que ha entendido. Y si cobras con el datáfono del banco y una caja, sin TPV, apuntas lo vendido de cada día en «¿Sin TPV? Apunta lo vendido».</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar la comprobación: no son datos de ningún negocio.</em></p><p>Subes la foto del cierre del 11 de noviembre:</p><div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Un ejemplo con números"><table><thead><tr><th scope="col">Forma de pago</th><th scope="col" class="num">Importe</th></tr></thead><tbody><tr><th scope="row">Efectivo</th><td class="num">742,10 €</td></tr><tr><th scope="row">Tarjeta</th><td class="num">1.650,30 €</td></tr><tr><th scope="row">Bizum</th><td class="num">94,00 €</td></tr><tr class="total"><th scope="row"><strong>Suma</strong></th><td class="num"><strong>2.486,40 €</strong></td></tr></tbody></table></div><p>El total del ticket dice 2.486,40 €. Cuadra, y Kontrol contesta: «Cierre del 11 nov · 2.486,40 €: va a Ventas».</p><p>Otro día, las formas de pago suman 1.504,00 € y el total dice 1.540,00 €. Ese cierre no entra: se queda esperando a que lo mires, con la diferencia a la vista. Lo más probable es un número bailado, y es mejor verlo ese día que encontrarlo en el margen a fin de mes.</p>
-<h2 id="lo-que-kontrol-cuida-por-ti">Lo que Kontrol cuida por ti</h2>
-<ul><li><strong>Dos turnos, dos cierres.</strong> Si haces un cierre a mediodía y otro por la noche, se suman.</li><li><strong>El mismo cierre, dos veces.</strong> No cuenta dos veces: Kontrol lo reconoce por su número de Z o por su contenido.</li><li><strong>El mismo día por dos caminos.</strong> Si un día entra por el correo del TPV y además por un Excel, te avisa de que puede estar contado dos veces y te deja quitar uno, o decir que son dos cajas distintas (la terraza y el comedor).</li></ul>
-<h2 id="para-que-sirven-las-ventas">Para qué sirven las ventas</h2>
-<ul><li><strong>El margen del mes:</strong> lo que vendes menos compras, personal y gastos fijos, todo sin IVA.</li><li><strong>El escandallo:</strong> lo que te deja cada plato, y cuáles son los que más vendes. Ver <a href="/escandallos/">Escandallos</a>.</li><li><strong>La merma:</strong> lo que se gastó de más respecto a lo que decían tus recetas. Ver <a href="/almacen-y-merma/">Almacén y merma</a>.</li></ul><p>Para el margen basta con el total de cada día. Para el almacén y la merma hace falta saber qué se vendió: las ventas por artículo.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Con qué TPV funciona?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con cualquiera que exporte un Excel o un CSV de ventas, o que imprima un cierre de caja. Además, Square se conecta con un clic, Glop y Numier mandan su informe por correo, y los TPV que envían sus tickets a Holded entran por Holded.</p></details><details><summary>¿Kontrol es un TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Kontrol no cobra ni hace tickets: lee las ventas de tu caja. Tu TPV sigue siendo el tuyo.</p></details><details><summary>¿Las ventas van con IVA o sin IVA?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>El cierre de caja se lee con IVA, como lo imprime tu caja. En el margen, las ventas cuentan sin IVA, igual que las compras.</p></details><details><summary>¿Tengo que cumplir Verifactu por usar Kontrol?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Verifactu es cosa del programa con el que haces tus tickets y facturas, es decir, de tu TPV. Kontrol no los hace. Lo explicamos en <a href="/verifactu/">Verifactu</a>.</p></details><details><summary>¿Y si subo un cierre equivocado?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Tiene su «Deshacer» al subirlo. Y más tarde puedes quitar los cierres de un mes y subir los buenos.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para restaurantes, bares y tiendas</p><h1>Ventas y cierres de caja: lo que vendes, sin teclearlo</h1><p class="entradilla">Kontrol trae las ventas de tu bar, tu restaurante o tu tienda como le vaya bien a tu caja: conectándola, con el informe del TPV por correo o con una foto del cierre de caja. Y sale tu margen.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-app"><img src="/img/tarjeta-margen.webp" alt="En la app, el margen del mes: te quedan 6.216 euros en septiembre, 20,05 de cada 100 que entran" width="1066" height="630" decoding="async" fetchpriority="high"><figcaption>Pantalla real de la app, con un restaurante de ejemplo.</figcaption></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo queda Kontrol con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Eliges una forma, y con una basta.</h2><div class="puntos puntos-4"><article class="punto"><h3>Conectar tu caja</h3><p>Con Square es un clic; y si tu TPV manda sus tickets a Holded, entran solas cada noche.</p></article><article class="punto"><h3>Que tu TPV las mande por correo</h3><p>Vale para Glop, Numier y cualquier TPV que mande cada día su informe de ventas.</p></article><article class="punto"><h3>La foto del cierre de caja</h3><p>Subes el ticket Z y Kontrol comprueba al céntimo que las formas de pago suman el total.</p></article><article class="punto"><h3>El Excel, o a mano</h3><p>Arrastras el Excel que exporta tu TPV o, si no tienes TPV, apuntas lo vendido cada día.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Qué es un cierre de caja o ticket Z?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Es el ticket que saca tu caja al cerrar el turno: el total vendido, lo cobrado por cada forma de pago y el desglose del IVA. Kontrol lo lee con una foto.</p></details><details><summary>¿Con qué TPV funciona Kontrol?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con cualquiera que exporte un Excel o un CSV de ventas, o que imprima un cierre de caja.</p></details><details><summary>¿Kontrol es un TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Kontrol no cobra ni hace tickets: lee las ventas de tu caja. Tu TPV sigue siendo el tuyo.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -196,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/verifactu/">Verifactu<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -279,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

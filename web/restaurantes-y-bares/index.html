@@ -44,42 +44,26 @@
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "¿Qué programa lleva el control de costes de un bar o restaurante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kontrol: lee tus facturas y albaranes y te dice lo que te deja cada plato y el margen de cada mes, sin teclear precios."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "¿Tengo que saber de contabilidad?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Tú haces la foto y miras lo que no cuadra. Las cuentas las hace la app y, si algo no se entiende, se lo preguntas a Teresa desde cualquier pantalla: te contesta con tus números."
+            "text": "No. Tú haces la foto y miras lo que no cuadra; las cuentas las hace la app."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Sustituye a mi gestor?",
+          "name": "¿Sustituye a mi gestor o a mi TPV?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Le deja preparado lo suyo cada mes: el Excel y los papeles. Lo fiscal lo sigue decidiendo él."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Sustituye a mi TPV?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Kontrol no cobra ni hace tickets: lee las ventas de tu caja, sea la que sea."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Se usa en el móvil?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En el móvil y en el ordenador. Tu encargado y tú, cada uno con su acceso y viendo lo que tú decidas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Desde 119 € al mes más IVA, sin permanencia. Los tres paquetes están en Precios."
+            "text": "No. A tu gestor le deja preparados el Excel y los papeles, y de tu caja solo lee las ventas, sea la que sea."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,23 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Restaurantes y bares</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Kontrol para restaurantes y bares: el control de costes que se hace con una foto</h1><p class="entradilla">Kontrol es un programa para bares y restaurantes que lee tus facturas y albaranes y, con ellos, calcula el escandallo de cada plato, lleva el almacén y te dice el margen del mes. Tú haces la foto al albarán; de leerlo, comprobarlo y hacer las cuentas se encarga Teresa, su administrativa.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-llenas-el-local-y-no-sabes-cuanto-te-queda">El problema: llenas el local y no sabes cuánto te queda</h2>
-<p>En hostelería se trabaja con márgenes estrechos. Como referencia, un restaurante deja de media un 9-10 % de lo que vende antes de amortizaciones, intereses e impuestos, y un bar, un 12 % (INE, Estadística estructural de empresas del sector servicios, 2024; comprobado el 29 de octubre de 2026). Con tan poco aire, una subida del pescado o una plantilla un punto por encima se comen el beneficio sin que nadie lo note.</p><p>Y casi todos los datos para verlo ya los tienes: están en los albaranes, en la caja y en las nóminas. Lo que falta es tiempo para juntarlos.</p>
-<h2 id="lo-que-hace-kontrol-en-tu-dia-a-dia">Lo que hace Kontrol en tu día a día</h2>
-<h3>Llega el género: una foto</h3><p>El albarán entra con una foto, y la factura, con el PDF o por correo. Kontrol lee cada línea, comprueba las cuentas al céntimo y te avisa si hay un error en el precio, con el mensaje para el proveedor ya escrito. <a href="/facturas-y-albaranes/">Facturas y albaranes</a>.</p><h3>Cada plato, con su coste al día</h3><p>El escandallo de cada plato usa el precio de tu último albarán. Si sube la lubina, lo ves ese día en el margen del plato: del menú del día, de la tapa o de la caña. <a href="/escandallos/">Escandallos</a>.</p><h3>El almacén, contado con el móvil</h3><p>Cuentas barriles, botellas y cajas de pie, con el móvil. Entre recuento y recuento, Kontrol te dice lo que debería quedarte, y con dos recuentos, la merma: cuánto se ha perdido y en qué. <a href="/almacen-y-merma/">Almacén y merma</a>.</p><h3>Los pedidos, con lo de siempre delante</h3><p>Al hacer un pedido eliges el proveedor y te sale lo que sueles comprarle, con el último precio, y lo que se te está acabando. Lo mandas tú por WhatsApp o por correo, y al llegar marcas lo que ha venido.</p><h3>Las ventas entran solas</h3><p>Con la caja conectada, con el informe del TPV por correo o con una foto del cierre de caja. <a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a>.</p><h3>Tu equipo, con sus números</h3><p>La ficha de cada persona, con su contrato y sus nóminas, lo que te cuesta cada hora, los horarios, las vacaciones y las bajas. <a href="/personal-y-nominas/">Personal y nóminas</a>.</p><h3>El margen del mes, sin esperar al gestor</h3><p>Con todo dentro, «Margen del mes» hace la cuenta: lo que vendes menos compras, personal y gastos fijos, todo sin IVA. Y lo de tu gestoría sale en un clic: el Excel y los papeles.</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar la cuenta: no son datos de ningún negocio.</em></p><p>Un restaurante que en octubre vende 42.000 €, sin IVA:</p><div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Un ejemplo con números"><table><thead><tr><th scope="col"></th><th scope="col" class="num">Euros</th><th scope="col" class="num">De lo que vende</th></tr></thead><tbody><tr><th scope="row">Ventas</th><td class="num">42.000 €</td><td class="num">100 %</td></tr><tr><th scope="row">Compras de comida y bebida</th><td class="num">− 13.440 €</td><td class="num">32,00 %</td></tr><tr><th scope="row">Personal</th><td class="num">− 13.860 €</td><td class="num">33,00 %</td></tr><tr><th scope="row">Luz, alquiler y otros gastos</th><td class="num">− 8.400 €</td><td class="num">20,00 %</td></tr><tr class="total"><th scope="row"><strong>Te queda</strong></th><td class="num"><strong>6.300 €</strong></td><td class="num"><strong>15,00 %</strong></td></tr></tbody></table></div><p>Lo útil no es la cifra final, es verla nada más acabar el mes y saber de dónde sale cada línea. Si en noviembre las compras pasan del 32 % al 35 %, vas a «Precios» y ves qué proveedor ha subido y qué producto.</p>
-<h2 id="bar-o-restaurante-funciona-igual">¿Bar o restaurante? Funciona igual</h2>
-<p>En un bar pesan más las botellas, los barriles y las copas; en un restaurante, la cocina y los elaborados (el fondo, el sofrito, la masa). El escandallo y el almacén son los mismos: una caña o un gin-tonic tienen su receta igual que un arroz. En un hotel funciona como en un restaurante.</p><p>Un detalle de la cuenta: en un bar o un restaurante, todo lo que se sirve para tomar allí lleva un 10 % de IVA, también la cerveza, el vino y las copas (Ley del IVA, art. 91; comprobado el 29 de octubre de 2026). Por eso Kontrol le quita ese 10 % al precio de la carta antes de decirte lo que te deja cada plato.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Tengo que saber de contabilidad?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Tú haces la foto y miras lo que no cuadra. Las cuentas las hace la app y, si algo no se entiende, se lo preguntas a Teresa desde cualquier pantalla: te contesta con tus números.</p></details><details><summary>¿Sustituye a mi gestor?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Le deja preparado lo suyo cada mes: el Excel y los papeles. Lo fiscal lo sigue decidiendo él.</p></details><details><summary>¿Sustituye a mi TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Kontrol no cobra ni hace tickets: lee las ventas de tu caja, sea la que sea.</p></details><details><summary>¿Se usa en el móvil?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>En el móvil y en el ordenador. Tu encargado y tú, cada uno con su acceso y viendo lo que tú decidas.</p></details><details><summary>¿Cuánto cuesta?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Desde 119 € al mes más IVA, sin permanencia. Los tres paquetes están en <a href="/precios/">Precios</a>.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para restaurantes, bares y hoteles</p><h1>Programa para restaurantes y bares: tus costes, con una foto</h1><p class="entradilla">Kontrol es un programa para bares y restaurantes que lee tus facturas y albaranes y, con ellos, calcula el escandallo de cada plato, lleva el almacén y te dice el margen del mes. Tú haces la foto.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-foto"><img src="/img/foto-noche2-990.webp" alt="De noche, con el restaurante ya cerrado, el dueño se sujeta la cabeza delante del portátil, en una mesa llena de tiques y facturas con una calculadora" width="990" height="684" decoding="async" fetchpriority="high" srcset="/img/foto-noche2-640.webp 640w, /img/foto-noche2-990.webp 990w" sizes="(min-width:900px) 600px, 100vw"></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a>. Te preparamos tu Kontrol con esos datos y lo vemos juntos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Llenas el local, y por fin sabes cuánto te queda.</h2><div class="puntos puntos-4"><article class="punto"><h3>Llega el género: una foto</h3><p>Teresa, la administrativa de Kontrol, lee cada línea y te avisa si hay un error en el precio.</p></article><article class="punto"><h3>Cada plato, con su coste al día</h3><p>El escandallo usa el precio de tu último albarán: el menú del día, la tapa o la caña.</p></article><article class="punto"><h3>Almacén, ventas y equipo, juntos</h3><p>El almacén se cuenta con el móvil, las ventas entran de tu caja y cada persona tiene su ficha.</p></article><article class="punto"><h3>Tu margen, sin esperar al gestor</h3><p>Lo que vendes menos compras, personal y gastos fijos, todo sin IVA.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Qué programa lleva el control de costes de un bar o restaurante?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Kontrol: lee tus facturas y albaranes y te dice lo que te deja cada plato y el margen de cada mes, sin teclear precios.</p></details><details><summary>¿Tengo que saber de contabilidad?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Tú haces la foto y miras lo que no cuadra; las cuentas las hace la app.</p></details><details><summary>¿Sustituye a mi gestor o a mi TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. A tu gestor le deja preparados el Excel y los papeles, y de tu caja solo lee las ventas, sea la que sea.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -194,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/personal-y-nominas/">Personal y nóminas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/personal-y-nominas/">Personal y nóminas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -277,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

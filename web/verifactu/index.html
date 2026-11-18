@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Verifactu en bares, restaurantes y tiendas: fechas | Kontrol</title>
-<meta name="description" content="Qué es Verifactu, a quién le toca y desde cuándo, con las fechas del BOE comprobadas el 6 de noviembre de 2026. Y qué tiene que ver con Kontrol: nada.">
+<meta name="description" content="Qué es Verifactu, a quién le toca y desde cuándo. Y qué tiene que ver con Kontrol: nada, porque Kontrol no hace facturas ni tickets.">
 <link rel="canonical" href="https://kontrolapp.es/verifactu/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Kontrol">
 <meta property="og:url" content="https://kontrolapp.es/verifactu/">
 <meta property="og:title" content="Verifactu en bares, restaurantes y tiendas: fechas | Kontrol">
-<meta property="og:description" content="Qué es Verifactu, a quién le toca y desde cuándo, con las fechas del BOE comprobadas el 6 de noviembre de 2026. Y qué tiene que ver con Kontrol: nada.">
+<meta property="og:description" content="Qué es Verifactu, a quién le toca y desde cuándo. Y qué tiene que ver con Kontrol: nada, porque Kontrol no hace facturas ni tickets.">
 <meta property="og:image" content="https://kontrolapp.es/img/foto-albaran-1100.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F1EA">
@@ -47,31 +47,15 @@
           "name": "¿Cuándo entra en vigor Verifactu?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Según la ley vigente a 6 de noviembre de 2026: antes del 1 de enero de 2027 para las sociedades y antes del 1 de julio de 2027 para autónomos y comunidades de bienes."
+            "text": "Según la ley vigente, tu programa o tu TPV tiene que cumplir antes del 1 de enero de 2027 si eres una sociedad y antes del 1 de julio de 2027 si eres autónomo."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Está aplazado a 2028?",
+          "name": "¿Se ha aplazado Verifactu a 2028?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Hacienda anunció el 5 de octubre de 2026 que quiere retrasarlo, pero a 6 de noviembre de 2026 no es ley."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tengo que cambiar de TPV?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No necesariamente. Pide a tu fabricante la versión adaptada y su declaración responsable."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Una factura de un proveedor sin QR vale?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, se desgrava igual si cumple lo demás."
+            "text": "Todavía no. Hacienda anunció el 5 de octubre de 2026 que quiere retrasarlo a 2028, pero aún no es ley: valen las fechas de la ley vigente."
           }
         },
         {
@@ -79,7 +63,7 @@
           "name": "¿Kontrol cumple Verifactu?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No le aplica: Kontrol no hace facturas ni tickets. Quien tiene que cumplir es el programa o el TPV con el que los haces."
+            "text": "No le aplica, porque no hace facturas ni tickets. Cumplir le toca al programa o al TPV con el que los haces."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,35 +141,30 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+<!-- REVISAR: CADA MES (la última, el 18-nov-2026: siguen las fechas de 2027). Si sale una norma que las cambie (lo anunciado para 2028), cambiar las respuestas «¿Cuándo entra en vigor Verifactu?» y «¿Se ha aplazado Verifactu a 2028?», y `teresa-mundo.ts` de Kontrol. -->
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Verifactu</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Verifactu para bares, restaurantes y tiendas: qué es, a quién le toca y cuándo</h1><p class="entradilla">Verifactu es la norma de Hacienda sobre los programas y los TPV con los que se hacen facturas y tickets. Según la ley vigente, tu programa o tu TPV tiene que cumplirla antes del 1 de enero de 2027 si tu negocio es una sociedad, y antes del 1 de julio de 2027 si eres autónomo.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<!-- REVISAR: CADA MES. Las fechas pueden cambiar (ver «¿Se va a retrasar?»). No publicar ni dejar publicada esta página sin volver a comprobar `teresa-mundo.ts`. -->
-<p class="nota-ejemplo"><em>Datos comprobados en el BOE y en la sede de la Agencia Tributaria el 6 de noviembre de 2026. Esta página no es asesoramiento fiscal: tu caso concreto, con tu gestor.</em></p>
-<h2 id="que-es-con-el-ticket-en-la-mano">Qué es, con el ticket en la mano</h2>
-<p>Verifactu obliga a que los programas y los TPV guarden cada factura y cada ticket de forma que no se puedan borrar ni cambiar sin dejar rastro. Y cada factura o ticket lleva un código QR.</p><p>Se puede cumplir de dos formas:</p><ul><li>El programa manda cada factura a Hacienda en el momento. Lo reconoces porque el ticket pone «VERI*FACTU».</li><li>El programa las guarda él, protegidas, y las entrega si Hacienda las pide.</li></ul>
-<h2 id="a-quien-le-toca">A quién le toca</h2>
-<p>Le afecta a quien hace facturas o tickets con un programa o un TPV, aunque sea solo en una parte del negocio.</p><p>No le afecta:</p><ul><li>A quien hace todas sus facturas a mano.</li><li>A quien lleva el IVA por el SII de Hacienda.</li><li>A los negocios que tributan en el País Vasco o en Navarra, que tienen sus propias normas.</li></ul><h3>Si tienes un bar o un restaurante en módulos</h3><p>En módulos, en general no tienes que hacer factura a un cliente particular, y mientras tus tickets no sean facturas, Verifactu no te afecta. Pero a un cliente que es empresa o autónomo sí tienes que darle factura, y si la haces con el TPV o con un programa, ese programa tiene que cumplir.</p><h3>Si tienes una tienda en recargo de equivalencia</h3><p>Una tienda de autónomo en recargo de equivalencia que en la renta no está en módulos sí tiene que dar factura o ticket. Si los saca con una caja registradora o con un programa, Verifactu le afecta.</p><h3>Si haces las facturas a mano o con Excel</h3><p>Si las haces todas a mano, no te afecta. Pero, en general, no se puede mezclar: si usas un programa para facturar, todas tienen que salir de él. Usar Excel o Word solo para escribir, imprimir y guardar tus facturas tampoco cuenta; si además te sacan solos los libros del IVA o la contabilidad, sí.</p><p>Para quien hace pocas facturas, Hacienda tiene una aplicación gratuita que ya cumple. No sirve para los tickets del mostrador.</p>
-<h2 id="las-fechas">Las fechas</h2>
-<div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Las fechas"><table><thead><tr><th scope="col">Tu negocio es…</th><th scope="col" class="num">Tu programa o TPV tiene que cumplir antes del…</th></tr></thead><tbody><tr><th scope="row">Una sociedad (SL, SA, cooperativa…)</th><td class="num">1 de enero de 2027</td></tr><tr><th scope="row">Un autónomo o una comunidad de bienes</th><td class="num">1 de julio de 2027</td></tr></tbody></table></div><p>Hasta entonces es un periodo de prueba. Las fechas ya se han movido dos veces: primero eran en 2025 y después en 2026. Si lees una guía que dice 2025 o 2026, está desfasada.</p><h3>¿Se va a retrasar otra vez?</h3><p>El 5 de octubre de 2026 el Ministerio de Hacienda anunció que quiere retrasar Verifactu hasta octubre de 2028, para juntarlo con la factura electrónica de los negocios pequeños. Es un anuncio, no una norma: a 6 de noviembre de 2026 todavía no es ley, así que valen las fechas de 2027.</p>
-<h2 id="que-tienes-que-hacer">Qué tienes que hacer</h2>
-<p>Pide a quien te vende el TPV o el programa dos cosas: la versión adaptada y su «declaración responsable». Es el papel en el que el fabricante firma que su programa cumple, y tiene que verse dentro del propio programa, en «Ayuda» o en «Acerca de».</p><p>No tienes que registrar nada ni pedir ningún certificado. Y cuando llegue tu fecha, el programa viejo ya no puede servir para facturar.</p>
-<h2 id="las-multas">Las multas</h2>
-<p class="nota-ejemplo"><em>Estas cifras son las de la ley, no un ejemplo.</em></p><p>Tener un programa de facturación sin adaptar cuando ya es obligatorio, o uno manipulado, se multa con 50.000 € por cada año. A quien lo fabrica o lo vende, con 150.000 € por año y por cada tipo de programa. (Ley General Tributaria, art. 201 bis.)</p>
-<h2 id="y-las-facturas-que-te-llegan-de-tus-proveedores">Y las facturas que te llegan de tus proveedores</h2>
-<p>Verifactu es cosa de quien hace la factura, no de quien la recibe: con las facturas de tus proveedores no tienes que hacer nada nuevo.</p><p>Una factura sin QR se desgrava igual si cumple lo demás, y es normal que no lo lleve: las hechas a mano, las de empresas que están en el SII, las del País Vasco o Navarra y las de antes de que tu proveedor esté obligado. Los albaranes no llevan QR.</p>
-<h2 id="que-tiene-que-ver-kontrol-con-verifactu">Qué tiene que ver Kontrol con Verifactu</h2>
-<p>Nada, y preferimos decirlo claro. Kontrol no hace facturas ni tickets: lee las que te llegan y las que haces tú con tu programa. Por eso Verifactu no se le aplica a Kontrol, y usar Kontrol no hace que tu TPV o tu programa de facturas cumpla. Eso depende de su fabricante.</p><p>Lo que sí hace Kontrol es llevar el resto de tus papeles: <a href="/facturas-y-albaranes/">leer tus facturas y albaranes</a>, avisarte de los errores en el precio y traer <a href="/ventas-y-cierres-de-caja/">las ventas de tu caja</a>, sea la que sea.</p>
-<h2 id="no-lo-confundas-con-la-factura-electronica">No lo confundas con la factura electrónica</h2>
-<p>Son dos normas distintas. Verifactu va del programa con el que haces tus facturas y tickets. La factura electrónica (la ley «Crea y Crece») va de cómo se mandan las facturas entre empresas: en un fichero que los programas leen solos, no en un PDF.</p><p>Será obligatoria desde el 6 de octubre de 2027 para quien vendió más de 8 millones de euros el año anterior, y desde el 6 de octubre de 2028 para todos los demás. Hoy todavía no lo es para nadie. Los tickets normales y las ventas a particulares no tienen que ser electrónicos.</p>
-<h2 id="fuentes">Fuentes</h2>
-<ul><li>Real Decreto 1007/2023 (Reglamento Verifactu), arts. 1, 3, 7, 8, 13, 15, 16 y 17, y disposición final 4.ª en la redacción del RDL 15/2025: https://www.boe.es/buscar/act.php?id=BOE-A-2023-24840</li><li>Agencia Tributaria, preguntas frecuentes sobre Verifactu: https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu/preguntas-frecuentes/cuestiones-generales-ambitos-aplicacion.html</li><li>Ministerio de Hacienda, nota informativa del 5 de octubre de 2026 (anuncio, no norma): https://www.hacienda.gob.es/sgt/gabsehacienda/nota-informativa-verifactu.pdf</li><li>Ley General Tributaria, art. 201 bis: https://www.boe.es/buscar/act.php?id=BOE-A-2003-23186</li><li>Reglamento de facturación (RD 1619/2012), arts. 2, 3 y 26: https://www.boe.es/buscar/act.php?id=BOE-A-2012-14696</li><li>Factura electrónica: Ley 18/2022, art. 12, y calendario de la Agencia Tributaria: https://sede.agenciatributaria.gob.es/Sede/iva/factura-electronica/calendario-implantacion.html</li></ul><p>Todas comprobadas el 6 de noviembre de 2026.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Cuándo entra en vigor Verifactu?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Según la ley vigente a 6 de noviembre de 2026: antes del 1 de enero de 2027 para las sociedades y antes del 1 de julio de 2027 para autónomos y comunidades de bienes.</p></details><details><summary>¿Está aplazado a 2028?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Hacienda anunció el 5 de octubre de 2026 que quiere retrasarlo, pero a 6 de noviembre de 2026 no es ley.</p></details><details><summary>¿Tengo que cambiar de TPV?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No necesariamente. Pide a tu fabricante la versión adaptada y su declaración responsable.</p></details><details><summary>¿Una factura de un proveedor sin QR vale?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, se desgrava igual si cumple lo demás.</p></details><details><summary>¿Kontrol cumple Verifactu?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No le aplica: Kontrol no hace facturas ni tickets. Quien tiene que cumplir es el programa o el TPV con el que los haces.</p></details></div>
+  <header class="pagina-cab sin-figura" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para bares, restaurantes y tiendas</p><h1>Verifactu para bares, restaurantes y tiendas: qué es, a quién le toca y cuándo</h1><p class="entradilla">Verifactu es la norma de Hacienda sobre los programas y los TPV con los que bares, restaurantes y tiendas hacen sus facturas y tickets. No es asesoramiento fiscal: tu caso, con tu gestor.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Si lo que quieres es dejar de llevar los papeles a mano, mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo quedan en Kontrol, con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Verifactu, con el ticket en la mano.</h2><div class="puntos puntos-4"><article class="punto"><h3>Va con tu programa o TPV</h3><p>Tiene que guardar cada factura y cada ticket sin que se puedan borrar ni cambiar, y ponerles un QR.</p></article><article class="punto"><h3>A quién le toca</h3><p>A quien hace facturas o tickets con un programa o un TPV; si son todas a mano, no.</p></article><article class="punto"><h3>Qué tienes que pedir</h3><p>A quien te lo vende, la versión adaptada y su «declaración responsable».</p></article><article class="punto"><h3>Kontrol no hace facturas ni tickets</h3><p>Lee las que te llegan y las ventas de tu caja; que tu TPV cumpla depende de su fabricante.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Cuándo entra en vigor Verifactu?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Según la ley vigente, tu programa o tu TPV tiene que cumplir antes del 1 de enero de 2027 si eres una sociedad y antes del 1 de julio de 2027 si eres autónomo.</p></details><details><summary>¿Se ha aplazado Verifactu a 2028?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Todavía no. Hacienda anunció el 5 de octubre de 2026 que quiere retrasarlo a 2028, pero aún no es ley: valen las fechas de la ley vigente.</p></details><details><summary>¿Kontrol cumple Verifactu?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No le aplica, porque no hace facturas ni tickets. Cumplir le toca al programa o al TPV con el que los haces.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -206,8 +185,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/tiendas/">Kontrol para tiendas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/restaurantes-y-bares/">Kontrol para restaurantes y bares<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/tiendas/">Tiendas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -289,7 +271,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

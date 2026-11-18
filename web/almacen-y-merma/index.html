@@ -44,18 +44,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Cada cuánto hay que hacer inventario?",
+          "name": "¿Cómo se calcula la merma de un bar o restaurante?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Cuando tú quieras. La merma se calcula entre dos recuentos cerrados, sea cual sea el tiempo que pase entre ellos. Cuanto más seguidos, antes ves dónde se va el género."
+            "text": "Cuentas el almacén dos veces. Al primer recuento se le suma lo comprado y se le resta lo vendido: lo que falte en el segundo es la merma."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Tengo que dar de alta todos mis productos?",
+          "name": "¿Cada cuánto hay que hacer inventario?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. La lista del recuento sale sola de tus albaranes."
+            "text": "Cuando tú quieras. Cuanto más seguidos sean los recuentos, antes ves dónde se va el género."
           }
         },
         {
@@ -63,23 +63,7 @@
           "name": "¿Necesito un TPV para llevar el almacén?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Para contar y saber lo que vale tu almacén, no. Para la merma, sí hace falta saber qué se vendió: la caja conectada, su Excel o un cierre de caja con los artículos. Lo explicamos en Ventas y cierres de caja."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿La merma va con IVA o sin IVA?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sin IVA, con el precio de compra de tus albaranes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué paquete va?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En «Teresa + Operaciones» y en el «Paquete Full». Los tienes en Precios."
+            "text": "Para contar y saber lo que vale tu almacén, no. Para la merma hace falta saber qué se vendió, producto a producto."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,25 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Almacén y merma</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Almacén y merma: lo que tienes, lo que debería quedarte y lo que se pierde</h1><p class="entradilla">Kontrol lleva el inventario de tu restaurante, tu bar o tu tienda con recuentos que haces de pie, con el móvil. Con dos recuentos, tus albaranes y tus ventas, calcula la merma: lo que se ha perdido entre lo que compras y lo que vendes.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-sabes-lo-que-compras-y-lo-que-vendes-pero-no-lo">El problema: sabes lo que compras y lo que vendes, pero no lo que se va por el camino</h2>
-<p>La copa servida de más, la botella que se rompe, el género que caduca, la ración que sale más grande que la receta. Nada de eso aparece en ninguna factura. Solo se ve si cuentas el almacén y lo comparas con lo que debería haber, y esa cuenta, a mano, no la hace casi nadie: hay que cruzar compras, ventas y recetas producto a producto.</p>
-<h2 id="como-se-hace-en-kontrol-paso-a-paso">Cómo se hace en Kontrol, paso a paso</h2>
-<h3>1. Haz un recuento</h3><p>En «Almacén», el botón «Hacer recuento» abre una lista con lo que compras de verdad: sale de tus albaranes, no hay que crearla. Hay una casilla por producto y un buscador arriba.</p><ul><li>Cuentas en la unidad que te venga bien: botellas, kilos, litros, cajas. Lo que viene en botella empieza contándose en botellas.</li><li>Casilla vacía quiere decir «no lo he contado»; un cero, «no queda nada».</li><li>Si hay algo que no ha pasado por ningún papel, lo añades con «Contar algo que no está en la lista».</li><li>Dos personas pueden contar a la vez, cada una con su móvil: lo que cuenta cada una se suma.</li></ul><p>Al cerrar el recuento tienes la primera cifra: «Valor de tu almacén».</p><h3>2. Mira lo que debería quedarte hoy</h3><p>Entre recuento y recuento, «Lo que tienes» te enseña lo que debería quedarte hoy de cada cosa. Sale de una resta: tu último recuento, más lo que has comprado desde entonces (tus albaranes), menos lo que se ha vendido (tu caja, cruzada con tus recetas).</p><p>Va ordenado como la hoja de un inventario, por grupos y familias: vinos, cervezas, licores, pescado, carne, verdura. Lo que no llega a una semana al ritmo al que sale lleva su aviso en ámbar («para 3 días»), y al hacer un pedido Kontrol te lo recuerda en «Se te está acabando».</p><p>Kontrol lo dice claro en la propia pantalla: es lo que debería haber, no lo que hay. Lo que hay de verdad solo lo dice un recuento.</p><h3>3. Con el segundo recuento, sale la merma</h3><p>Con dos recuentos cerrados aparece la segunda cifra, «Se ha perdido»: la merma entre uno y otro. Debajo, «Dónde se está yendo» la desglosa producto a producto, para que sepas si es la ginebra, el pescado o el aceite.</p><p>La cuenta suma lo que falta y resta lo que sobra. Al contar siempre se redondea (la botella empezada, el medio saco de harina) y esos descuadres pequeños se compensan entre sí.</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar la cuenta: no son datos de ningún negocio.</em></p><p>Una ginebra que compras a 13,50 € la botella, sin IVA:</p><div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Un ejemplo con números"><table><thead><tr><th scope="col"></th><th scope="col" class="num">Botellas</th></tr></thead><tbody><tr><th scope="row">Recuento del 1 de septiembre</th><td class="num">24</td></tr><tr><th scope="row">Compradas después, según tus albaranes</th><td class="num">+ 36</td></tr><tr><th scope="row">Gastadas, según tus ventas y tus recetas</th><td class="num">− 41</td></tr><tr class="total"><th scope="row"><strong>Deberían quedar</strong></th><td class="num"><strong>19</strong></td></tr><tr><th scope="row">Recuento del 30 de septiembre</th><td class="num">16</td></tr><tr class="total"><th scope="row"><strong>Faltan</strong></th><td class="num"><strong>3</strong></td></tr></tbody></table></div><p>Tres botellas a 13,50 € son 40,50 € de merma en un solo producto y en un mes. Con ese dato ya sabes dónde mirar: si las copas se sirven más largas de lo que dice la receta, si hay invitaciones sin apuntar o si falta un albarán por subir.</p>
-<h2 id="cuando-el-numero-no-sale-kontrol-te-dice-por-que">Cuando el número no sale, Kontrol te dice por qué</h2>
-<p>Una merma solo vale si los datos están completos, y Kontrol prefiere no dar una cifra antes que dar una falsa.</p><ul><li>Si te sobra más de lo que pierdes, no enseña cifra y lo explica: casi siempre es una receta que pide más de lo que lleva, un recuento contado de más o un albarán sin subir.</li><li>Si tu caja solo manda el total del día, sin decir qué se vendió, te avisa de cuántos euros quedan sin explicar. Para la merma hacen falta las ventas por producto.</li></ul>
-<h2 id="en-un-bar-en-un-restaurante-y-en-una-tienda">En un bar, en un restaurante y en una tienda</h2>
-<p>En un bar o un restaurante, lo vendido se traduce a género con tus recetas: cada gin-tonic gasta su medida de ginebra. Por eso el almacén y el <a href="/escandallos/">escandallo</a> van de la mano.</p><p>En una tienda no hay recetas: cada cosa vendida es una unidad menos de su producto. La merma es lo que falta de lo que deberías tener según lo vendido: roturas, robos, errores al cobrar o al recibir la mercancía.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Cada cuánto hay que hacer inventario?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Cuando tú quieras. La merma se calcula entre dos recuentos cerrados, sea cual sea el tiempo que pase entre ellos. Cuanto más seguidos, antes ves dónde se va el género.</p></details><details><summary>¿Tengo que dar de alta todos mis productos?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. La lista del recuento sale sola de tus albaranes.</p></details><details><summary>¿Necesito un TPV para llevar el almacén?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Para contar y saber lo que vale tu almacén, no. Para la merma, sí hace falta saber qué se vendió: la caja conectada, su Excel o un cierre de caja con los artículos. Lo explicamos en <a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a>.</p></details><details><summary>¿La merma va con IVA o sin IVA?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sin IVA, con el precio de compra de tus albaranes.</p></details><details><summary>¿En qué paquete va?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>En «Teresa + Operaciones» y en el «Paquete Full». Los tienes en <a href="/precios/">Precios</a>.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para restaurantes, bares y tiendas</p><h1>Inventario y merma: lo que tienes en el almacén y lo que se pierde</h1><p class="entradilla">Kontrol lleva el inventario de tu restaurante, tu bar o tu tienda con recuentos que haces de pie, con el móvil. Con dos recuentos, tus albaranes y tus ventas, calcula la merma: lo que se pierde por el camino.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-foto"><img src="/img/foto-pedido-1100.webp" alt="Llega el pescado a la puerta de la cocina y el cocinero firma el albarán junto a la caja con hielo" width="1100" height="1375" decoding="async" fetchpriority="high" srcset="/img/foto-pedido-700.webp 700w, /img/foto-pedido-1100.webp 1100w" sizes="(min-width:900px) 600px, 100vw"></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo queda Kontrol con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Lo que ninguna factura te cuenta.</h2><div class="puntos puntos-4"><article class="punto"><h3>La lista sale de tus albaranes</h3><p>No das de alta nada: cuentas botellas, kilos o cajas, y dos personas pueden contar a la vez.</p></article><article class="punto"><h3>Lo que debería quedarte hoy</h3><p>Tu último recuento, más lo comprado, menos lo vendido; y te avisa de lo que se está acabando.</p></article><article class="punto"><h3>La merma, producto a producto</h3><p>Con dos recuentos ves cuánto se ha perdido y si es la ginebra, el pescado o el aceite.</p></article><article class="punto"><h3>Ninguna cifra a medias</h3><p>Si faltan datos para calcular la merma, Kontrol no da un número: te dice qué falta.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Cómo se calcula la merma de un bar o restaurante?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Cuentas el almacén dos veces. Al primer recuento se le suma lo comprado y se le resta lo vendido: lo que falte en el segundo es la merma.</p></details><details><summary>¿Cada cuánto hay que hacer inventario?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Cuando tú quieras. Cuanto más seguidos sean los recuentos, antes ves dónde se va el género.</p></details><details><summary>¿Necesito un TPV para llevar el almacén?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Para contar y saber lo que vale tu almacén, no. Para la merma hace falta saber qué se vendió, producto a producto.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -196,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/tiendas/">Kontrol para tiendas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -279,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

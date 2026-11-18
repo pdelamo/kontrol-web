@@ -44,42 +44,26 @@
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "¿Qué es un escandallo y para qué sirve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es la receta de un plato con el precio real de cada ingrediente. Te dice lo que cuesta una ración y lo que te deja al venderla."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "¿Tengo que meter los precios de los ingredientes a mano?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Salen de tus albaranes confirmados, con el último precio de cada producto. Solo se escribe a mano el de algo que viene por paquetes y se cobra como una unidad (una bandeja de 30 huevos, por ejemplo): ahí Kontrol te pide lo que vale uno."
+            "text": "No: salen de tus albaranes. Tú escribes la receta. Solo en lo que se compra junto, como una bandeja de huevos, te pedimos lo que vale uno."
           }
         },
         {
           "@type": "Question",
-          "name": "¿El coste es con IVA o sin IVA?",
+          "name": "¿El coste del plato va con IVA o sin IVA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sin IVA. El coste de la ración y lo que te deja el plato van sin IVA; el precio de la carta se enseña con IVA, como lo ve tu cliente, y debajo sin él."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué pasa si a un plato le falta algún precio?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No se inventa un coste. En vez de las cifras, el plato dice qué le falta: «Sin receta», «Faltan 2 precios» o «Sin precio de venta»."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Sirve para una tienda?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En una tienda no hay recetas. Su equivalente es «Lo que te deja cada producto»: lo que vendes de cada cosa menos lo que te cuesta. Está en Kontrol para tiendas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué paquete va el escandallo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En «Teresa + Operaciones» y en el «Paquete Full». Los tienes en Precios."
+            "text": "Sin IVA, igual que lo que te deja. El precio de la carta se enseña con IVA, como lo ve tu cliente."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,25 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Escandallos</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Escandallos: lo que te cuesta cada plato y lo que te deja</h1><p class="entradilla">Un escandallo es la receta de un plato con el precio real de cada ingrediente: te dice lo que cuesta una ración y lo que te deja al venderla. En Kontrol ese precio sale de tus propios albaranes, así que el coste de cada plato se pone al día solo cada vez que un proveedor cambia un precio.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-un-escandallo-en-excel-caduca-el-primer-lunes">El problema: un escandallo en Excel caduca el primer lunes</h2>
-<p>Casi todos los restaurantes han hecho sus escandallos alguna vez. El trabajo no está en hacerlos, está en mantenerlos. Sube la lubina, cambia el aceite, el distribuidor quita un descuento, y la hoja sigue diciendo lo mismo que el día que se escribió. A los tres meses decides los precios de la carta con costes que ya no existen.</p><p>El control de costes de un restaurante empieza aquí: el food cost de un plato solo es verdad si el precio de cada ingrediente es el que pagaste esta semana.</p>
-<h2 id="como-se-hace-en-kontrol-paso-a-paso">Cómo se hace en Kontrol, paso a paso</h2>
-<h3>1. Sube tus albaranes</h3><p>Haces una foto al albarán o subes el PDF. Teresa, la administrativa de Kontrol, lee cada línea y guarda el último precio de cada producto. De ahí salen los precios de tus recetas: no hay que teclear ninguno. Lo contamos en <a href="/facturas-y-albaranes/">Facturas y albaranes</a>.</p><h3>2. Escribe la receta del plato</h3><p>En «Escandallo» escribes el plato: su nombre, el precio al que lo vendes y lo que lleva, con sus cantidades. Kontrol entiende las unidades tal como las escribe tu proveedor (kilos, litros, botellas, garrafas, latas) y las pasa a la de tu receta.</p><p>Un detalle que evita muchos escandallos falsos: la cantidad es la que compras, no la que llega al plato. Si limpias un rape y tiras casi la mitad, para una ración de 200 g apuntas los 330 g que salen del arcón, porque el albarán es del pescado entero.</p><h3>3. Mira lo que cuesta y lo que deja</h3><p>Cada plato sale en su fila con cuatro cifras: lo que te cuesta la ración (sin IVA), a cuánto lo vendes (el precio de la carta, con IVA), lo que te deja (sin IVA) y su margen. Alrededor de la foto del plato hay un anillo que se llena con el margen: verde desde el 60 %, rojo por debajo.</p><p>Lo que te deja se cuenta desde el precio sin el IVA de la carta, porque ese IVA no es tuyo. Por eso «lo vendes a» menos «te cuesta» no da «te deja», y no es un error.</p><h3>4. Ordena la carta por lo que importa</h3><p>Con el botón «Filtro» ordenas por «Más margen primero», «Menos margen primero» o «Lo que más te deja», y puedes ver solo los platos «Por debajo del 60 %». En un minuto sabes qué platos sostienen la carta y cuáles hay que revisar.</p>
-<h2 id="los-elaborados-el-fondo-el-sofrito-la-masa">Los elaborados: el fondo, el sofrito, la masa</h2>
-<p>Lo que cocinas una vez y va en varios platos tiene su apartado, «Elaborados». Le pones su receta y lo que rinde, en litros o en kilos, y Kontrol saca su precio por unidad. Cuando sube el pescado, sube el fondo, y suben solos todos los platos que lo llevan.</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar la cuenta: no son datos de ningún negocio.</em></p><p>Una lubina a la plancha que vendes a 18,00 € en la carta:</p><div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Un ejemplo con números"><table><thead><tr><th scope="col"></th><th scope="col" class="num">Cantidad</th><th scope="col" class="num">Precio del último albarán</th><th scope="col" class="num">Coste</th></tr></thead><tbody><tr><th scope="row">Lubina</th><td class="num">330 g</td><td class="num">14,90 €/kg</td><td class="num">4,92 €</td></tr><tr><th scope="row">Guarnición</th><td class="num">1 ración</td><td class="num"></td><td class="num">0,85 €</td></tr><tr><th scope="row">Aceite y sal</th><td class="num"></td><td class="num"></td><td class="num">0,25 €</td></tr><tr class="total"><th scope="row"><strong>Coste de la ración</strong></th><td class="num"></td><td class="num"></td><td class="num"><strong>6,02 €</strong></td></tr></tbody></table></div><ul><li>Precio sin IVA: 18,00 € con el 10 % son 16,36 €.</li><li>Te deja: 16,36 − 6,02 = 10,34 €.</li><li>Margen: 63,20 %. El food cost, que es la otra cara de la misma cuenta, es el 36,80 %.</li></ul><p>El mes siguiente la lubina llega a 16,90 €/kg. Sin tocar nada, el coste pasa a 6,68 €, el plato te deja 9,68 € y el margen baja al 59,17 %: el anillo se pone rojo. Te enteras ese día, no al cerrar el trimestre.</p>
-<h2 id="que-food-cost-es-normal">¿Qué food cost es normal?</h2>
-<p>Como referencia general, la comida y la bebida que compra un restaurante suelen ser alrededor de un 30 % de lo que vende: un 28 % en la comida y un 34,5 % en la bebida (Fundación elBulli y CaixaBank; dato comprobado el 29 de octubre de 2026). Es una media, no un objetivo: cada casa y cada plato son distintos.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Tengo que meter los precios de los ingredientes a mano?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Salen de tus albaranes confirmados, con el último precio de cada producto. Solo se escribe a mano el de algo que viene por paquetes y se cobra como una unidad (una bandeja de 30 huevos, por ejemplo): ahí Kontrol te pide lo que vale uno.</p></details><details><summary>¿El coste es con IVA o sin IVA?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sin IVA. El coste de la ración y lo que te deja el plato van sin IVA; el precio de la carta se enseña con IVA, como lo ve tu cliente, y debajo sin él.</p></details><details><summary>¿Qué pasa si a un plato le falta algún precio?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No se inventa un coste. En vez de las cifras, el plato dice qué le falta: «Sin receta», «Faltan 2 precios» o «Sin precio de venta».</p></details><details><summary>¿Sirve para una tienda?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>En una tienda no hay recetas. Su equivalente es «Lo que te deja cada producto»: lo que vendes de cada cosa menos lo que te cuesta. Está en <a href="/tiendas/">Kontrol para tiendas</a>.</p></details><details><summary>¿En qué paquete va el escandallo?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>En «Teresa + Operaciones» y en el «Paquete Full». Los tienes en <a href="/precios/">Precios</a>.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para restaurantes, bares y hoteles</p><h1>Escandallos: lo que te cuesta cada plato y lo que te deja</h1><p class="entradilla">Kontrol calcula el escandallo de cada plato de tu restaurante o tu bar con el precio de tu último albarán. Si un proveedor cambia un precio, el coste del plato se pone al día solo.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-app"><img src="/img/tarjeta-platos.webp" alt="En la app, el escandallo: 42 platos, cada uno con lo que cuesta, a cuánto se vende y el porcentaje que deja" width="858" height="837" decoding="async" fetchpriority="high"><figcaption>Pantalla real de la app, con un restaurante de ejemplo.</figcaption></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo queda Kontrol con tus datos. Gratis y sin compromiso. Si prefieres hablar antes, llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Tu carta, con los costes de esta semana.</h2><div class="puntos puntos-3"><article class="punto"><h3>Los precios salen de tus albaranes</h3><p>Haces la foto, y Teresa, la administrativa de Kontrol, guarda el último precio de cada producto.</p></article><article class="punto"><h3>Cada plato, con lo que deja</h3><p>Ves lo que te cuesta la ración, a cuánto la vendes, lo que te deja y su margen.</p></article><article class="punto"><h3>El fondo y el sofrito también cuentan</h3><p>Si sube el pescado, sube el fondo y suben solos todos los platos que lo llevan.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Qué es un escandallo y para qué sirve?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Es la receta de un plato con el precio real de cada ingrediente. Te dice lo que cuesta una ración y lo que te deja al venderla.</p></details><details><summary>¿Tengo que meter los precios de los ingredientes a mano?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No: salen de tus albaranes. Tú escribes la receta. Solo en lo que se compra junto, como una bandeja de huevos, te pedimos lo que vale uno.</p></details><details><summary>¿El coste del plato va con IVA o sin IVA?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sin IVA, igual que lo que te deja. El precio de la carta se enseña con IVA, como lo ve tu cliente.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -196,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes: de la foto a tus números<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma: lo que debería quedarte y lo que se pierde<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/precios/">Precios<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -279,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

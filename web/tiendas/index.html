@@ -44,10 +44,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿En qué se diferencia de la versión para restaurantes?",
+          "name": "¿Qué programa lleva las facturas y el stock de una tienda?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No hay recetas ni escandallo de platos. En su lugar tienes «Lo que te deja cada producto», y el almacén descuenta una unidad por cada venta."
+            "text": "Kontrol: lee tus facturas con una foto, saca de ellas la lista de tus productos y descuenta del almacén una unidad por cada venta de tu caja."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funciona si estoy en recargo de equivalencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Las facturas con recargo cuadran, y tus costes van con el IVA y el recargo dentro, porque ese dinero no vuelve. Si es tu caso o no, con tu gestor."
           }
         },
         {
@@ -56,30 +64,6 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "No. Salen de las facturas y los albaranes que subes, y del catálogo de tu proveedor si lo cargas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Funciona con mi caja?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Con cualquiera que exporte un Excel o un CSV de ventas. Square se conecta con un clic y Holded, con una clave de solo lectura."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Me afecta Verifactu?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Depende de cómo hagas tus tickets y facturas, no de Kontrol. Lo explicamos en Verifactu."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Desde 119 € al mes más IVA, sin permanencia. El almacén y «Lo que te deja cada producto» van en «Teresa + Operaciones» y en el «Paquete Full». Precios."
           }
         }
       ]
@@ -126,7 +110,7 @@ try {
     <nav class="nav-principal" aria-label="Principal">
       <a class="nav-enlace" href="/#como">Cómo funciona</a>
       <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
-      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#precios">Precios</a>
       <a class="nav-enlace" href="/#preguntas">Preguntas</a>
     </nav>
     <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
@@ -140,7 +124,7 @@ try {
         <ul class="menu-lista">
           <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
           <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
-          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#precios"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
           <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
         </ul>
         <div class="menu-pie">
@@ -157,23 +141,29 @@ try {
 <div class="menu-velo" hidden></div>
 
 <main id="principal">
-  <article class="pagina envoltura">
+  <div class="envoltura">
   <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Tiendas</span></li></ol></nav>
-  <header class="pagina-cab" id="inicio"><h1>Kontrol para tiendas: tus facturas, tu almacén y lo que te deja cada producto</h1><p class="entradilla">Kontrol lleva los papeles de tu tienda: lee las facturas y los albaranes de tus proveedores, cuenta tu almacén y te dice lo que te deja cada producto que vendes. Funciona igual que en un restaurante, sin la parte de cocina, y también si estás en recargo de equivalencia.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
-  <div class="texto">
-<h2 id="el-problema-mil-referencias-y-ninguna-cuenta-hecha">El problema: mil referencias y ninguna cuenta hecha</h2>
-<p>Una tienda vive de la diferencia entre lo que paga y lo que cobra por cada producto, multiplicada por cientos o miles de referencias. El proveedor sube un precio en una factura de cuarenta líneas y nadie lo ve. Faltan unidades en la estantería y no se sabe si se vendieron, se rompieron o nunca llegaron.</p><p>Con pocas manos y el mostrador abierto, esas cuentas no se hacen.</p>
-<h2 id="como-se-hace-en-kontrol-paso-a-paso">Cómo se hace en Kontrol, paso a paso</h2>
-<h3>1. Tus facturas entran con una foto o por correo</h3><p>Foto, PDF o el correo del proveedor reenviado a tu dirección de Kontrol. Teresa, la administrativa de Kontrol, lee cada línea, comprueba las cuentas al céntimo y te avisa de los errores en el precio y de las subidas. Si un proveedor te factura en otra moneda, lo pasa a euros con el cambio oficial del día de la factura. <a href="/facturas-y-albaranes/">Facturas y albaranes</a>.</p><h3>2. Sube el catálogo de tus proveedores</h3><p>En la ficha de cada proveedor puedes subir su catálogo, hasta 3.000 productos. Al hacer un pedido lo tienes delante, y si otro proveedor tiene lo mismo más barato en su catálogo, Kontrol te lo dice.</p><h3>3. Tus ventas, producto a producto</h3><p>Conectas tu caja, recibes su informe por correo o subes el Excel que exporta. Si cobras con Square, se conecta con un clic; si haces tus tickets y facturas con Holded, con una clave de solo lectura. <a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a>.</p><h3>4. Lo que te deja cada producto</h3><p>Es el escandallo de una tienda: cada cosa que vendes, menos lo que te cuesta. Lo ves producto a producto, en «Lo que te deja cada producto», con el coste de tu última compra.</p><h3>5. El almacén y lo que falta</h3><p>Cuentas con el móvil; la lista sale de tus facturas, aunque tengas mil referencias. Cada cosa que vende tu caja se enlaza con el producto que compras, y «Emparejar por el nombre» junta solas las que se llaman igual. Desde ahí, cada unidad vendida es una unidad menos.</p><p>Con dos recuentos, Kontrol te dice lo que falta de lo que deberías tener según lo vendido: roturas, robos, errores al cobrar o al recibir la mercancía. En el comercio también se llama merma. <a href="/almacen-y-merma/">Almacén y merma</a>.</p>
-<h2 id="un-ejemplo-con-numeros">Un ejemplo con números</h2>
-<p class="nota-ejemplo"><em>Ejemplo inventado para explicar las cuentas: no son datos de ningún negocio. Es una tienda que recupera el IVA de sus compras.</em></p><p>Una funda de móvil:</p><ul><li>La vendes a 14,95 €. Sin el 21 % de IVA son 12,36 €.</li><li>Te cuesta 4,20 €, sin IVA, según tu última factura.</li><li>Te deja 8,16 € por unidad.</li></ul><p>Y en el almacén, después de dos recuentos, su fila dice: «deberías tener 40 unidades y hay 37 · faltan 3». Tres fundas a 4,20 € son 12,60 € que no están ni vendidos ni en la estantería.</p>
-<h2 id="si-estas-en-recargo-de-equivalencia">Si estás en recargo de equivalencia</h2>
-<p>No hace falta saber el nombre: se ve en el papel. Si las facturas de tus proveedores traen, además del IVA, una línea que pone «Recargo de equivalencia» o «R.E.», estás en ese régimen.</p><p>Qué es, en corto: es para comerciantes minoristas que son autónomos o comunidades de bienes, nunca una S.L. En cada compra pagas, además del IVA, un 5,2 % sobre lo que va al 21 %, un 1,4 % sobre lo que va al 10 % y un 0,5 % sobre lo que va al 4 %. A cambio, no presentas la declaración del IVA ni recuperas el de tus compras. (Ley del IVA, arts. 148, 154 y 161; comprobado en el BOE el 29 de octubre de 2026.)</p><p><em>Ejemplo:</em> una factura de 1.000 € de base al 21 % lleva 210 € de IVA y 52 € de recargo: total, 1.262 €.</p><p>Qué cambia en Kontrol:</p><ul><li>Las facturas con recargo cuadran: Kontrol cuenta esa línea al comprobar el total, y no la toma por un error.</li><li>Tus costes van con el IVA y el recargo dentro, porque para ti ese dinero no vuelve. Así, lo que te deja cada producto es lo que te deja de verdad.</li></ul><p>Si tu caso es este o no, lo decide tu gestor. Kontrol lo ve en tus papeles y hace las cuentas en consecuencia.</p>
-<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿En qué se diferencia de la versión para restaurantes?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No hay recetas ni escandallo de platos. En su lugar tienes «Lo que te deja cada producto», y el almacén descuenta una unidad por cada venta.</p></details><details><summary>¿Tengo que dar de alta mis productos uno a uno?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Salen de las facturas y los albaranes que subes, y del catálogo de tu proveedor si lo cargas.</p></details><details><summary>¿Funciona con mi caja?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Con cualquiera que exporte un Excel o un CSV de ventas. Square se conecta con un clic y Holded, con una clave de solo lectura.</p></details><details><summary>¿Me afecta Verifactu?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Depende de cómo hagas tus tickets y facturas, no de Kontrol. Lo explicamos en <a href="/verifactu/">Verifactu</a>.</p></details><details><summary>¿Cuánto cuesta?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Desde 119 € al mes más IVA, sin permanencia. El almacén y «Lo que te deja cada producto» van en «Teresa + Operaciones» y en el «Paquete Full». <a href="/precios/">Precios</a>.</p></details></div>
+  <header class="pagina-cab" id="inicio"><div class="pagina-cab-texto"><p class="antetitulo">Para tiendas</p><h1>Programa para tiendas: tus facturas, tu almacén y lo que te deja cada producto</h1><p class="entradilla">Kontrol es el programa que lleva los papeles de tu tienda: lee las facturas y los albaranes de tus proveedores, cuenta tu almacén y te dice lo que te deja cada producto. También si estás en recargo de equivalencia.</p><div class="acciones">
+        <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a>
+        <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a>
+      </div><p class="como-demo">Mándanos 3 o 4 facturas y te enseñamos cómo queda <span data-marca="producto">Kontrol</span> con tus datos. <span class="tel-linea">O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</span></p><ul class="confianza">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Gratis y sin compromiso</li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span>Te atienden Luis y Pablo, los founders de <span data-marca="producto">Kontrol</span></span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
+      </ul></div><figure class="pagina-figura figura-movil"><div class="movil"><div class="pantalla"><img src="/img/hoy-m-claro.webp" alt="La pantalla Hoy de la app: 18.244 euros gastados en septiembre, los errores en el precio, los cambios de precio y lo que podrías ahorrar" width="780" height="1688" decoding="async" fetchpriority="high"></div></div><figcaption>Pantalla real de la app, con un restaurante de ejemplo.</figcaption></figure></header>
   </div>
-  </article>
 
-  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a> y te enseñamos cómo queda Kontrol con tus datos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>.</p><div class="canales">
+  <section class="bloque puntos-bloque" aria-labelledby="t-puntos"><div class="envoltura"><h2 id="t-puntos" class="titular">Mil referencias, y las cuentas hechas.</h2><div class="puntos puntos-3"><article class="punto"><h3>Tus facturas, con una foto</h3><p>Teresa, la administrativa de Kontrol, lee cada línea y te avisa de los errores en el precio y de las subidas.</p></article><article class="punto"><h3>Lo que te deja cada producto</h3><p>Lo que vendes de cada cosa menos lo que te cuesta, con el coste de tu última compra.</p></article><article class="punto"><h3>El almacén y lo que falta</h3><p>Con dos recuentos sabes lo que falta según lo vendido: roturas, robos o errores al cobrar.</p></article></div></div></section>
+  <section class="bloque preguntas-bloque" aria-labelledby="t-preguntas"><div class="envoltura"><h2 id="t-preguntas" class="titular">Lo que nos suelen preguntar.</h2><div class="faq"><details><summary>¿Qué programa lleva las facturas y el stock de una tienda?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Kontrol: lee tus facturas con una foto, saca de ellas la lista de tus productos y descuenta del almacén una unidad por cada venta de tu caja.</p></details><details><summary>¿Funciona si estoy en recargo de equivalencia?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí. Las facturas con recargo cuadran, y tus costes van con el IVA y el recargo dentro, porque ese dinero no vuelve. Si es tu caso o no, con tu gestor.</p></details><details><summary>¿Tengo que dar de alta mis productos uno a uno?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Salen de las facturas y los albaranes que subes, y del catálogo de tu proveedor si lo cargas.</p></details></div></div></section>
+  <section class="contacto bloque" id="contacto" aria-labelledby="t-contacto">
+    <div class="envoltura">
+      <h2 id="t-contacto" class="titular aparece">Pide tu demo con tus propias facturas.</h2>
+      <ol class="pasos-demo aparece">
+        <li><span class="n">1</span><b>Nos mandas 3 o 4 facturas</b><span>O albaranes. Una foto con el móvil vale.</span></li>
+        <li><span class="n">2</span><b>Te preparamos tu <span data-marca="producto">Kontrol</span></b><span>Con tus datos, y te lo enviamos para que lo veas.</span></li>
+        <li><span class="n">3</span><b>Lo vemos juntos</b><span>Te lo explicamos y resolvemos tus dudas. Sin compromiso.</span></li>
+      </ol>
+      <div class="canales">
         <article class="canal canal-principal aparece">
           <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
           <h3>Por WhatsApp</h3>
@@ -194,8 +184,11 @@ try {
           <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
           <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
         </article>
-      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
-  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/verifactu/">Verifactu<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+      </div>
+      <p class="nota-facturas aparece">Tus facturas solo las usamos para preparar tu demo.</p>
+  </div>
+</section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue">Más de Kontrol</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/almacen-y-merma/">Almacén y merma<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
 
   <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
   <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
@@ -277,7 +270,7 @@ try {
   <div class="envoltura">
     <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
-    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

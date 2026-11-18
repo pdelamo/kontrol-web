@@ -1,4 +1,4 @@
-/* GENERADO por seo/construir.py a partir de la <style> de index.html + lo propio de las páginas de texto.
+/* GENERADO por seo/construir.py a partir de la <style> de index.html + lo propio de las páginas de contenido.
    No se edita a mano: se vuelve a ejecutar el script. */
 @font-face{font-family:'Bricolage Grotesque';font-style:normal;font-display:swap;font-weight:200 800;src:url(/fuentes/bricolage-grotesque.woff2) format('woff2');}
 /* ── KONTROL · WEB · BASE COMÚN ───────────────────────────────────────────────────────────────
@@ -887,6 +887,7 @@ button.dia.lleno::after{display:none}
 /* Contacto: tres tarjetas iguales; la de la demo, destacada. El correo, plegado debajo */
 .canales{display:grid;gap:12px;margin-top:32px}
 .canal{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:4px;align-items:center;padding:20px;border-radius:22px;background:color-mix(in srgb,var(--niebla) 42%,var(--fondo));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--borde) 70%,transparent)}
+:root[data-tema="oscuro"] .canal:not(.canal-principal){background:var(--superficie)}
 .canal .tecla{grid-row:span 2}
 .canal h3{font-size:21px;letter-spacing:-.015em}
 .canal p{color:var(--texto-2);font-size:15.5px}
@@ -946,11 +947,19 @@ body{padding-bottom:0}
 @media (min-width:1840px){html{zoom:1.32}}
 @media (min-width:2200px){html{zoom:1.5}}
 @media (min-width:2500px){html{zoom:1.7}}
+/* Lo de la cabecera de la portada, para la de estas páginas (sale solo de index.html) */
+.pagina-cab .acciones{gap:12px}
+.pagina-cab .acciones .boton{flex:0 1 auto}
+.pagina-cab .acciones{flex-wrap:nowrap;gap:10px}
+@media (max-width:899px){.pagina-cab .acciones{margin-top:22px}.pagina-cab .acciones .boton{min-height:50px;padding:0 14px;font-size:15.5px;flex:1 1 auto;min-width:0}.pagina-cab .acciones .boton-borde{flex:0 1 auto}}
+@media (max-width:379px){.pagina-cab .acciones .boton{font-size:15px;padding:0 12px}}
+@media (max-width:359px){.pagina-cab .acciones{gap:8px}.pagina-cab .acciones .boton{padding:0 10px}.pagina-cab .acciones .boton .icono{display:none}}
+@media (max-width:899px){.pagina-cab .entradilla{font-size:17px;margin-top:16px}}
 
 /* ══════════════════════════════════════════════════════════════════════════════════════════
-   PÁGINAS DE TEXTO (SEO, nov-2026). Todo lo de arriba es la hoja de la portada, copiada tal cual
-   por seo/construir.py; esto de aquí abajo es lo único propio de estas páginas. Mismos colores,
-   mismas variables: claro y oscuro salen solos.
+   PÁGINAS DE CONTENIDO (SEO, nov-2026; cortas desde el 18-nov). Todo lo de arriba es la hoja de
+   la portada, copiada tal cual por seo/construir.py; esto de aquí abajo es lo único propio de
+   estas páginas. Mismos colores y mismas variables: claro y oscuro salen solos.
    ══════════════════════════════════════════════════════════════════════════════════════════ */
 .migas{padding-top:18px}
 .migas ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;font-size:14.5px;color:var(--texto-2)}
@@ -960,60 +969,52 @@ body{padding-bottom:0}
 .migas a:hover{color:var(--texto);text-decoration-color:currentColor}
 .migas [aria-current]{color:var(--texto)}
 
-.pagina{max-width:780px;margin-inline:auto}
-.pagina-cab{padding-block:22px 6px}
-.pagina-cab h1{font-size:clamp(31px,7.2vw,52px);line-height:1.04;letter-spacing:-.03em;max-width:25ch}
-.pagina-cab .entradilla{max-width:58ch;font-size:clamp(18px,4.6vw,21px);margin-top:20px}
-.pagina-cab .acciones{margin-top:26px}
+/* Cabecera: el texto y, al lado (o debajo en el móvil), una imagen real */
+.pagina-cab{display:grid;gap:40px;padding-block:20px 64px;align-items:center}
+.pagina-cab h1{font-size:clamp(34px,8.6vw,60px);line-height:1.02;letter-spacing:-.034em;max-width:17ch;text-wrap:balance}
+.pagina-cab .entradilla{max-width:42ch}
+.pagina-cab .antetitulo{margin-bottom:14px}
+.pagina-figura{margin:0;justify-self:center;width:100%}
+.pagina-figura figcaption{margin-top:14px;font-size:14.5px;line-height:1.4;color:var(--texto-2);text-align:center}
+.figura-app{max-width:540px}
+.figura-app img{display:block;width:100%;height:auto;border-radius:22px;background:var(--crudo);box-shadow:0 0 0 1px var(--borde),0 30px 60px -30px color-mix(in srgb,var(--pino-claro) 55%,transparent)}
+.figura-movil{position:relative;isolation:isolate;max-width:270px}
+.figura-movil .movil{margin-inline:auto}
+.figura-movil figcaption{margin-top:44px}
+.figura-foto{max-width:600px}
+.figura-foto img{display:block;width:100%;height:auto;aspect-ratio:4/3.2;object-fit:cover;border-radius:28px;background:var(--pino-profundo);box-shadow:var(--sombra-3)}
+.pagina-cab.sin-figura h1{max-width:21ch}
+.pagina-cab.sin-figura .entradilla{max-width:52ch}
+@media (min-width:900px){
+  .pagina-cab{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:64px;padding-block:32px 104px}
+  .pagina-cab.sin-figura{grid-template-columns:minmax(0,1fr);padding-bottom:72px}
+  .pagina-cab-texto{padding-block:12px}
+}
 
-.texto{padding-top:44px;padding-bottom:12px;font-size:18px;line-height:1.65}
-.texto > :first-child{margin-top:0}
-.texto h2{font-size:clamp(26px,5.6vw,36px);line-height:1.1;margin:60px 0 6px;max-width:26ch}
-.texto h3{font-size:clamp(19px,4.6vw,22px);line-height:1.25;letter-spacing:-.012em;margin:32px 0 2px}
-.texto p{margin-top:14px;max-width:66ch}
-.texto h2 + p,.texto h3 + p{margin-top:12px}
-.texto a{color:var(--acento-texto);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:color .2s ease}
-.texto a:hover{color:var(--texto)}
-.texto em{color:var(--texto-2)}
-.texto .nota-ejemplo{color:var(--texto-2);font-size:16px;margin-top:22px}
-.texto ul{list-style:none;margin:14px 0 0;padding:0;max-width:66ch;display:grid;gap:8px}
-.texto ul li{position:relative;padding-left:26px}
-.texto ul li::before{content:"";position:absolute;left:4px;top:.72em;width:8px;height:8px;border-radius:50%;background:var(--acento)}
-.texto code{font-size:.9em;padding:1px 6px;border-radius:6px;background:var(--acento-sutil)}
+/* Los 3-4 puntos: como las cajas de «Cuatro cosas que dejas de hacer a mano», solo con texto */
+.puntos-bloque{padding-top:8px}
+.puntos{display:grid;gap:14px;margin-top:32px}
+.punto{margin:0;padding:26px 24px 28px;border-radius:26px;background:color-mix(in srgb,var(--niebla) 42%,var(--fondo));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--borde) 70%,transparent)}
+:root[data-tema="oscuro"] .punto{background:var(--superficie)}
+.punto h3{font-size:clamp(21px,5vw,25px);line-height:1.12;letter-spacing:-.022em;max-width:20ch;text-wrap:balance}
+.punto p{margin-top:10px;color:var(--texto-2);font-size:16.5px;line-height:1.55;max-width:46ch}
+@media (min-width:700px){.puntos-4{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+@media (min-width:900px){.puntos-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.punto{padding:32px 30px 34px}}
 
-/* Las tablas de ejemplo: el scroll de lado es solo de la tabla, nunca de la página */
-.tabla-caja{margin:18px 0 6px;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border-radius:18px;background:var(--superficie);box-shadow:var(--filo),0 0 0 1px var(--borde),var(--sombra-1);-webkit-overflow-scrolling:touch}
-.tabla-caja table{width:100%;min-width:480px;border-collapse:collapse;font-size:16px;line-height:1.4;font-variant-numeric:tabular-nums}
-.tabla-caja th,.tabla-caja td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--borde)}
-.tabla-caja thead th{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--texto-2);background:var(--superficie-alt);white-space:nowrap}
-.tabla-caja tbody th{font-weight:400}
-.tabla-caja .num{text-align:right}
-.tabla-caja td.num{white-space:nowrap}
-.tabla-caja tbody tr:last-child > *{border-bottom:0}
-.tabla-caja tr.total{background:var(--acento-sutil)}
-.tabla-caja tr.total > *,.tabla-caja strong{font-weight:700}
-.tabla-caja:focus-visible{outline-offset:2px}
+/* Las 3 preguntas: las de la portada, en una sola columna */
+.preguntas-bloque{padding-top:0;padding-bottom:16px}
+.preguntas-bloque .faq{grid-template-columns:1fr;max-width:820px}
+.preguntas-bloque .faq details:nth-last-child(2){border-bottom:0}
+.preguntas-bloque .faq details:last-child{border-bottom:1px solid var(--borde)}
 
-.texto .faq{margin-top:24px;grid-template-columns:1fr}
-.texto .faq details:nth-last-child(2){border-bottom:0}
-.texto .faq details:last-child{border-bottom:1px solid var(--borde)}
-.texto .faq details p{max-width:62ch;margin-top:0}
-.texto .faq details ul{padding-bottom:20px;color:var(--texto-2)}
-.texto .faq summary{font-size:clamp(17px,4.4vw,19px)}
-.texto .faq a{color:var(--acento-texto)}
-
-.contacto.demo-pagina .titular{max-width:22ch}
-.contacto.demo-pagina .explica{max-width:62ch}
-.contacto .nota-facturas{margin-top:18px;font-size:14.5px;color:var(--texto-2)}
-
-.sigue{padding-block:8px 72px}
-.sigue h2{font-size:clamp(26px,5.4vw,36px)}
-.sigue ul{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
+/* Más de Kontrol: tres enlaces a otras páginas */
+.sigue{padding-block:8px 80px}
+.sigue h2{font-size:clamp(24px,5.2vw,32px)}
+.sigue ul{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
 .sigue a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:16px 20px;border-radius:20px;background:var(--superficie);background-image:linear-gradient(to bottom,color-mix(in srgb,var(--luz) 40%,transparent),transparent 40%);box-shadow:var(--filo),0 0 0 1px var(--borde),var(--sombra-1);color:var(--texto);font-weight:700;font-size:18px;line-height:1.25;text-decoration:none;transition:transform .25s var(--curva),box-shadow .25s var(--curva)}
 :root[data-tema="oscuro"] .sigue a{background-image:none}
 .sigue a:hover{transform:translateY(-3px);box-shadow:var(--filo),0 0 0 1px var(--borde-fuerte),var(--sombra-2)}
 .sigue a .icono{color:var(--acento);transition:transform .25s var(--curva)}
 .sigue a:hover .icono{transform:translateX(3px)}
-@media (min-width:700px){.sigue ul{grid-template-columns:1fr 1fr}}
-
-@media (min-width:900px){.contacto.demo-pagina.bloque{padding-block:96px}.texto h2{margin-top:72px}}
+@media (min-width:900px){.sigue ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.sigue a,.sigue a .icono{transition:none}.sigue a:hover,.sigue a:hover .icono{transform:none}}
