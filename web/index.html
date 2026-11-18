@@ -686,6 +686,8 @@ button.dia.lleno::after{display:none}
 .pie .envoltura{display:grid;gap:18px}
 .pie nav{display:flex;flex-wrap:wrap;gap:4px 18px}
 .pie a{color:var(--texto-2);min-height:44px;display:inline-flex;align-items:center}
+.pie .mas-paginas{padding-top:12px;border-top:1px solid var(--borde)}
+.pie .mas-paginas a{color:var(--texto)}
 .pie .marca img{width:28px;height:28px;border-radius:7px}
 .pie .nombre-marca{font-size:16px}
 
@@ -745,6 +747,7 @@ button.dia.lleno::after{display:none}
   .contacto .tique{margin-top:24px}
   .pie .envoltura{grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:32px}
   .pie nav{justify-content:flex-end}
+  .pie .mas-paginas{grid-column:1 / -1;justify-content:flex-start}
   .pie .envoltura > span:last-child{grid-column:1 / -1}
 }
 /* Los dos tiques del contacto (WhatsApp y llamada) no caben en la columna estrecha hasta 1024 px:
@@ -1462,6 +1465,7 @@ body{padding-bottom:0}
   <div class="envoltura">
     <span class="marca"><img src="img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
     <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
     <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
   </div>
 </footer>

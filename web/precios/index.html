@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precios de Kontrol: 119, 199 o 263 € al mes + IVA</title>
+<meta name="description" content="Tres paquetes sin permanencia: Teresa (119 €), Teresa + Operaciones (199 €) y Full (263 €) al mes + IVA. Qué incluye cada uno y cómo se instala.">
+<link rel="canonical" href="https://kontrolapp.es/precios/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Kontrol">
+<meta property="og:url" content="https://kontrolapp.es/precios/">
+<meta property="og:title" content="Precios de Kontrol: 119, 199 o 263 € al mes + IVA">
+<meta property="og:description" content="Tres paquetes sin permanencia: Teresa (119 €), Teresa + Operaciones (199 €) y Full (263 €) al mes + IVA. Qué incluye cada uno y cómo se instala.">
+<meta property="og:image" content="https://kontrolapp.es/img/foto-albaran-1100.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F5F1EA">
+<link rel="icon" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preload" href="/fuentes/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kontrol",
+          "item": "https://kontrolapp.es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Precios",
+          "item": "https://kontrolapp.es/precios/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Hay permanencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Cambias de paquete o lo dejas cuando quieras."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los precios llevan IVA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Son 119 €, 199 € y 263 € al mes, y a eso se le suma el IVA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué cuenta como un papel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una factura o un albarán. Los papeles de los tres meses anteriores que cargamos al empezar no cuentan en tu mes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo cambiar de paquete más adelante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, cuando quieras, hacia arriba o hacia abajo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánta gente puede entrar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una persona con el Paquete Teresa, tres con Teresa + Operaciones y las que quieras con el Paquete Full. Cada una entra con su correo y su contraseña, y tú decides qué ve."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script>
+/* ── LO QUE SE PUEDE CAMBIAR, EN UN SOLO SITIO ─────────────────────────────────────────────────
+   «Kontrol» es provisional, y «Teresa» es la ayudante. Se cambian AQUÍ y cambian en toda la
+   página: los textos, la pestaña del navegador y los mensajes. (Las capturas y vídeos de la app
+   llevan el nombre que tenga la app: al cambiarlo allí, se vuelven a sacar.) */
+window.MARCA = {
+  producto: "Kontrol",
+  ayudante: "Teresa",
+  whatsapp: "34686679713",                           /* el de soporte, el mismo que en la app */
+  correo: "ventas@kontrolapp.es",                    /* adonde llegan los mensajes del formulario (el de ventas, desde el 28-sep) */
+  formulario: "https://n8n.delamotech.es/webhook/kontrol-contacto", /* el flujo que envía el correo solo (n8n, desde el 28-sep)
+                                                        (n8n); vacía = se abre el correo del visitante */
+  horas: "https://n8n.delamotech.es/webhook/kontrol-huecos",     /* las horas libres para la llamada (n8n);
+                                                        vacía = horas de ejemplo y no se apunta nada */
+  agendar: "https://n8n.delamotech.es/webhook/kontrol-llamada",  /* donde se apunta la llamada (n8n) */
+  entrar: "https://app.kontrolapp.es/app/entrar",
+  mensaje: "Hola, os mando 3 o 4 facturas para ver cómo quedaría {producto} con los datos de mi negocio.",
+  plazas: 10,                                         /* PROMO: plazas que QUEDAN con el primer mes gratis (de 10). Con 10 pone «para los 10 primeros»; con menos, «quedan X plazas».
+                                                        Cambia este número cada vez que entre un cliente; con 0 la promo desaparece de la web */
+  plazasTotal: 10
+};
+/* Abre en claro; el oscuro solo si esta persona lo eligió con el interruptor (o #oscuro en la dirección) */
+try {
+  if (localStorage.getItem("kontrol-web-tema") === "oscuro" || location.hash === "#oscuro")
+    document.documentElement.setAttribute("data-tema", "oscuro");
+} catch (e) {}
+</script>
+<link rel="stylesheet" href="/paginas.css">
+</head>
+
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="i-chef-hat" viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z"/><path d="M6 17h12"/></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="i-folder-archive" viewBox="0 0 24 24"><circle cx="15" cy="19" r="2"/><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"/><path d="M15 11v-1"/><path d="M15 17v-2"/></symbol><symbol id="i-shopping-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol><symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol><symbol id="i-boxes" viewBox="0 0 24 24"><path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z"/><path d="m7 16.5-4.74-2.85"/><path d="m7 16.5 5-3"/><path d="M7 16.5v5.17"/><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z"/><path d="m17 16.5-5-3"/><path d="m17 16.5 4.74-2.85"/><path d="M17 16.5v5.17"/><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z"/><path d="M12 8 7.26 5.15"/><path d="m12 8 4.74-2.85"/><path d="M12 13.5V8"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol><symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol><symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></symbol><symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="i-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol><symbol id="i-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48"/><path d="M15 6h1v4"/><path d="m6.134 14.768.866-.5 2 3.464"/><circle cx="16" cy="8" r="6"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol><symbol id="i-ayuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol><symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol><symbol id="i-archive" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol><symbol id="i-forward" viewBox="0 0 24 24"><path d="m15 17 5-5-5-5"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-calendar-check" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol><symbol id="i-calendar-plus" viewBox="0 0 24 24"><path d="M16 19h6"/><path d="M16 2v4"/><path d="M19 16v6"/><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5"/><path d="M3 10h18"/><path d="M8 2v4"/></symbol><symbol id="i-rotate-cw" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol></svg>
+<a class="salta" href="#principal">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="envoltura cabecera-fila">
+    <a class="marca" href="/" aria-label="Kontrol, inicio"><img src="/img/kontrol-icono.webp" alt="" width="34" height="34"><span class="nombre-marca" data-marca="producto">Kontrol</span></a>
+    <nav class="nav-principal" aria-label="Principal">
+      <a class="nav-enlace" href="/#como">Cómo funciona</a>
+      <a class="nav-enlace" href="/#teresa" data-marca="ayudante">Teresa</a>
+      <a class="nav-enlace" href="/precios/">Precios</a>
+      <a class="nav-enlace" href="/#preguntas">Preguntas</a>
+    </nav>
+    <a class="nav-enlace cab-entrar" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a>
+    <a class="boton boton-cab" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo</a>
+    <button class="redondo tema-boton cab-tema" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button>
+    <button class="redondo menu-boton" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menú" data-menu><svg class="icono abrir" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icono cerrar" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="menu" id="menu" hidden>
+    <div class="envoltura">
+      <div class="menu-caja">
+        <ul class="menu-lista">
+          <li><a href="/#como"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-file-text"/></svg></span><b>Cómo funciona</b><small>Papeles, precios, escandallo y margen</small></a></li>
+          <li><a href="/#teresa"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg></span><b data-marca="ayudante">Teresa</b><small>La administrativa inteligente de Kontrol</small></a></li>
+          <li><a href="/precios/"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-coins"/></svg></span><b>Precios</b><small>Desde 119 € al mes + IVA, sin permanencia</small></a></li>
+          <li><a href="/#preguntas"><span class="tecla"><svg class="icono" aria-hidden="true"><use href="#i-ayuda"/></svg></span><b>Preguntas</b><small>Lo que nos suelen preguntar</small></a></li>
+        </ul>
+        <div class="menu-pie">
+          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo por WhatsApp</a>
+          <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
+          <div class="fila"><a class="tel-enlace" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg><span data-telefono>686 679 713</span></a><a class="enlace" data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></div>
+          <div class="fila"><span>Modo oscuro</span><button class="redondo tema-boton" type="button" aria-pressed="false" aria-label="Pasar a modo oscuro" title="Pasar a modo oscuro"><svg class="icono luna" aria-hidden="true"><use href="#i-moon"/></svg><svg class="icono sol" aria-hidden="true"><use href="#i-sun"/></svg></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="menu-velo" hidden></div>
+<div class="menu-velo" hidden></div>
+
+<main id="principal">
+  <article class="pagina envoltura">
+  <nav class="migas" aria-label="Migas de pan"><ol><li><a href="/">Kontrol</a></li><li><span aria-current="page">Precios</span></li></ol></nav>
+  <header class="pagina-cab" id="inicio"><h1>Precios de Kontrol: tres paquetes, sin permanencia</h1><p class="entradilla">Kontrol cuesta 119 €, 199 € o 263 € al mes, más IVA, según lo que quieras que haga por ti. No hay permanencia: cambias de paquete o lo dejas cuando quieras.</p><div class="acciones"><a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo gratis</a><a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Por correo</a></div></header>
+  <div class="texto">
+<h2 id="los-tres-paquetes">Los tres paquetes</h2>
+<div class="tabla-caja" role="region" tabindex="0" aria-label="Ejemplo: Los tres paquetes"><table><thead><tr><th scope="col"></th><th scope="col">Paquete Teresa</th><th scope="col">Teresa + Operaciones</th><th scope="col">Paquete Full</th></tr></thead><tbody><tr class="total"><th scope="row"><strong>Al mes, sin IVA</strong></th><td><strong>119 €</strong></td><td><strong>199 €</strong></td><td><strong>263 €</strong></td></tr><tr><th scope="row">Para qué</th><td>Tus papeles</td><td>Y tus números</td><td>Y tu equipo</td></tr><tr><th scope="row">Papeles al mes</th><td>150</td><td>350</td><td>700</td></tr><tr><th scope="row">Personas que entran</th><td>1</td><td>3</td><td>Sin límite</td></tr></tbody></table></div><p>Un papel es una factura o un albarán.</p><h3>Paquete Teresa: 119 € al mes + IVA</h3><p>Para dejar de llevar los papeles a mano.</p><ul><li>Lee tus facturas y albaranes.</li><li>Te avisa de errores y cambios de precio.</li><li>Cuadra cada factura con sus albaranes.</li><li>Todo listo para tu gestoría.</li></ul><p>Hasta 150 papeles al mes. Entra una persona.</p><h3>Teresa + Operaciones: 199 € al mes + IVA</h3><p>Para saber lo que ganas y dónde se te va.</p><ul><li>Todo lo del Paquete Teresa.</li><li>Escandallo de cada plato.</li><li>Lo que te queda cada mes.</li><li>Pedidos a tus proveedores.</li><li>Almacén e inventario.</li></ul><p>Hasta 350 papeles al mes. Entran tres personas.</p><h3>Paquete Full: 263 € al mes + IVA</h3><p>Para llevar también a tu equipo.</p><ul><li>Todo lo de Operaciones.</li><li>Horarios y cuadrantes de tu equipo.</li><li>Vacaciones y bajas.</li><li>Todos los empleados que tengas.</li></ul><p>Hasta 700 papeles al mes. Entran las personas que quieras.</p>
+<h2 id="la-instalacion-te-lo-montamos-nosotros">La instalación: te lo montamos nosotros</h2>
+<p>No te damos una contraseña y un manual. Cargamos tus papeles de los últimos 3 meses, para que el primer día ya veas tus números y no una pantalla vacía, y te enseñamos a usarlo.</p><!-- PENDIENTE DE PABLO: la web de hoy no publica el precio de la instalación. Si se quiere poner aquí, que lo confirme él; hasta entonces, esta página no da ninguna cifra. -->
+<h2 id="como-elegir-paquete">Cómo elegir paquete</h2>
+<p class="nota-ejemplo"><em>Ejemplo orientativo: cada negocio es distinto.</em></p><p>Cuenta los papeles que te llegan en un mes. Un bar que recibe unos 5 albaranes a la semana y una docena de facturas al mes mueve alrededor de 35 papeles: le cabe de sobra en el Paquete Teresa, y elegirá por lo que quiere que haga Kontrol, no por el número.</p><ul><li>Si lo que te quita el sueño son los papeles y el gestor: Paquete Teresa.</li><li>Si quieres saber lo que te deja cada plato y lo que ganas cada mes: Teresa + Operaciones.</li><li>Si además quieres los horarios, las vacaciones y las bajas de tu equipo: Paquete Full.</li></ul><p>Y si no lo tienes claro, te lo decimos en la demo, con lo que mueve tu negocio.</p>
+<h2 id="el-primer-mes">El primer mes</h2>
+<p>El primer mes es gratis para los 10 primeros negocios.</p><!-- PENDIENTE DE PABLO: confirmar que la oferta sigue abierta el día que se publique esta página. -->
+<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2><div class="faq"><details><summary>¿Hay permanencia?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Cambias de paquete o lo dejas cuando quieras.</p></details><details><summary>¿Los precios llevan IVA?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No. Son 119 €, 199 € y 263 € al mes, y a eso se le suma el IVA.</p></details><details><summary>¿Qué cuenta como un papel?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Una factura o un albarán. Los papeles de los tres meses anteriores que cargamos al empezar no cuentan en tu mes.</p></details><details><summary>¿Puedo cambiar de paquete más adelante?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sí, cuando quieras, hacia arriba o hacia abajo.</p></details><details><summary>¿Cuánta gente puede entrar?<svg class="icono" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Una persona con el Paquete Teresa, tres con Teresa + Operaciones y las que quieras con el Paquete Full. Cada una entra con su correo y su contraseña, y tú decides qué ve.</p></details></div>
+  </div>
+  </article>
+
+  <section class="contacto bloque demo-pagina" id="contacto" aria-labelledby="t-contacto"><div class="envoltura"><h2 id="t-contacto" class="titular">Pide tu demo</h2><p class="explica">Mándanos 3 o 4 facturas o albaranes por WhatsApp o a <a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a>. Te preparamos tu Kontrol con esos datos, te lo enviamos y luego lo vemos juntos. Gratis y sin compromiso. O llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a>: hablas con Luis o con Pablo.</p><div class="canales">
+        <article class="canal canal-principal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-message-circle"/></svg></span>
+          <h3>Por WhatsApp</h3>
+          <p>Haz una foto a tus facturas y mándanoslas.</p>
+          <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Mandar mis facturas</a>
+          <span class="telefono">Lo más rápido</span>
+        </article>
+        <article class="canal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-mail"/></svg></span>
+          <h3>Por correo</h3>
+          <p>Adjúntalas en PDF a <b data-correo>ventas@kontrolapp.es</b>.</p>
+          <a class="boton boton-borde" data-mail-demo href="mailto:ventas@kontrolapp.es"><svg class="icono" aria-hidden="true"><use href="#i-mail"/></svg>Escribir el correo</a>
+        </article>
+        <article class="canal aparece">
+          <span class="tecla" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
+          <h3>¿Prefieres hablar antes?</h3>
+          <p>Hablas con Luis o con Pablo, los founders de <span data-marca="producto">Kontrol</span>.</p>
+          <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar una llamada</button>
+          <span class="telefono">o llámanos al <a data-tel href="tel:+34686679713"><span data-telefono>686 679 713</span></a></span>
+        </article>
+      </div><p class="nota-facturas">Tus facturas solo las usamos para preparar tu demo.</p></div></section>
+  <section class="sigue" aria-labelledby="t-sigue"><div class="envoltura"><h2 id="t-sigue" class="titular" style="max-width:none">Sigue leyendo</h2><ul><li><a href="/facturas-y-albaranes/">Facturas y albaranes<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/escandallos/">Escandallos<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/personal-y-nominas/">Personal y nóminas<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li><li><a href="/restaurantes-y-bares/">Kontrol para restaurantes y bares<svg class="icono" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li></ul></div></section>
+
+  <!-- AGENDAR UNA LLAMADA: el calendario sale como un tique grande. Las horas las da n8n (MARCA.horas). -->
+  <dialog class="agenda" id="agenda" aria-labelledby="agenda-titulo">
+    <div class="agenda-caja">
+      <header class="agenda-cabeza">
+        <span class="agenda-icono" aria-hidden="true"><svg class="icono"><use href="#i-phone-call"/></svg></span>
+        <div>
+          <h2 id="agenda-titulo">Agenda tu demo</h2>
+          <p>Elige el día y la hora. Te llamamos y te enseñamos <span data-marca="producto">Kontrol</span>.</p>
+        </div>
+        <button class="agenda-cerrar" type="button" data-cerrar aria-label="Cerrar"><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </header>
+
+      <section class="agenda-paso" data-paso="elegir">
+        <p class="agenda-aviso" role="alert" hidden></p>
+        <div class="agenda-rejilla">
+          <div class="mes">
+            <div class="mes-cabeza">
+              <button class="mes-flecha" type="button" data-mes="-1" aria-label="Mes anterior"><svg class="icono" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+              <b class="mes-nombre" aria-live="polite"></b>
+              <button class="mes-flecha" type="button" data-mes="1" aria-label="Mes siguiente"><svg class="icono" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+            </div>
+            <div class="mes-semana" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+            <div class="mes-dias"></div>
+          </div>
+          <div class="horas">
+            <p class="horas-dia"></p>
+            <div class="horas-lista"></div>
+            <div class="horas-fallo" hidden>
+              <p>No hemos podido ver las horas libres ahora mismo.</p>
+              <div class="acciones">
+                <button class="boton boton-borde" type="button" data-reintentar><svg class="icono" aria-hidden="true"><use href="#i-rotate-cw"/></svg>Probar otra vez</button>
+                <a class="enlace" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener">o escríbenos por WhatsApp</a>
+              </div>
+            </div>
+            <p class="horas-pie"><span class="punto-vivo" aria-hidden="true"></span><span class="horas-estado">Las horas tachadas ya están cogidas.</span></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="agenda-paso" data-paso="datos" hidden>
+        <button class="elegida" type="button" data-volver>
+          <svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="elegida-texto"><b data-elegida-dia></b><span data-elegida-hora></span></span>
+          <span class="elegida-cambiar">Cambiar</span>
+        </button>
+        <form class="formulario" id="form-llamada" novalidate>
+          <div class="dos">
+            <div class="campo"><label for="l-nombre">Nombre</label><input id="l-nombre" name="nombre" autocomplete="name" maxlength="120" required><span class="error" hidden></span></div>
+            <div class="campo"><label for="l-telefono">Teléfono</label><input id="l-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required><span class="error" hidden></span></div>
+          </div>
+          <div class="dos">
+            <div class="campo"><label for="l-negocio">Tu negocio <span class="opcional">(si quieres)</span></label><input id="l-negocio" name="negocio" autocomplete="organization" maxlength="160" placeholder="Restaurante, bar u hotel, y dónde"></div>
+            <div class="campo"><label for="l-correo">Correo <span class="opcional">(si quieres)</span></label><input id="l-correo" name="correo" type="email" autocomplete="email" maxlength="160"><span class="error" hidden></span></div>
+          </div>
+          <div class="campo"><label for="l-nota">Qué te gustaría saber <span class="opcional">(si quieres)</span></label><textarea id="l-nota" name="nota" rows="3" maxlength="1500"></textarea></div>
+          <div class="trampa" aria-hidden="true"><label for="l-web">No rellenes esto</label><input id="l-web" name="web" tabindex="-1" autocomplete="off"></div>
+          <div class="acepto"><input type="checkbox" id="l-acepto" name="acepto" required><label for="l-acepto">He leído la <a href="https://app.kontrolapp.es/privacidad" target="_blank" rel="noopener">política de privacidad</a> y quiero que me llaméis.</label><span class="error" hidden></span></div>
+          <button class="boton" type="submit"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Confirmar la demo</button>
+          <p class="estado" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="agenda-paso agenda-hecho" data-paso="hecho" hidden tabindex="-1">
+        <svg class="icono" aria-hidden="true"><use href="#i-calendar-check"/></svg>
+        <h3>Hecho. Te llamamos el <span data-hecho-cuando></span>.</h3>
+        <p>Al <b data-hecho-tel></b>. Si te surge algo, escríbenos por <a data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p class="agenda-demo" hidden>Esto es una vista previa: aquí no se apunta nada. En la web de verdad, la llamada queda en vuestro calendario y os llega un correo.</p>
+        <div class="acciones">
+          <button class="boton boton-borde" type="button" data-ics><svg class="icono" aria-hidden="true"><use href="#i-calendar-plus"/></svg>Añadir a mi calendario</button>
+          <button class="boton" type="button" data-cerrar>Listo</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <span class="marca"><img src="/img/kontrol-icono.webp" alt="" width="28" height="28"><span class="nombre-marca" data-marca="producto">Kontrol</span></span>
+    <nav aria-label="Legal"><a data-tel href="tel:+34686679713">Tel.&nbsp;<span data-telefono>686 679 713</span></a><a data-correo href="mailto:ventas@kontrolapp.es">ventas@kontrolapp.es</a><a href="https://app.kontrolapp.es/legal">Aviso legal</a><a href="https://app.kontrolapp.es/privacidad">Privacidad</a><a href="https://app.kontrolapp.es/cookies">Cookies</a><a href="https://app.kontrolapp.es/condiciones">Condiciones</a><a data-entrar href="https://app.kontrolapp.es/app/entrar">Entrar</a></nav>
+    <nav class="mas-paginas" aria-label="Más sobre Kontrol"><a href="/escandallos/">Escandallos</a><a href="/facturas-y-albaranes/">Facturas y albaranes</a><a href="/almacen-y-merma/">Almacén y merma</a><a href="/personal-y-nominas/">Personal y nóminas</a><a href="/ventas-y-cierres-de-caja/">Ventas y cierres de caja</a><a href="/precios/">Precios</a><a href="/restaurantes-y-bares/">Restaurantes y bares</a><a href="/tiendas/">Tiendas</a><a href="/menorca-y-baleares/">Menorca y Baleares</a><a href="/verifactu/">Verifactu</a></nav>
+    <span>Hecho por Luis y Pablo. Pantallas y vídeos de la app de verdad, con un restaurante de ejemplo; las fotos de ambiente son ilustrativas.</span>
+  </div>
+</footer>
+
+<nav class="barra-movil" aria-label="Pide una demo">
+  <a class="boton" data-wa href="https://wa.me/34686679713" target="_blank" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-message-circle"/></svg>Pide tu demo</a>
+  <button class="boton boton-borde" type="button" data-agenda aria-haspopup="dialog"><svg class="icono" aria-hidden="true"><use href="#i-calendar"/></svg>Agendar</button>
+  <a class="boton boton-borde" data-tel href="tel:+34686679713"><svg class="icono" aria-hidden="true"><use href="#i-phone-call"/></svg>Llamar</a>
+</nav>
+<script src="/paginas.js"></script>
+</body>
+</html>

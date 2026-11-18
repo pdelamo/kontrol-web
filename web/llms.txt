@@ -1,0 +1,58 @@
+# Kontrol
+
+> Kontrol es un programa para bares, restaurantes y tiendas de España que lleva los papeles del negocio. Lee las facturas y los albaranes a partir de una foto, un PDF o un correo, comprueba las cuentas al céntimo, calcula el escandallo de cada plato y el margen del mes, y lleva el almacén, el personal y las ventas. Funciona en el móvil y en el ordenador.
+
+Quien lee y comprueba los papeles dentro de Kontrol se llama Teresa, la administrativa de Kontrol: el dueño puede preguntarle desde cualquier pantalla y contesta con los números de su negocio.
+
+## Para quién es
+
+- Bares, restaurantes y hoteles.
+- Tiendas, también en recargo de equivalencia.
+- Dueños que no son contables: su parte es hacer la foto y revisar lo que no cuadra.
+
+## Qué hace
+
+- Lee facturas y albaranes y comprueba cada línea, la base, el IVA y el total.
+- Avisa de los errores en el precio y de las subidas, con el mensaje para el proveedor ya escrito. El mensaje lo envía el dueño.
+- Evita que un albarán y la factura que lo junta cuenten dos veces.
+- Prepara el Excel y los papeles para la gestoría, por meses o por trimestre.
+- Calcula el escandallo de cada plato con el precio del último albarán, sin IVA.
+- Lleva el almacén con recuentos hechos con el móvil y calcula la merma entre dos recuentos.
+- Trae las ventas de la caja: conectada, por correo, con un Excel o con la foto del cierre de caja.
+- Guarda la ficha de cada persona del equipo, con su contrato y sus nóminas, y lleva horarios, vacaciones y bajas.
+
+## Qué no hace
+
+- No hace facturas ni tickets y no es un TPV. Por eso Verifactu no se le aplica a Kontrol.
+- No sustituye a la gestoría ni da consejo fiscal.
+- No envía ni cambia nada sin el visto bueno del dueño.
+
+## Precios
+
+Al mes, sin IVA y sin permanencia:
+
+- Paquete Teresa, 119 €: lectura de facturas y albaranes, avisos de errores y cambios de precio, cuadre de facturas con albaranes y lo de la gestoría. Hasta 150 papeles al mes y 1 persona.
+- Teresa + Operaciones, 199 €: todo lo anterior más escandallo, margen del mes, pedidos a proveedores y almacén. Hasta 350 papeles al mes y 3 personas.
+- Paquete Full, 263 €: todo lo anterior más horarios, vacaciones y bajas, para todos los empleados. Hasta 700 papeles al mes y personas sin límite.
+
+Un papel es una factura o un albarán. La puesta en marcha la hace el equipo de Kontrol: carga los papeles de los últimos 3 meses y enseña a usarlo.
+
+## Páginas
+
+- [Escandallos](https://kontrolapp.es/escandallos): cómo se calcula el coste de cada plato y el food cost con el precio del último albarán.
+- [Facturas y albaranes](https://kontrolapp.es/facturas-y-albaranes): cómo se digitalizan con una foto, los errores en el precio y lo de la gestoría.
+- [Almacén y merma](https://kontrolapp.es/almacen-y-merma): recuentos, lo que debería quedar y cómo se calcula la merma.
+- [Personal y nóminas](https://kontrolapp.es/personal-y-nominas): lo que cuesta cada empleado, contratos y nóminas que se leen solas, horarios y bajas.
+- [Ventas y cierres de caja](https://kontrolapp.es/ventas-y-cierres-de-caja): las formas de traer las ventas y cómo se comprueba un cierre de caja.
+- [Precios](https://kontrolapp.es/precios): los tres paquetes y lo que incluye cada uno.
+- [Restaurantes y bares](https://kontrolapp.es/restaurantes-y-bares): Kontrol en hostelería, con un ejemplo del margen del mes.
+- [Tiendas](https://kontrolapp.es/tiendas): Kontrol en el comercio, con recargo de equivalencia.
+- [Menorca y Baleares](https://kontrolapp.es/menorca-y-baleares): puesta en marcha en persona y convenio de hostelería de las Illes Balears.
+- [Verifactu](https://kontrolapp.es/verifactu): qué es, a quién le toca y las fechas vigentes, con sus fuentes oficiales.
+
+## Contacto
+
+- Web: https://kontrolapp.es
+- Demo: se piden enviando 3 o 4 facturas o albaranes a ventas@kontrolapp.es
+- Teléfono: 686 679 713
+- Hecho por Luis y Pablo.
