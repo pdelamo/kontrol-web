@@ -1,6 +1,6 @@
 # Kontrol
 
-> Kontrol es un programa para bares, restaurantes y tiendas de España que lleva los papeles del negocio. Lee las facturas y los albaranes a partir de una foto, un PDF o un correo, comprueba las cuentas al céntimo, calcula el escandallo de cada plato y el margen del mes, y lleva el almacén, el personal y las ventas. Funciona en el móvil y en el ordenador.
+> Kontrol es un programa para bares, restaurantes y tiendas de la península y Baleares que lleva los papeles del negocio. Lee las facturas y los albaranes a partir de una foto, un PDF o un correo, comprueba las cuentas al céntimo, calcula el escandallo de cada plato y el margen del mes, y lleva el almacén, el personal y las ventas. Funciona en el móvil y en el ordenador.
 
 Quien lee y comprueba los papeles dentro de Kontrol se llama Teresa, la administrativa de Kontrol: el dueño puede preguntarle desde cualquier pantalla y contesta con los números de su negocio.
 

@@ -11,7 +11,7 @@ enlaces:
   - /facturas-y-albaranes
 ---
 
-Kontrol es el programa que lleva los papeles de bares, restaurantes y tiendas de Menorca y del resto de Baleares: facturas, escandallos, almacén, personal y ventas. Te atienden Luis y Pablo, los founders de Kontrol.
+Kontrol es el programa que lleva los papeles de bares, restaurantes y tiendas de Menorca y del resto de Baleares: facturas, escandallos, almacén, personal y ventas. Funciona igual en toda la península; aquí te contamos lo que además tiene en cuenta en las islas.
 
 ## Hecho para cómo se trabaja en las islas.
 
@@ -35,5 +35,5 @@ Sí: Kontrol. Lee tus facturas y albaranes, también en catalán, y lleva tus es
 ### ¿Tiene en cuenta el convenio de hostelería de Baleares?
 Sí: Teresa, la administrativa de Kontrol, lo tiene en cuenta cuando le preguntas por tu equipo. Lo que haya que decidir sobre un contrato o una nómina lo lleva tu gestoría.
 
-### ¿Con quién hablo?
-Con Luis o con Pablo, los founders de Kontrol.
+### ¿Kontrol es solo para Menorca y Baleares?
+No. Funciona igual en toda la península. Esta página cuenta lo que además tiene en cuenta en las islas: los albaranes en catalán, la temporada y el convenio de hostelería de Baleares.
