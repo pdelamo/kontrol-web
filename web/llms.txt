@@ -13,7 +13,7 @@ Quien lee y comprueba los papeles dentro de Kontrol se llama Teresa, la administ
 ## Qué hace
 
 - Lee facturas y albaranes y comprueba cada línea, la base, el IVA y el total.
-- Avisa de las subidas de precio y de los errores en el precio. Para los errores, deja escrito el mensaje para el proveedor; lo envía el dueño.
+- Avisa de los errores en el precio y de las subidas, con el mensaje para el proveedor ya escrito. El mensaje lo envía el dueño.
 - Evita que un albarán y la factura que lo junta cuenten dos veces.
 - Prepara el Excel y los papeles para la gestoría, por meses o por trimestre.
 - Calcula el escandallo de cada plato con el precio del último albarán, sin IVA.
