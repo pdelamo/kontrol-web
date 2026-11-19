@@ -1,8 +1,8 @@
 ---
 slug: almacen-y-merma
-title: Inventario y merma de tu bar o restaurante | Kontrol
+title: Inventario y merma de tu negocio | Kontrol
 description: Cuenta el almacén con el móvil y Kontrol te dice lo que vale, lo que debería quedarte hoy y cuánto se ha perdido entre dos recuentos.
-etiqueta: Para restaurantes, bares y tiendas
+etiqueta: Para tu negocio
 h1: Inventario y merma: lo que tienes en el almacén y lo que se pierde
 imagen: foto-pedido
 enlaces:
@@ -11,7 +11,7 @@ enlaces:
   - /escandallos
 ---
 
-Kontrol lleva el inventario de tu restaurante, tu bar o tu tienda con recuentos que haces de pie, con el móvil. Con dos recuentos, tus albaranes y tus ventas, calcula la merma: lo que se pierde por el camino.
+Kontrol lleva el inventario de tu negocio con recuentos que haces de pie, con el móvil. Con dos recuentos, tus albaranes y tus ventas, calcula la merma: lo que se pierde por el camino.
 
 ## Lo que ninguna factura te cuenta.
 
@@ -29,7 +29,7 @@ Si faltan datos para calcular la merma, Kontrol no da un número: te dice qué f
 
 ## Preguntas frecuentes
 
-### ¿Cómo se calcula la merma de un bar o restaurante?
+### ¿Cómo se calcula la merma de un negocio?
 Cuentas el almacén dos veces. Al primer recuento se le suma lo comprado y se le resta lo vendido: lo que falte en el segundo es la merma.
 
 ### ¿Cada cuánto hay que hacer inventario?

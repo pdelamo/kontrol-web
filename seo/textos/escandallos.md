@@ -1,8 +1,8 @@
 ---
 slug: escandallos
-title: Escandallo de restaurante: el coste de cada plato | Kontrol
+title: Escandallo: lo que te cuesta cada plato | Kontrol
 description: Kontrol calcula el escandallo de cada plato con el precio de tu último albarán y te dice lo que cuesta, lo que te deja y su margen, sin IVA.
-etiqueta: Para restaurantes, bares y hoteles
+etiqueta: Para negocios con cocina
 h1: Escandallos: lo que te cuesta cada plato y lo que te deja
 imagen: tarjeta-platos
 enlaces:
@@ -11,7 +11,7 @@ enlaces:
   - /ventas-y-cierres-de-caja
 ---
 
-Kontrol calcula el escandallo de cada plato de tu restaurante o tu bar con el precio de tu último albarán. Si un proveedor cambia un precio, el coste del plato se pone al día solo.
+Kontrol calcula el escandallo de cada plato de tu carta con el precio de tu último albarán. Si un proveedor cambia un precio, el coste del plato se pone al día solo.
 
 ## Tu carta, con los costes de esta semana.
 

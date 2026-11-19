@@ -2,7 +2,7 @@
 slug: facturas-y-albaranes
 title: Digitalizar facturas y albaranes con una foto | Kontrol
 description: Haz una foto al albarán y Kontrol lo lee línea a línea, avisa de los errores en el precio y deja listo el Excel y los papeles para tu gestoría.
-etiqueta: Para restaurantes, bares, hoteles y tiendas
+etiqueta: Para tu negocio
 h1: Facturas y albaranes: les haces una foto y se leen solos
 imagen: foto-albaran
 enlaces:
@@ -11,7 +11,7 @@ enlaces:
   - /verifactu
 ---
 
-Con Kontrol, tu bar, tu restaurante o tu tienda digitaliza sus facturas y albaranes con una foto. Teresa, la administrativa de Kontrol, lee cada línea, comprueba las cuentas al céntimo y te avisa si hay un error en el precio.
+Con Kontrol, tu negocio digitaliza sus facturas y albaranes con una foto. Teresa, la administrativa de Kontrol, lee cada línea, comprueba las cuentas al céntimo y te avisa si hay un error en el precio.
 
 ## Los papeles, sin repasarlos a mano.
 
@@ -29,7 +29,7 @@ Bajas el Excel con las facturas del mes o del trimestre y los papeles originales
 
 ## Preguntas frecuentes
 
-### ¿Cómo digitalizar las facturas y los albaranes de un restaurante?
+### ¿Cómo digitalizar las facturas y los albaranes de un negocio?
 Con una foto del móvil o con el PDF. Kontrol lee el proveedor, la fecha, cada línea, el IVA y el total.
 
 ### ¿Y si lee mal una cifra?

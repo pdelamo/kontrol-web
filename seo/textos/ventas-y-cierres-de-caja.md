@@ -1,8 +1,8 @@
 ---
 slug: ventas-y-cierres-de-caja
-title: Ventas y cierre de caja de tu restaurante | Kontrol
+title: Ventas y cierre de caja de tu negocio | Kontrol
 description: Tus ventas entran solas en Kontrol: con la caja conectada, con el informe del TPV por correo o con una foto del cierre de caja. Y sale tu margen.
-etiqueta: Para restaurantes, bares y tiendas
+etiqueta: Para tu negocio
 h1: Ventas y cierres de caja: lo que vendes, sin teclearlo
 imagen: tarjeta-margen
 enlaces:
@@ -11,7 +11,7 @@ enlaces:
   - /facturas-y-albaranes
 ---
 
-Kontrol trae las ventas de tu bar, tu restaurante o tu tienda como le vaya bien a tu caja: conectándola, con el informe del TPV por correo o con una foto del cierre de caja. Y sale tu margen.
+Kontrol trae las ventas de tu negocio como le vaya bien a tu caja: conectándola, con el informe del TPV por correo o con una foto del cierre de caja. Y sale tu margen.
 
 ## Eliges una forma, y con una basta.
 

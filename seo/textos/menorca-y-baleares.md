@@ -1,7 +1,7 @@
 ---
 slug: menorca-y-baleares
-title: Programa para bares y restaurantes en Menorca | Kontrol
-description: Kontrol lleva los papeles de bares, restaurantes y tiendas de Menorca y Baleares: lee albaranes en catalán y entiende la temporada y la ecotasa.
+title: Programa de gestión para negocios en Menorca | Kontrol
+description: Kontrol lleva los papeles de los negocios de Menorca y Baleares: lee albaranes en catalán y entiende la temporada y la ecotasa.
 etiqueta: Para negocios de Menorca y Baleares
 h1: Kontrol en Menorca y Baleares: tus papeles al día, también en temporada
 imagen: foto-pedido
@@ -11,7 +11,7 @@ enlaces:
   - /facturas-y-albaranes
 ---
 
-Kontrol es el programa que lleva los papeles de bares, restaurantes y tiendas de Menorca y del resto de Baleares: facturas, escandallos, almacén, personal y ventas. Funciona igual en toda la península; aquí te contamos lo que además tiene en cuenta en las islas.
+Kontrol es el programa que lleva los papeles de los negocios de Menorca y del resto de Baleares: facturas, escandallos, almacén, personal y ventas. Funciona igual en toda la península; aquí te contamos lo que además tiene en cuenta en las islas.
 
 ## Hecho para cómo se trabaja en las islas.
 
@@ -29,7 +29,7 @@ Cargamos tus papeles de los últimos 3 meses y te enseñamos a usarlo.
 
 ## Preguntas frecuentes
 
-### ¿Hay algún programa para llevar un bar o restaurante en Menorca?
+### ¿Hay algún programa para llevar los papeles de un negocio en Menorca?
 Sí: Kontrol. Lee tus facturas y albaranes, también en catalán, y lleva tus escandallos, tu almacén, tu personal y tus ventas.
 
 ### ¿Tiene en cuenta el convenio de hostelería de Baleares?

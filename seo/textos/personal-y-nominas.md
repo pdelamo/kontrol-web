@@ -1,8 +1,8 @@
 ---
 slug: personal-y-nominas
-title: Personal y nóminas en hostelería: lo que cuesta | Kontrol
+title: Personal y nóminas: lo que te cuesta tu equipo | Kontrol
 description: La ficha de cada persona con su contrato y sus nóminas, que se leen solas. Horarios, vacaciones, bajas y lo que te cuesta de verdad cada empleado.
-etiqueta: Para restaurantes, bares y hoteles
+etiqueta: Para tu negocio
 h1: Personal y nóminas: lo que te cuesta cada persona de tu equipo
 imagen: ninguna
 enlaces:
@@ -12,7 +12,7 @@ enlaces:
 revisar: CADA ENERO. Los % de la Seguridad Social (32,15 y 33,35 en 2026, con la cotización de accidentes de hostelería) cambian cada año: sacarlos de `coste-empresa.ts` de Kontrol.
 ---
 
-En Kontrol, cada persona de tu bar o tu restaurante tiene su ficha, con su contrato, sus nóminas, sus vacaciones y sus bajas. Sueltas los PDF de la gestoría y ves lo que te cuesta cada empleado.
+En Kontrol, cada persona de tu negocio tiene su ficha, con su contrato, sus nóminas, sus vacaciones y sus bajas. Sueltas los PDF de la gestoría y ves lo que te cuesta cada empleado.
 
 ## Tu mayor gasto, por fin a la vista.
 
@@ -27,8 +27,8 @@ Te avisamos 15 días antes de que acabe un periodo de prueba y 30 antes de que a
 
 ## Preguntas frecuentes
 
-### ¿Cuánto le cuesta un empleado a un bar o restaurante?
-Su sueldo bruto más la Seguridad Social que pagas tú: en hostelería, en 2026, un 32,15 % del bruto si es indefinido y un 33,35 % si es temporal.
+### ¿Cuánto le cuesta un empleado a un negocio?
+Su sueldo bruto más la Seguridad Social que pagas tú. Por ejemplo, en hostelería, en 2026, un 32,15 % del bruto si es indefinido y un 33,35 % si es temporal.
 
 ### ¿Kontrol hace las nóminas?
 No. Las hace tu gestoría, como siempre. Kontrol las lee para decirte lo que te cuesta de verdad cada persona: la cifra exacta está en su nómina.

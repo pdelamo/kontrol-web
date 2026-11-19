@@ -1,19 +1,19 @@
 # Kontrol
 
-> Kontrol es un programa para bares, restaurantes y tiendas de la península y Baleares que lleva los papeles del negocio. Lee las facturas y los albaranes a partir de una foto, un PDF o un correo, comprueba las cuentas al céntimo, calcula el escandallo de cada plato y el margen del mes, y lleva el almacén, el personal y las ventas. Funciona en el móvil y en el ordenador.
+> Kontrol es un programa que lleva los papeles de los negocios de la península y Baleares. Lee las facturas y los albaranes a partir de una foto, un PDF o un correo, comprueba las cuentas al céntimo, calcula el escandallo de cada plato y el margen del mes, y lleva el almacén, el personal y las ventas. Funciona en el móvil y en el ordenador.
 
 Quien lee y comprueba los papeles dentro de Kontrol se llama Teresa, la administrativa de Kontrol: el dueño puede preguntarle desde cualquier pantalla y contesta con los números de su negocio.
 
 ## Para quién es
 
-- Bares, restaurantes y hoteles.
-- Tiendas, también en recargo de equivalencia.
+- Negocios que compran a proveedores y quieren saber lo que les queda cada mes.
+- Hoy, sobre todo, hostelería y comercio (también tiendas en recargo de equivalencia).
 - Dueños que no son contables: su parte es hacer la foto y revisar lo que no cuadra.
 
 ## Qué hace
 
 - Lee facturas y albaranes y comprueba cada línea, la base, el IVA y el total.
-- Avisa de los errores en el precio y de las subidas, con el mensaje para el proveedor ya escrito. El mensaje lo envía el dueño.
+- Avisa de las subidas de precio y de los errores en el precio. Para los errores, deja escrito el mensaje para el proveedor; lo envía el dueño.
 - Evita que un albarán y la factura que lo junta cuenten dos veces.
 - Prepara el Excel y los papeles para la gestoría, por meses o por trimestre.
 - Calcula el escandallo de cada plato con el precio del último albarán, sin IVA.

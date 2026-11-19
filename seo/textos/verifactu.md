@@ -1,9 +1,9 @@
 ---
 slug: verifactu
-title: Verifactu en bares, restaurantes y tiendas: fechas | Kontrol
+title: Verifactu en tu negocio: qué es y cuándo te toca | Kontrol
 description: Qué es Verifactu, a quién le toca y desde cuándo. Y qué tiene que ver con Kontrol: nada, porque Kontrol no hace facturas ni tickets.
-etiqueta: Para bares, restaurantes y tiendas
-h1: Verifactu para bares, restaurantes y tiendas: qué es, a quién le toca y cuándo
+etiqueta: Para tu negocio
+h1: Verifactu para tu negocio: qué es, a quién le toca y cuándo
 imagen: ninguna
 enlaces:
   - /facturas-y-albaranes
@@ -12,7 +12,7 @@ enlaces:
 revisar: CADA MES (la última, el 18-nov-2026: siguen las fechas de 2027). Si sale una norma que las cambie (lo anunciado para 2028), cambiar las respuestas «¿Cuándo entra en vigor Verifactu?» y «¿Se ha aplazado Verifactu a 2028?», y `teresa-mundo.ts` de Kontrol.
 ---
 
-Verifactu es la norma de Hacienda sobre los programas y los TPV con los que bares, restaurantes y tiendas hacen sus facturas y tickets. No es asesoramiento fiscal: tu caso, con tu gestor.
+Verifactu es la norma de Hacienda sobre los programas y los TPV con los que los negocios hacen sus facturas y tickets. No es asesoramiento fiscal: tu caso, con tu gestor.
 
 ## Verifactu, con el ticket en la mano.
 
