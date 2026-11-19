@@ -32,6 +32,14 @@ Quien lee y comprueba los papeles dentro de Kontrol se llama Teresa, la administ
 - Se pide una demo enviando 3 o 4 facturas o albaranes por WhatsApp o a ventas@kontrolapp.es. El equipo de Kontrol prepara la demo con esos datos y la ve con el dueño.
 - Si le encaja, el equipo de Kontrol lo monta: carga los papeles de los últimos 3 meses y enseña a usarlo.
 
+## Paquetes
+
+Al mes, sin IVA y sin permanencia. Un papel es una factura o un albarán.
+
+- Paquete Teresa, 119 €: lectura de facturas y albaranes, avisos de errores y cambios de precio, cuadre de facturas con albaranes y lo de la gestoría. Hasta 150 papeles al mes y 1 persona con acceso.
+- Teresa + Operaciones, 199 €: todo lo anterior más escandallo, margen del mes, pedidos a proveedores y almacén. Hasta 350 papeles al mes y 3 personas con acceso.
+- Paquete Full, 263 €: todo lo anterior más horarios, vacaciones y bajas de todo el equipo. Hasta 700 papeles al mes y personas con acceso sin límite.
+
 ## Páginas
 
 - [Escandallos](https://kontrolapp.es/escandallos/): el coste de cada plato y lo que deja, con el precio del último albarán.
